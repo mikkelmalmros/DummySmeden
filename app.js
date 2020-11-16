@@ -11,12 +11,12 @@ mongoose.connect(config.mongoDBHost, {
     autoIndex: true,
     useUnifiedTopology: true
 })
-
-app.set('view engine', 'pug')
-
 // Attributes
 let port = process.env.PORT || 8080
 const app = express()
+
+app.set('view engine', 'pug')
+
 
 //End points
 app.get('/', (req, res) => {
