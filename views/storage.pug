@@ -1,0 +1,52 @@
+html
+    head
+        style
+            include ../styles/storage.css
+        title Lagerbeholdning
+    body
+        div.div1
+            div.item1
+                include blueprints.pug
+            div.item2
+                form(action='/' method='post')
+                    h2 Opret komponent
+                    label(for="") Navn
+                    br
+                    input(type='text' name='name2' style="width:100%" placeholder='Navn på komponent')
+                    br
+                    br
+                    label(for="") Antal
+                    br
+                    input(type='text' name='amount2' style="width:100%" placeholder='Antal på lager')
+                    br
+                    br
+                    label(for="") Beskrivelse
+                    br
+                    input(type='text' name='description2' style="width:100%" placeholder='Beskrivelse af komponenten')
+                    br
+                    br
+                    label(for="") Minimumsantal
+                    br
+                    input(type='text' name='storageMin2' style="width:100%" placeholder='Minimumsantal')
+                    br
+                    br
+                    button(type='submit' name='create') Opret komponent
+                br
+                br
+                form(action='/update' method='post')
+                    label(for="") Vælg komponent for at opdatere den
+                    select(name="dropdownComponents" style="width: 100%")
+                        each component in components
+                            option(value=component) #{component.name}
+                    label(for="") Antal
+                    br
+                    input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+                    br
+                    br
+                    button(type='submit' name='update') Opdater komponent
+
+                h2 Komponenter
+
+                each component in components
+                    p='Navn: '+ component.name +' Antal: '+ component.amount
+                    br

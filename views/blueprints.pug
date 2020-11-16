@@ -1,0 +1,40 @@
+html
+    head
+        style
+            include ../styles/storage.css
+        title Blueprints
+    body
+        form(action='/' method='post')
+            h2 Opret blueprint
+            label(for="") Navn
+            br
+            input(type='text' name='name1' style="width:100%" placeholder='Navn på blueprint')
+            br
+            br
+            label(for="") Antal
+            br
+            input(type='text' name='amount1' style="width:100%" placeholder='Antal på lager')
+        br
+        br
+        form(action='/dropdown' method='post')
+            label(for="") Vælg komponenter til blueprintet
+            select(name="dropdown" style="width: 100%" multiple)
+                each component in components
+                    option(value=component) #{component.name}
+                    br
+                    br
+        form(action='/dropdown' method='post')
+            label(for="") Vælg andre blueprints til blueprintet
+            select(name="dropdown" style="width: 100%" multiple)
+                each blueprint in blueprints
+                    option(value=blueprint) #{blueprint.name}
+            br
+            br
+
+            button(type='submit' name='create') Opret blueprint
+
+            h2 Blueprints
+
+            each blueprint in blueprints
+                p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
+                br

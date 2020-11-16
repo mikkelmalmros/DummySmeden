@@ -1,0 +1,29 @@
+body {
+}
+
+.div1 {
+    display: grid;
+    /* width: 45em; */
+    /* height: ; */
+    grid-template-columns: 50% auto;
+    grid-template-rows: 1;
+    border: 2px solid black;
+    /* margin: 0; */
+    /* padding: 1em; */
+    /* justify-items: center; */
+    background-color:rgb(85, 85, 185);
+}
+
+.item1{
+    grid-column: 1;
+    border: 2px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.item2{
+    grid-column: 2;
+    border: 2px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
