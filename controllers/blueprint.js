@@ -57,3 +57,15 @@ exports.removeBlueprintFromBlueprint = async function (firstBlueprint, secondBLu
     blueprints.splice(index, 1)
     return await firstBlueprint.save()
 }
+
+//Delete a blueprint
+exports.deleteBlueprint = async function (blueprint) {
+    let id = blueprint._id
+    return await Blueprint.deleteOne().where('_id').equals(id).exec()
+}
+
+//Update name on a blueprint
+exports.updateName = async function(blueprint, name) {
+    blueprint.name = name
+    return await blueprint.save()
+}
