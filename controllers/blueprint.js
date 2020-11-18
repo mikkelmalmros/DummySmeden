@@ -20,8 +20,8 @@ exports.getBlueprints = async function () {
 }
 
 // Get one blueprint
-exports.getBlueprint = async function (blueprintId) {
-    return await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
+exports.getBlueprint = async function (blueprint) {
+    return await Blueprint.findById(blueprint._id).populate('components').populate('blueprints').exec()
 }
 
 //Get a list of blueprints by IDs
@@ -45,39 +45,39 @@ exports.getBlueprintByName = async function (name) {
 }
 
 //Adds a component to a blueprint
-exports.addComponentToBluePrint = async function (blueprintId, componentId) {
-    let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
-    let component = await Component.findById(componentId).exec()
+exports.addComponentToBluePrint = async function (blueprint, component) {
+    //let blueprint = await Blueprint.findById(blueprint).populate('components').populate('blueprints').exec()
+    //let component = await Component.findById(componentId).exec()
     blueprint.components.push(component)
     return await blueprint.save()
 }
 
 //Removes a component from a blueprint
-exports.removeComponentFromBlueprint = async function (blueprintId, componentId) {
-    let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
+exports.removeComponentFromBlueprint = async function (blueprint, component) {
+    //let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
     let components = blueprint.components
-    let index = components.indexOf(componentId)
+    let index = components.indexOf(component._id)
     components.splice(index, 1)
     return await blueprint.save()
 }
 
 //Adds a blueprint to a blueprint
 //The first blueprint will have the second blueprint added to it
-exports.addBlueprintToBlueprint = async function (firstBlueprintId, secondBLueprintId) {
-    let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
-    let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
+exports.addBlueprintToBlueprint = async function (firstBlueprint, secondBLueprint) {
+    // let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
+    // let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
     firstBlueprint.blueprints.push(secondBLueprint)
     return await firstBlueprint.save()
 }
 
 //Removes a blueprint from a blueprint
 //The first blueprint will have the second blueprint removed from it
-exports.removeBlueprintFromBlueprint = async function (firstBlueprintId, secondBLueprintId) {
-    let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
-    let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
+exports.removeBlueprintFromBlueprint = async function (firstBlueprint, secondBLueprint) {
+    // let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
+    // let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
 
     let firstBlueprints = firstBlueprint.blueprints
-    let index = blueprints.indexOf(secondBLueprint)
+    let index = blueprints.indexOf(secondBLueprint._id)
 
     blueprints.splice(index, 1)
     return await firstBlueprint.save()

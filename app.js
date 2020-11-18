@@ -25,6 +25,8 @@ let port = process.env.PORT || 8080
 const app = express()
 app.set('view engine', 'pug')
 
+app.use('/static', express.static('public'))
+
 app.use(body.json())
 app.use(body.urlencoded({ extended: false }))
 

@@ -1,18 +1,18 @@
 html
     head
-        script(src="/opretBlueprint.js")
+        script(src="/static/javascript/blueprint.js")
         script.
-            function snupEnComponent() {
-                console.log("Der trykkes!");
-                let dropdown = document.getElementById("dropdownC").value
-                let compArea = document.getElementById("compArea")
-                let antal = document.getElementById("antalC").value
-                let dropdownValue = JSON.parse(dropdown)
-                console.log(compArea);
-                compArea.innerHTML= dropdownValue.name + " "  + " " + antal  + '\n' + compArea.innerHTML
+            //- function snupEnComponent() {
+            //-     console.log("Der trykkes!");
+            //-     let dropdown = document.getElementById("dropdownC").value
+            //-     let compArea = document.getElementById("compArea")
+            //-     let antal = document.getElementById("antalC").value
+            //-     let dropdownValue = JSON.parse(dropdown)
+            //-     console.log(compArea);
+            //-     compArea.innerHTML= dropdownValue.name + " "  + " " + antal  + '\n' + compArea.innerHTML
 
-                console.log(dropdown);
-            }
+            //-     console.log(dropdown);
+            //- }
             
             function snupEtBlueprint(){
                 let dropdown = document.getElementById("blueprintDropDown").value
@@ -31,6 +31,7 @@ html
     body
         form(action='/createBlueprint' method='post')
             h2 Opret blueprint
+            
             label Navn
             br
             input(type='text' name='name1' style="width:100%" placeholder='Navn på blueprint')
@@ -42,10 +43,12 @@ html
             br
             br
             label Vælg komponenter til blueprintet
-            select(name="dropdownComp" style="width: 100%" multiple)
+            select(name="dropdownComp" style="width: 100%" )
+                each component in components
+                        option(value=component) #{component.name}
             br
-            label Vælg andre blueprints til blueprintet
-            select(name="dropdownBP" style="width: 100%" multiple)
+            //- label Vælg andre blueprints til blueprintet
+            //- select(name="dropdownBP" style="width: 100%" multiple)
             // antal input
             input(type="text" id= "antalC")
 
@@ -75,11 +78,25 @@ html
         //Blueprint listen
         textarea(id="blueprintArea", cols="30", rows="10" style = "width: 100%")
 
-
         button(id= "blueprintArea" type='submit' name='create') Opret blueprint
+
+        
+        
+        
 
         h2 Blueprints
 
         each blueprint in blueprints
             p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
             br
+
+    h2 BlueprintsTest
+    div.test(id='test', style="overflow-y:scroll;height:400px; width:100%; background-color:white")
+        each blueprint in blueprints
+            label #{blueprint.name} 
+            br
+            input(type='text' id='input'+blueprint._id  placeholder='Antal')
+            button(id='button'+blueprint._id onclick= "snupEtBlueprint()") Tilføj komponent
+            br
+            br
+    //- div(id='blueprintsTest' style=overflow-y:scroll; height:400px; width:100%; background-color:white)
