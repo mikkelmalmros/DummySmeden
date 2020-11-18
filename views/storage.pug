@@ -33,7 +33,7 @@ html
                     button(type='submit' name='create') Opret komponent
                 br
                 br
-                form(action='/update' method='patch')
+                form(action='/updateComponent' method='post')
                     label Vælg komponent for at opdatere den
                     select(name="dropdownComponents" style="width: 100%")
                         each component in components
@@ -44,6 +44,15 @@ html
                     br
                     br
                     button(type='submit' name='update') Opdater komponent
+
+                form(action='/deleteComponent' method='post')
+                    label Vælg komponent for at slette den
+                    select(name="dropdownDelete" style="width: 100%")
+                        each component in components
+                            option(value=component.id) #{component.name}
+                    br
+                    br
+                    button(type='submit' name='delete') Slet komponent
 
                 h2 Komponenter
 
