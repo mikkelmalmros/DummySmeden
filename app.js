@@ -52,6 +52,7 @@ app.get('/', async (req, res) => {
     res.render('storage', { components: components, blueprints: blueprints })
 })
 
+// DER SKAL LAVES CHECKS PÅ TOMME STRENGE
 app.post('/createComponent', async (req, res) => {
     const name = req.body.name2
     const amount = req.body.amount2
@@ -61,31 +62,32 @@ app.post('/createComponent', async (req, res) => {
     res.redirect('/')
 })
 
-app.post('/', async (req, res) => {
+app.post('/createBlueprint', async (req, res) => {
     const name = req.body.name1
     const amount = req.body.amount1
-    // const componentIDs = []
-    // const blueprintIDs = []
-    // let components = []
-    // let blueprints = []
-    // await getBlueprint
-    // Vi skal have 2 lister fra de der fucked up select
-    // felter i blueprints.pug ind så vi kan lave objektet
+    //Finder en liste af alle komponenter i DB ud fra ID'erne
+    const components = await componentController.getComponentsById(req.body.dropdownComp)
+    const blueprints = await blueprintController.getBlueprintssById(req.body.dropdownBP)
     await blueprintController.createBlueprint(name, amount, components, blueprints)
     res.redirect('/')
 })
 
 // DERUDOVER TÆNKER JEG DEN SKAL LAVES OM TIL EN PUT I STEDET FOR POST?
-app.patch('/update', async (req, res) => {
-    console.log("hej");
-    // const componentID = req.body.dropdownComponents
-    // const component = await componentController.getComponent(componentID)
-    // const amount = req.body.updateamount
-    // console.log(component.name);
-    // await componentController.updateAmount(component, amount)
-    res.redirect(301, '/')
+// DER SKAL LAVES CHECKS PÅ TOMME STRENGE
+app.post('/updateComponent', async (req, res) => {
+    const componentID = req.body.dropdownComponents
+    const component = await componentController.getComponent(componentID)
+    const amount = req.body.updateamount
+    await componentController.updateAmount(component, amount)
+    res.redirect('/')
 })
 
+app.post('/deleteComponent', async (req, res) => {
+    const componentID = req.body.dropdownDelete
+    const component = await componentController.getComponent(componentID)
+    await componentController.deleteComponent(component)
+    res.redirect('/')
+})
 
 //Start server
 app.listen(port, () => {

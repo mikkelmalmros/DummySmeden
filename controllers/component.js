@@ -1,4 +1,5 @@
 const Component = require('../models/component')
+const Blueprint = require('../models/blueprint')
 
 exports.createComponent = async function (name, amount, description, storageMin) {
     const component = Component({
@@ -24,8 +25,31 @@ exports.getComponent = async function (id) {
 }
 
 exports.getComponentsById = async function (ids) {
-    array.forEach(id => {
+    let list = []
+    if (ids != null || ids != undefined)
+        if (Array.isArray(ids)) {
+            for (const id of ids) {
+                list.push(await Component.findById(id).exec())
+            }
+        } else {
+            list.push(await Component.findById(ids).exec())
+        }
+    return list;
+}
 
-    });
-    return await Component.findById(id).exec()
+exports.deleteComponent = async function (id) {
+    const doc = Blueprint.blueprint;
+
+    await Component.deleteOne().where('_id').equals(id).exec()
+    await doc.pull().where('_id').equals(id).exec()
+    return 'yeet'
+}
+
+exports.deleteComponent2 = async function (id) {
+    await Blueprint.update(
+        { "blueprints": id },
+        { "$pull": { "components": id } },
+        { "multi": true }
+    )
+    return await Component.deleteOne().where('_id').equals(id).exec()
 }

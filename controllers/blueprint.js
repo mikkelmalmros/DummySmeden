@@ -24,6 +24,21 @@ exports.getBlueprint = async function (blueprintId) {
     return await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
 }
 
+//Get a list of blueprints by IDs
+exports.getBlueprintssById = async function (ids) {
+    let list = []
+    if (ids != null || ids != undefined) {
+        if (Array.isArray(ids)) {
+            for (const id of ids) {
+                list.push(await Blueprint.findById(id).populate('components').populate('blueprints').exec())
+            }
+        } else {
+            list.push(await Blueprint.findById(ids).populate('components').populate('blueprints').exec())
+        }
+    }
+    return list;
+}
+
 //Get one blueprint on the name
 exports.getBlueprintByName = async function (name) {
     return await Blueprint.findOne().populate('components').populate('blueprints').where('name').equals(name).exec()
