@@ -5,12 +5,12 @@ const blueprintSchema = Schema({
     name: String,
     amount: Number,
     components: [{
-        type: Schema.Types.ObjectId, ref: 'Component'
-        //componentAmount: Number
+        type: Schema.Types.ObjectId, ref: 'Component',
+        componentAmount: Number
     }],
     blueprints: [{
-        type: Schema.Types.ObjectId, ref: 'Blueprint'
-        //bluePrintAmount: Number
+        type: Schema.Types.ObjectId, ref: 'Blueprint',
+        bluePrintAmount: Number
     }]
 })
 

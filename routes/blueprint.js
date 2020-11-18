@@ -9,6 +9,7 @@ router.use(bodyParser.json())
 
 //Creates blueprint
 router.post('/create', (req, res) => {
+    
     controller.createBlueprint(req.body.name, req.body.amount, req.body.components, req.body.blueprints)
 })
 
