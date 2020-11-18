@@ -1,8 +1,27 @@
 html
     head
+        script(src="/opretBlueprint.js")
+        script. 
+            function snupEnComponent() {
+                console.log("Der trykkes!");
+                let dropdown = document.getElementById("dropdownC").value
+                let compArea = document.getElementById("compArea")
+                let antal = document.getElementById("antalC").value
+                let dropdownValue = JSON.parse(dropdown)
+                console.log(compArea);
+                compArea.innerHTML= dropdownValue.name + " "  + " " + antal  + '\n' + compArea.innerHTML
+
+                console.log(dropdown);
+            }
+            funtion snupEtBlueprint(){
+                let dropdown = document.getElementByid()
+            }
+          
         style
             include ../styles/storage.css
+            
         title Blueprints
+      
     body
         form(action='/' method='post')
             h2 Opret blueprint
@@ -16,14 +35,27 @@ html
             input(type='text' name='amount1' style="width:100%" placeholder='Antal på lager')
         br
         br
-        form(action='/dropdown' method='post')
+        //Component drop down
+        form(action='/dropdown' method='post' id="compDropDown")
             label(for="") Vælg komponenter til blueprintet
-            select(name="dropdown" style="width: 100%" multiple)
+            select(id="dropdownC" style="width: 100%" multiple)
                 each component in components
                     option(value=component) #{component.name}
                     br
                     br
-        form(action='/dropdown' method='post')
+
+        // antal input
+        input(type="text" id= "antalC")
+
+        // tilføj component til component listen
+        button(name = "componentAmountButton" onclick = "snupEnComponent()") Vælg antal
+        br
+        
+        //Component listen
+        textarea(id="compArea", cols="30", rows="10" style = "width: 100%")
+        
+        // Blueprint dropdown
+        form(action='/dropdown' method='post' id ="blueprintDropDown")
             label(for="") Vælg andre blueprints til blueprintet
             select(name="dropdown" style="width: 100%" multiple)
                 each blueprint in blueprints
@@ -31,10 +63,19 @@ html
             br
             br
 
-            button(type='submit' name='create') Opret blueprint
+        // blueprint antal input
+        input(type="text" id="antalB")
+        
+        //tilføj blueprint til en blueprint liste
+        button(name = "blueprintAmountButton" onclick= "snupEtBlueprint()") vælg antal
+        //Blueprint listen
+        textarea(id="blueprintArea", cols="30", rows="10" style = "width: 100%")
 
-            h2 Blueprints
 
-            each blueprint in blueprints
-                p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
-                br
+        button(type='submit' name='create') Opret blueprint
+
+        h2 Blueprints
+
+        each blueprint in blueprints
+            p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
+            br
