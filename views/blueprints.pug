@@ -13,8 +13,14 @@ html
 
                 console.log(dropdown);
             }
+            
             funtion snupEtBlueprint(){
-                let dropdown = document.getElementByid()
+                let dropdown = document.getElementById("blueprintDropDown").value
+                let bluePrintArea = document.getElementById("blueprintArea")
+                let antal = ducument.getElemnetById("antalB")
+                let dropdownValue = JSON.parse(dropdown)
+                console.log(" :)")
+                bluePrintArea.innerHTML =  compArea.innerHTML= dropdownValue.name + " "  + " " + antal  + '\n' + bluePrintArea.innerHTML
             }
           
         style
@@ -72,7 +78,7 @@ html
         textarea(id="blueprintArea", cols="30", rows="10" style = "width: 100%")
 
 
-        button(type='submit' name='create') Opret blueprint
+        button(id= "blueprintArea" type='submit' name='create') Opret blueprint
 
         h2 Blueprints
 
