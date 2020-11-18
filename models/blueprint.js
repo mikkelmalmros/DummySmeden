@@ -4,8 +4,14 @@ const Schema = mongoose.Schema
 const blueprintSchema = Schema({
     name: String,
     amount: Number,
-    components: [{ type: Schema.Types.ObjectId, ref: 'Component' }],
-    blueprints: [{ type: Schema.Types.ObjectId, ref: 'Blueprint' }]
+    components: [{
+        type: Schema.Types.ObjectId, ref: 'Component'
+        //componentAmount: Number
+    }],
+    blueprints: [{
+        type: Schema.Types.ObjectId, ref: 'Blueprint'
+        //bluePrintAmount: Number
+    }]
 })
 
 module.exports = mongoose.model('Blueprint', blueprintSchema)

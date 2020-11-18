@@ -52,7 +52,7 @@ app.get('/', async (req, res) => {
     res.render('storage', { components: components, blueprints: blueprints })
 })
 
-app.post('/', async (req, res) => {
+app.post('/createComponent', async (req, res) => {
     const name = req.body.name2
     const amount = req.body.amount2
     const description = req.body.description2
@@ -61,26 +61,29 @@ app.post('/', async (req, res) => {
     res.redirect('/')
 })
 
-// app.post('/', async (req, res) => {
-//     const name = req.body.name1
-//     const amount = req.body.amount1
-//     // Vi skal have 2 lister fra de der fucked up select
-//     // felter i blueprints.pug ind så vi kan lave objektet
-//     await blueprintController.createBlueprint(name, amount, components, blueprints)
-//     res.redirect('/')
-// })
-
-// FIX METODE - BRUG VÆRDIEN FRA DROPDOWN MENUEN (FX NAVN)
-// KIG I DATABASEN EFTER EN KOMPONENT MED DET NAVN OG GEM SOM OBJEKT
-// DVS. LAV EN METODE, TIL AT KIGGE EFTER ET BESTEMT OBJEKT
-// DERUDOVER TÆNKER JEG DEN SKAL LAVES OM TIL EN PUT I STEDET FOR POST?
-app.post('/update', async (req, res) => {
-    console.log("hej");
-    const component = req.body.dropdownComponents
-    const amount = req.body.updateamount
-    console.log(component);
-    await componentController.updateAmount(component, amount)
+app.post('/', async (req, res) => {
+    const name = req.body.name1
+    const amount = req.body.amount1
+    // const componentIDs = []
+    // const blueprintIDs = []
+    // let components = []
+    // let blueprints = []
+    // await getBlueprint
+    // Vi skal have 2 lister fra de der fucked up select
+    // felter i blueprints.pug ind så vi kan lave objektet
+    await blueprintController.createBlueprint(name, amount, components, blueprints)
     res.redirect('/')
+})
+
+// DERUDOVER TÆNKER JEG DEN SKAL LAVES OM TIL EN PUT I STEDET FOR POST?
+app.patch('/update', async (req, res) => {
+    console.log("hej");
+    // const componentID = req.body.dropdownComponents
+    // const component = await componentController.getComponent(componentID)
+    // const amount = req.body.updateamount
+    // console.log(component.name);
+    // await componentController.updateAmount(component, amount)
+    res.redirect(301, '/')
 })
 
 

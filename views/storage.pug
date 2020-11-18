@@ -8,24 +8,24 @@ html
             div.item1
                 include blueprints.pug
             div.item2
-                form(action='/' method='post')
+                form(action='/createComponent' method='post')
                     h2 Opret komponent
-                    label(for="") Navn
+                    label Navn
                     br
                     input(type='text' name='name2' style="width:100%" placeholder='Navn på komponent')
                     br
                     br
-                    label(for="") Antal
+                    label Antal
                     br
                     input(type='text' name='amount2' style="width:100%" placeholder='Antal på lager')
                     br
                     br
-                    label(for="") Beskrivelse
+                    label Beskrivelse
                     br
                     input(type='text' name='description2' style="width:100%" placeholder='Beskrivelse af komponenten')
                     br
                     br
-                    label(for="") Minimumsantal
+                    label Minimumsantal
                     br
                     input(type='text' name='storageMin2' style="width:100%" placeholder='Minimumsantal')
                     br
@@ -33,12 +33,12 @@ html
                     button(type='submit' name='create') Opret komponent
                 br
                 br
-                form(action='/update' method='post')
-                    label(for="") Vælg komponent for at opdatere den
+                form(action='/update' method='patch')
+                    label Vælg komponent for at opdatere den
                     select(name="dropdownComponents" style="width: 100%")
                         each component in components
-                            option(value=component) #{component.name}
-                    label(for="") Antal
+                            option(value=component.id) #{component.name}
+                    label Antal
                     br
                     input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
                     br

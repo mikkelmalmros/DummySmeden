@@ -18,3 +18,14 @@ exports.updateAmount = async function (component, amount) {
     component.amount = amount
     return await component.save()
 }
+
+exports.getComponent = async function (id) {
+    return await Component.findById(id).exec()
+}
+
+exports.getComponentsById = async function (ids) {
+    array.forEach(id => {
+
+    });
+    return await Component.findById(id).exec()
+}
