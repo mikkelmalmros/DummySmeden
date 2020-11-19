@@ -10,6 +10,7 @@ text-align: center;
     display: grid;
     /* width: 45em; */
     /* height: ; */
+    min-height: 95%;
     grid-template-columns: 50% auto;
     grid-template-rows: 1;
     border: 2px solid black;

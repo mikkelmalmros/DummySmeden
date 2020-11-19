@@ -1,3 +1,4 @@
+// på eget ansvar
 document.querySelectorAll('.collapsibleButton').forEach(button =>{
     button.addEventListener('click', () =>{
         const content = button.nextElementSibling
@@ -9,6 +10,5 @@ document.querySelectorAll('.collapsibleButton').forEach(button =>{
         } else {
             content.style.maxHeight = 0
         }
-
     })
 })

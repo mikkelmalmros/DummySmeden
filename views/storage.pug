@@ -10,7 +10,11 @@ html
     body
         div.div1
             div.item1
-                include blueprints.pug
+                h2 Komponenter
+                div.collapsible
+                    button.collapsibleButton(type='submit') Opret
+                    div.content
+                        include createBlueprint.pug
             div.item2
                 h2 Komponenter
                 div.collapsible
