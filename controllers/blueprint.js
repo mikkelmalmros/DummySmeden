@@ -128,3 +128,15 @@ exports.updateName = async function (blueprint, name) {
   blueprint.name = name;
   return await blueprint.save();
 };
+
+//Update amount on a blueprint
+exports.updateAmount = async function (blueprint, amount) {
+  blueprint.amount = amount
+  return await blueprint.save()
+}
+
+//Update storageMin on a blueprint
+exports.updatestorageMin = async function (blueprint, storageMin) {
+  blueprint.storageMin = storageMin
+  return await blueprint.save()
+}

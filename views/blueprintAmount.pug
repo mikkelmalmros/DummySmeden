@@ -10,11 +10,14 @@ html
 
             form(action='/blueprint/amount' method='post')
                 h2 Blueprints
-                input(type="text" id=theBlueprint._id  placeholder=theBlueprint.name readonly)
+                input(type="hidden" name="mainBlueprint"  value=theBlueprint)
+                br
+                br
                 each blueprint in blueprints
                     label #{blueprint.name}
                     br
-                    input(type='text' id=blueprint._id  placeholder='Antal')
+                    input(type="hidden" name="hidden:"+blueprint.name value=blueprint)
+                    input(type='text' name=blueprint.name placeholder='Antal')
                     br
                     br
 
@@ -22,7 +25,8 @@ html
                 each component in components
                     label #{component.name}
                     br
-                    input(type='text' id=component._id  placeholder='Antal')
+                    input(type="hidden" name="hidden:"+component.name value=component)
+                    input(type='text' name=component.name  placeholder='Antal')
                     br
                     br
 

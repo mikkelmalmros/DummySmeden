@@ -8,10 +8,12 @@ const blueprintController = require("../controllers/blueprint");
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(bodyParser.json())
 
+//Globale variable
+let globalBlueprints
+let globalComponents
+
 //Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)
 const valider = /[a-zA-Z0-9]+/;
-
-
 
 //Opretter et blueprint
 router.post("/createBlueprint", async (req, res) => {
@@ -29,32 +31,60 @@ router.post("/createBlueprint", async (req, res) => {
         req.body.dropdownBP
     );
 
-    nyblueprint = { name: name, amount: amount, storageMin: storageMin, components: components, blueprints: blueprints }
+    nyblueprint = { name: name, amount: amount, storageMin: storageMin }
     if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-        nyblueprint = await controller.createBlueprint(
+        await controller.createBlueprint(
             name,
             amount,
-            storageMin,
-            components,
-            blueprints
+            storageMin
         );
     } else {
         //Vis pæn besked til brugeren
         console.log("Forkerte værdier i /createBlueprint");
     }
-    res.render("blueprintAmount", { theBlueprint: nyblueprint, blueprints: nyblueprint.blueprints, components: nyblueprint.components });
+    globalBlueprints = nyblueprint.blueprints
+    globalComponents = nyblueprint.components
+
+    res.render("blueprintAmount", { theBlueprint: nyblueprint, blueprints: blueprints, components: components });
 });
 
+
 router.post('/amount', (req, res) => {
-    console.log(req.body.blueprint)
-    let blueprints
-    let components
-    for (let index = 0; index < req.body.components; index++) {
-        let id = components[i].id
-        console.log(components[i].id)
-        console.log(req.body.id)
+    let blueprints = []
+    let body = req.body
+    let tempBlueprint
+    let mainblueprint
+    let jsonblueprint
+
+    for (const key of Object.keys(body)) {
+        console.log("Value : " + body[key]);
+        if (key.includes("mainBlueprint")) {
+            mainblueprint = body[key]
+            console.log("Mainblueprint : " + mainblueprint);
+        } else if (key.includes("hidden")) {
+            tempBlueprint = body[key]
+            console.log("Tempblueprint : " + tempBlueprint);
+        } else {
+            let temp = { type: tempBlueprint._id, ref: "Blueprint", blueprintAmount: body[key] }
+            jsonblueprint = JSON.parse(temp)
+            console.log("Tempblueprint with amount : " + jsonblueprint);
+        }
+
     }
-    res.redirect('/')
+
+
+
+    // for (let blueprint of globalBlueprints) {
+    //     let inputName = blueprint.name
+    //     amount = req.body.inputName
+    //     let json = { type: blueprint._id, ref: 'Blueprint', blueprintAmount: amount }
+    //     blueprints.push(json)
+    //     console.log(blueprints)
+    // }
+
+
+
+    //res.redirect('/')
 })
 
 router.get('/amount', (req, res) => {

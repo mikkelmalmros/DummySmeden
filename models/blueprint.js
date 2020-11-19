@@ -11,7 +11,7 @@ const blueprintSchema = Schema({
     }],
     blueprints: [{
         type: Schema.Types.ObjectId, ref: 'Blueprint',
-        bluePrintAmount: Number
+        blueprintAmount: Number
     }]
 })
 

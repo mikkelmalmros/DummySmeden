@@ -1,31 +1,13 @@
-
-
-let blueprints = [];
-
-
-async function addABlueprint(element) {
-  console.log(element);
-  console.log(element.id);
-  console.log(pickedElement.value);
-
-  let pickedElement = document.getElementById(element.id);
-  let blueprint = await controller.getBlueprintssById(element.id);
-
-  let tempBP = {
-    type: element.id,
-    ref: "Blueprint",
-    bluePrintAmount: pickedElement.value,
-  };
-
-  console.log(tempBP);
-
-  blueprints.push(tempBP);
-}
-
-function snupEnComponent() {
-  console.log("Der trykkes!");
-  alert("It's working");
-  // let dropdown = document.getElementById("compDropDown")
-  // let value = dropdown.value
-  // console.log(value);
+let acc = document.getElementsByClassName('accordion')
+let i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function () {
+    this.classList.toggle("active")
+    let panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  })
 }
