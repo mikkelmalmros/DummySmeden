@@ -49,6 +49,20 @@ html
             br
             //- label Vælg andre blueprints til blueprintet
             //- select(name="dropdownBP" style="width: 100%" multiple)
+            include selectBlueprint.pug
+            button(id= "blueprintArea" type='submit' name='create') Opret blueprint
+        
+        
+
+        //- h2 Blueprints
+
+        //- each blueprint in blueprints
+        //-     p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
+        //-     br
+
+
+    //- div(id='blueprintsTest' style=overflow-y:scroll; height:400px; width:100%; background-color:white)
+    
             // antal input
             input(type="text" id= "antalC")
 
@@ -79,24 +93,4 @@ html
         textarea(id="blueprintArea", cols="30", rows="10" style = "width: 100%")
 
         button(id= "blueprintArea" type='submit' name='create') Opret blueprint
-
-        
-        
-        
-
-        h2 Blueprints
-
-        each blueprint in blueprints
-            p='Navn: '+ blueprint.name +' Antal: '+ blueprint.amount
-            br
-
-    h2 BlueprintsTest
-    div.test(id='test', style="overflow-y:scroll;height:400px; width:100%; background-color:white")
-        each blueprint in blueprints
-            label #{blueprint.name} 
-            br
-            input(type='text' calss= blueprint._id, id='input'+blueprint._id  placeholder='Antal')
-            button(calss= blueprint._id id='button'+blueprint._id onclick= "addABlueprint(this)") Tilføj blueprint
-            br
-            br
-    //- div(id='blueprintsTest' style=overflow-y:scroll; height:400px; width:100%; background-color:white)
+//-

@@ -1,0 +1,9 @@
+h2 BlueprintsTest
+    div.test(id='test', style="overflow-y:scroll;height:400px; width:100%; background-color:white")
+        each blueprint in blueprints
+            label #{blueprint.name} 
+            br
+            input(type='text' class=blueprint._id, id=blueprint._id  placeholder='Antal')
+            button(class=blueprint._id id=blueprint._id onclick= "addABlueprint(this)") Tilføj blueprint
+            br
+            br

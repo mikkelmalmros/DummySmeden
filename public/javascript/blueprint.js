@@ -1,8 +1,16 @@
 console.log("Vi har fat i vores script!");
 
+let blueprints = []
+
 function addABlueprint(element) {
-    console.log(element.currentTarget);
-    console.log('ClassName: ' + element.currentTarget.className);
+    let newBlueprint = 
+    console.log(element);
+    console.log(element.id);
+    console.log(pickedElement.value);
+
+
+    let pickedElement = document.getElementById(element.id)
+        
 }
 
 
