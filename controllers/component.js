@@ -1,11 +1,10 @@
 const Component = require('../models/component')
 const Blueprint = require('../models/blueprint')
 
-exports.createComponent = async function (name, amount, description, storageMin) {
+exports.createComponent = async function (name, amount, storageMin) {
     const component = Component({
         name: name,
         amount: amount,
-        description: description,
         storageMin: storageMin
     })
     return await component.save()
@@ -17,6 +16,16 @@ exports.getComponents = async function () {
 
 exports.updateAmount = async function (component, amount) {
     component.amount = amount
+    return await component.save()
+}
+
+exports.updateName = async function (component, name) {
+    component.name = name
+    return await component.save()
+}
+
+exports.updateMininum = async function (component, minimum) {
+    component.storageMin = minimum
     return await component.save()
 }
 
@@ -38,16 +47,8 @@ exports.getComponentsById = async function (ids) {
 }
 
 exports.deleteComponent = async function (id) {
-    const doc = Blueprint.blueprint;
-
-    await Component.deleteOne().where('_id').equals(id).exec()
-    await doc.pull().where('_id').equals(id).exec()
-    return 'yeet'
-}
-
-exports.deleteComponent2 = async function (id) {
-    await Blueprint.update(
-        { "blueprints": id },
+    await Blueprint.updateMany(
+        { "components": id },
         { "$pull": { "components": id } },
         { "multi": true }
     )

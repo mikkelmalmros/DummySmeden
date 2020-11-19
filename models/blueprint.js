@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const blueprintSchema = Schema({
     name: String,
     amount: Number,
+    storageMin: Number,
     components: [{
         type: Schema.Types.ObjectId, ref: 'Component',
         componentAmount: Number

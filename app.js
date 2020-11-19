@@ -47,6 +47,9 @@ app.use(body.urlencoded({ extended: false }))
 // })
 // component.save()
 
+//Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)
+const valider = /[a-zA-Z0-9]+/
+
 //End points
 app.get('/', async (req, res) => {
     const components = await componentController.getComponents()
@@ -58,19 +61,27 @@ app.get('/', async (req, res) => {
 app.post('/createComponent', async (req, res) => {
     const name = req.body.name2
     const amount = req.body.amount2
-    const description = req.body.description2
     const storageMin = req.body.storageMin2
-    await componentController.createComponent(name, amount, description, storageMin)
+    if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
+        await componentController.createComponent(name, amount, storageMin)
+    } else {
+        console.log('Forkerte værdier i /createComponent');
+    }
     res.redirect('/')
 })
 
 app.post('/createBlueprint', async (req, res) => {
     const name = req.body.name1
     const amount = req.body.amount1
+    const storageMin = req.body.storageMin1
     //Finder en liste af alle komponenter i DB ud fra ID'erne
     const components = await componentController.getComponentsById(req.body.dropdownComp)
     const blueprints = await blueprintController.getBlueprintssById(req.body.dropdownBP)
-    await blueprintController.createBlueprint(name, amount, components, blueprints)
+    if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
+        await blueprintController.createBlueprint(name, amount, storageMin, components, blueprints)
+    } else {
+        console.log('Forkerte værdier i /createBlueprint');
+    }
     res.redirect('/')
 })
 
@@ -80,14 +91,20 @@ app.post('/updateComponent', async (req, res) => {
     const componentID = req.body.dropdownComponents
     const component = await componentController.getComponent(componentID)
     const amount = req.body.updateamount
-    await componentController.updateAmount(component, amount)
+    const name = req.body.updatename
+    const minimum = req.body.updatemin
+    if (amount != null && amount != undefined)
+        await componentController.updateAmount(component, amount)
+    if (name != null && name != undefined)
+        await componentController.updateName(component, name)
+    if (minimum != null && minimum != undefined)
+        await componentController.updateMininum(component, minimum)
     res.redirect('/')
 })
 
 app.post('/deleteComponent', async (req, res) => {
     const componentID = req.body.dropdownDelete
-    const component = await componentController.getComponent(componentID)
-    await componentController.deleteComponent(component)
+    await componentController.deleteComponent(componentID)
     res.redirect('/')
 })
 

@@ -4,10 +4,11 @@ const Blueprint = require('../models/blueprint')
 const Component = require('../models/component')
 
 //Creates ablueprint and saves it on MongoDB
-exports.createBlueprint = async function (name, amount, components, blueprints) {
+exports.createBlueprint = async function (name, amount, storageMin, components, blueprints) {
     const blueprint = Blueprint({
         name: name,
         amount: amount,
+        storageMin: storageMin,
         components: components,
         blueprints: blueprints
     })

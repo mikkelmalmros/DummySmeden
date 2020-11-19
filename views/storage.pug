@@ -8,54 +8,11 @@ html
             div.item1
                 include blueprints.pug
             div.item2
-                form(action='/createComponent' method='post')
-                    h2 Opret komponent
-                    label Navn
-                    br
-                    input(type='text' name='name2' style="width:100%" placeholder='Navn på komponent')
-                    br
-                    br
-                    label Antal
-                    br
-                    input(type='text' name='amount2' style="width:100%" placeholder='Antal på lager')
-                    br
-                    br
-                    label Beskrivelse
-                    br
-                    input(type='text' name='description2' style="width:100%" placeholder='Beskrivelse af komponenten')
-                    br
-                    br
-                    label Minimumsantal
-                    br
-                    input(type='text' name='storageMin2' style="width:100%" placeholder='Minimumsantal')
-                    br
-                    br
-                    button(type='submit' name='create') Opret komponent
-                br
-                br
-                form(action='/updateComponent' method='post')
-                    label Vælg komponent for at opdatere den
-                    select(name="dropdownComponents" style="width: 100%")
-                        each component in components
-                            option(value=component.id) #{component.name}
-                    label Antal
-                    br
-                    input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
-                    br
-                    br
-                    button(type='submit' name='update') Opdater komponent
-
-                form(action='/deleteComponent' method='post')
-                    label Vælg komponent for at slette den
-                    select(name="dropdownDelete" style="width: 100%")
-                        each component in components
-                            option(value=component.id) #{component.name}
-                    br
-                    br
-                    button(type='submit' name='delete') Slet komponent
+                include createComp.pug
+                include updateComp.pug
+                include deleteComp.pug
 
                 h2 Komponenter
-
                 each component in components
                     p='Navn: '+ component.name +' Antal: '+ component.amount
                     br

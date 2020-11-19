@@ -1,0 +1,11 @@
+form(action='/updateComponent' method='post')
+    label Vælg komponent for at opdatere den
+    select(name="dropdownComponents" style="width: 100%")
+        each component in components
+            option(value=component.id) #{component.name}
+    label Antal
+    br
+    input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+    br
+    br
+    button(type='submit' name='update') Opdater komponent
