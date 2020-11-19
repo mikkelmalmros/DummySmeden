@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const body = require("body-parser");
 const componentController = require("./controllers/component");
 const blueprintController = require("./controllers/blueprint");
+const blueprintRouter = require('./routes/blueprint')
 
 // Til test - Skal slettes senere
 const Blueprint = require("./models/blueprint");
@@ -30,8 +31,8 @@ app.use("/static", express.static("public"));
 app.use(body.json());
 app.use(body.urlencoded({ extended: false }));
 
-//Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)
-const valider = /[a-zA-Z0-9]+/;
+app.use('/blueprint', blueprintRouter)
+
 
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
@@ -58,34 +59,9 @@ app.post("/createComponent", async (req, res) => {
   res.redirect("/");
 });
 
-//Opretter et blueprint
-app.post("/createBlueprint", async (req, res) => {
-  const name = req.body.name1;
-  const amount = req.body.amount1;
-  const storageMin = req.body.storageMin1;
 
-  //Finder en liste af alle komponenter i DB ud fra ID'erne
-  const components = await componentController.getComponentsById(
-    req.body.dropdownComp
-  );
-  const blueprints = await blueprintController.getBlueprintssById(
-    req.body.dropdownBP
-  );
 
-  if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-    await blueprintController.createBlueprint(
-      name,
-      amount,
-      storageMin,
-      components,
-      blueprints
-    );
-  } else {
-    //Vis pæn besked til brugeren
-    console.log("Forkerte værdier i /createBlueprint");
-  }
-  res.redirect("/");
-});
+
 
 //Opdaterer attributter i komponent
 app.post("/updateComponent", async (req, res) => {

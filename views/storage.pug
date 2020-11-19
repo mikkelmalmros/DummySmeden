@@ -3,16 +3,26 @@ html
         style
             include ../styles/storage.css
         title Lagerbeholdning
+        script.
+            function showHideRow() {
+                $("# + row").toggle()
+                alert('hej')
+            }
     body
         div.div1
             div.item1
                 include blueprints.pug
-            div.item2
+            div.item2(style='overflow-x:auto')
                 include createComp.pug
                 include updateComp.pug
                 include deleteComp.pug
-
-                h2 Komponenter
-                each component in components
-                    p='Navn: '+ component.name +' Antal: '+ component.amount
-                    br
+                h2 Komponenter på lager
+                table(style='width:100%', border='1')
+                    tr(style='background-color: green')
+                        th Navn
+                        th(style='width:10%') Antal
+                    each component in components
+                        tr.data(style='text-align: center' onclick='showHideRow('#{component.name}')')
+                            td #{component.name}
+                            td #{component.amount}
+                        tr(id=#{component.name} class='hidden_row')

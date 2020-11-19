@@ -29,7 +29,7 @@ html
         title Blueprints
 
     body
-        form(action='/createBlueprint' method='post')
+        form(action='/blueprint/createBlueprint' method='post')
             h2 Opret blueprint
 
             label Navn
@@ -48,11 +48,16 @@ html
             br
             br
             label Vælg komponenter til blueprintet
-            select(name="dropdownComp" style="width: 100%" )
+            select(name="dropdownComp" style="width: 100%" multiple)
                 each component in components
                         option(value=component.id) #{component.name}
             br
+            label Vælg blueprints til blueprintet
+            select(name="dropdownBP" style="width: 100%" multiple)
+                each blueprint in blueprints
+                        option(value=blueprint.id) #{blueprint.name}
+            br
             //- label Vælg andre blueprints til blueprintet
             //- select(name="dropdownBP" style="width: 100%" multiple)
-            include selectBlueprint.pug
-            button(id= "blueprintArea" type='submit' name='create') Opret blueprint
+            //- include selectBlueprint.pug
+            button(type='submit' name='create') Put antal på blueprint

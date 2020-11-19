@@ -1,0 +1,29 @@
+html
+    head
+        style
+            include ../styles/addAmount.css
+        title Tilføj antal til blueprints
+    body
+        h1 BlueprintsTest
+
+        div.amountDiv
+
+            form(action='/blueprint/amount' method='post')
+                h2 Blueprints
+                input(type="text" id=theBlueprint._id  placeholder=theBlueprint.name readonly)
+                each blueprint in blueprints
+                    label #{blueprint.name}
+                    br
+                    input(type='text' id=blueprint._id  placeholder='Antal')
+                    br
+                    br
+
+                h2 Komponenter
+                each component in components
+                    label #{component.name}
+                    br
+                    input(type='text' id=component._id  placeholder='Antal')
+                    br
+                    br
+
+                button(type='submit' name='create') Opret blueprint
