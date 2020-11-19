@@ -1,5 +1,10 @@
 console.log("Vi har fat i vores script!");
 
+function addABlueprint(element) {
+    console.log(element.currentTarget);
+    console.log('ClassName: ' + element.currentTarget.className);
+}
+
 
 function snupEnComponent() {
     console.log("Der trykkes!");

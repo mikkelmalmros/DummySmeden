@@ -95,8 +95,8 @@ html
         each blueprint in blueprints
             label #{blueprint.name} 
             br
-            input(type='text' id='input'+blueprint._id  placeholder='Antal')
-            button(id='button'+blueprint._id onclick= "snupEtBlueprint()") Tilføj komponent
+            input(type='text' calss= blueprint._id, id='input'+blueprint._id  placeholder='Antal')
+            button(calss= blueprint._id id='button'+blueprint._id onclick= "addABlueprint(this)") Tilføj blueprint
             br
             br
     //- div(id='blueprintsTest' style=overflow-y:scroll; height:400px; width:100%; background-color:white)
