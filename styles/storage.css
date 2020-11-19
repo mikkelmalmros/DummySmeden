@@ -6,20 +6,17 @@ body{
 text-align: center;
 }
 
+/* Hele vores grid */
 .div1 {
     display: grid;
-    /* width: 45em; */
-    /* height: ; */
     min-height: 95%;
     grid-template-columns: 50% auto;
     grid-template-rows: 1;
     border: 2px solid black;
-    /* margin: 0; */
-    /* padding: 1em; */
-    /* justify-items: center; */
     background-color:#777777;
 }
 
+/* Kolonne 1 i vores grid */
 .item1{
     grid-column: 1;
     border: 2px solid black;

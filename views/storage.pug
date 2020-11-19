@@ -3,18 +3,27 @@ html
         style
             include ../styles/storage.css
             include ../styles/collapsible.css
-        title Lagerbeholdning
+        title Lager
         script(defer, src="/static/javascript/blueprint.js")
         script(defer, src="/static/javascript/component.js")
-        h1.headlineTop Dummy-smeden lagerbeholdning
+        h1.headlineTop Dummy-smeden lager
     body
         div.div1
             div.item1
-                h2 Komponenter
+                h2 Blueprints
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
                     div.content
                         include createBlueprint.pug
+                    button.collapsibleButton(type='submit') Opdater
+                    div.content
+                        include updateBlueprint.pug
+                    button.collapsibleButton(type='submit') Slet
+                    div.content
+                        include deleteBlueprint.pug
+
+                    h2 Lagerbeholdning
+
             div.item2
                 h2 Komponenter
                 div.collapsible
@@ -28,7 +37,7 @@ html
                     div.content
                         include deleteComp.pug
 
-                    h2 Komponenter på lager
+                    h2 Lagerbeholdning
                         table(style='width:100%', border='1')
                             tr(style='background-color: hotpink')
                                 th Navn

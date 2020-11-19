@@ -3,7 +3,7 @@
     display: block;
     width: 100%;
     padding: 15px;
-    border: none;
+    border-bottom: 1px solid black;
     outline: none;
     cursor: pointer;
     background: #333333;
@@ -33,6 +33,7 @@
 .content{
     overflow: hidden;
     max-height: 0;
+    border: none;
     transition: max-height 0.2s;
     padding-left: 5px;
     padding-right: 5px;
