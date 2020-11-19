@@ -1,5 +1,6 @@
 form(action='/deleteComponent' method='post')
-    label Vælg komponent for at slette den
+    h2 Slet komponent
+    label Vælg komponent til at slettes
     select(name="dropdownDelete" style="width: 100%")
         each component in components
             option(value=component.id) #{component.name}

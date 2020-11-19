@@ -2,25 +2,37 @@ html
     head
         style
             include ../styles/storage.css
+            include ../styles/collapsible.css
         title Lagerbeholdning
         script(defer, src="/static/javascript/blueprint.js")
+        script(defer, src="/static/javascript/component.js")
+        h1.headlineTop Dummy-smeden lagerbeholdning
     body
         div.div1
             div.item1
                 include blueprints.pug
             div.item2
-                include createComp.pug
-                include updateComp.pug
-                include deleteComp.pug
-                h2 Komponenter på lager
-                table(style='width:100%', border='1')
-                    tr(style='background-color: green')
-                        th Navn
-                        th(style='width:10%') Antal
-                    each component in components
-                        tr.data(style='text-align: center' class='accordion')
-                            td #{component.name}
-                            td #{component.amount}
-                        tr.hidden
-                            td
-                                div.hej Minimumsantal på lager før der gives notifikation: #{component.storageMin}
+                h2 Komponenter
+                div.collapsible
+                    button.collapsibleButton(type='submit') Opret
+                    div.content
+                        include createComp.pug
+                    button.collapsibleButton(type='submit') Opdater
+                    div.content
+                        include updateComp.pug
+                    button.collapsibleButton(type='submit') Slet
+                    div.content
+                        include deleteComp.pug
+
+                    h2 Komponenter på lager
+                        table(style='width:100%', border='1')
+                            tr(style='background-color: hotpink')
+                                th Navn
+                                th(style='width:10%') Antal
+                            each component in components
+                                tr.data(style='text-align: center' class='accordion')
+                                    td #{component.name}
+                                    td #{component.amount}
+                                tr.hidden
+                                    td
+                                        div.hej Minimumsantal på lager før der gives notifikation: #{component.storageMin}

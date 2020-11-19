@@ -1,3 +1,11 @@
+body{
+    background: #ffffff;
+}
+
+.headlineTop{
+text-align: center;
+}
+
 .div1 {
     display: grid;
     /* width: 45em; */
@@ -8,7 +16,7 @@
     /* margin: 0; */
     /* padding: 1em; */
     /* justify-items: center; */
-    background-color:rgb(85, 85, 185);
+    background-color:#777777;
 }
 
 .item1{
@@ -21,7 +29,7 @@
 .item2{
     grid-column: 2;
     border: 2px solid black;
-        padding-left: 5px;
+    padding-left: 5px;
     padding-right: 5px;
 }
 
@@ -39,7 +47,7 @@
 
 .accordion:after {
     content: '\002B';
-    color: #777;
+    color: #555555;
     font-weight: bold;
 }
 
@@ -48,7 +56,7 @@
 }
 
 .hidden{
-    background-color: rgb(53, 53, 255);
+    background-color: #555555;
     display: none;
     overflow: hidden;
     padding: 0 18px;
