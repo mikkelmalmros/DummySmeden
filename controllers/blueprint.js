@@ -1,5 +1,6 @@
 
 // Requires
+const { json } = require('body-parser')
 const Blueprint = require('../models/blueprint')
 const Component = require('../models/component')
 
@@ -47,10 +48,12 @@ exports.getBlueprintByName = async function (name) {
 
 //Adds a component to a blueprint
 exports.addComponentToBluePrint = async function (blueprint, component) {
+    let tempBp = JSON.parse(blueprint)
+    let tempC = JSON.parse(component)
     //let blueprint = await Blueprint.findById(blueprint).populate('components').populate('blueprints').exec()
     //let component = await Component.findById(componentId).exec()
-    blueprint.components.push(component)
-    return await blueprint.save()
+    tempBp.components.push(tempC)
+    return await tempBp.save()
 }
 
 //Removes a component from a blueprint
