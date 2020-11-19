@@ -47,12 +47,12 @@ router.post("/createBlueprint", async (req, res) => {
 
 router.post('/amount', (req, res) => {
     console.log(req.body.blueprint)
-    console.log("Fiskefillet");
     let blueprints
     let components
     for (let index = 0; index < req.body.components; index++) {
-        components.put(components[i])
-        console.log(components)
+        let id = components[i].id
+        console.log(components[i].id)
+        console.log(req.body.id)
     }
     res.redirect('/')
 })

@@ -22,7 +22,7 @@ html
                         th Navn
                         th(style='width:10%') Antal
                     each component in components
-                        tr.data(style='text-align: center' onclick='showHideRow(#{component.name})')
+                        tr.data(style='text-align: center' onclick='showHideRow()')
                             td #{component.name}
                             td #{component.amount}
                         tr(id='#{component.name}' class='hidden_row')
