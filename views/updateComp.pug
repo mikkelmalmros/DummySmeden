@@ -3,9 +3,21 @@ form(action='/updateComponent' method='post')
     select(name="dropdownComponents" style="width: 100%")
         each component in components
             option(value=component.id) #{component.name}
+    br
+    br
+    label Name
+    br
+    input(type='text' name='updatename' style="width:100%" placeholder='Nyt navn på komponent')
+    br
+    br
     label Antal
     br
     input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+    br
+    br
+    label Minimumsantal
+    br
+    input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
     br
     br
     button(type='submit' name='update') Opdater komponent

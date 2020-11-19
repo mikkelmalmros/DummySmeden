@@ -1,23 +1,30 @@
-console.log("Vi har fat i vores script!");
+const controller = require("../../controllers/blueprint");
 
-let blueprints = []
+let blueprints = [];
 
-function addABlueprint(element) {
-    let newBlueprint = 
-    console.log(element);
-    console.log(element.id);
-    console.log(pickedElement.value);
+async function addABlueprint(element) {
+  console.log(element);
+  console.log(element.id);
+  console.log(pickedElement.value);
 
+  let pickedElement = document.getElementById(element.id);
+  let blueprint = await controller.getBlueprintssById(element.id);
 
-    let pickedElement = document.getElementById(element.id)
-        
+  let tempBP = {
+    type: element.id,
+    ref: "Blueprint",
+    bluePrintAmount: pickedElement.value,
+  };
+
+  console.log(tempBP);
+
+  blueprints.push(tempBP);
 }
 
-
 function snupEnComponent() {
-    console.log("Der trykkes!");
-    alert("It's working")
-    // let dropdown = document.getElementById("compDropDown")
-    // let value = dropdown.value
-    // console.log(value);
+  console.log("Der trykkes!");
+  alert("It's working");
+  // let dropdown = document.getElementById("compDropDown")
+  // let value = dropdown.value
+  // console.log(value);
 }
