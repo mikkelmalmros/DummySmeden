@@ -10,7 +10,8 @@ exports.createBlueprint = async function (name, amount, storageMin, components, 
   const blueprint = Blueprint({
     name: name, amount: amount, storageMin: storageMin, components: components, blueprints: blueprints,
   });
-  return await blueprint.save();
+  await blueprint.save();
+  return blueprint
 };
 
 // Get all blueprints
