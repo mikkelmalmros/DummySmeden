@@ -39,35 +39,11 @@ router.post("/createBlueprint", async (req, res) => {
         console.log("Forkerte værdier i /createBlueprint");
     }
 
-    router.locals.newBlueprint=newBlueprint
-    router.locals.blueprints=blueprints
-    router.locals.components=components
-    
-
     res.render("blueprintAmount", { theBlueprint: newBlueprint, blueprints: blueprints, components: components });
 });
 
 
 router.post('/amount', (req, res) => {
-        const datas = req.body
-
-        // console.log(datas.Rune)
-        // console.log(datas.Fiskebolle)
-        const skafTal = /[0-9]+/;
-        // console.log(JSON.stringify(datas))
-        dataString = JSON.stringify(datas)
-        console.log(dataString)
-        dataStringSplit =  dataString.split(',')
-        console.log(dataString.match(dataStringSplit))
-
-
-
-        // let blueprint = router.locals.blueprints[0]
-        // datas.forEach(function(blueprint) {
-        //     console.log(blueprint.name)
-        // });
-
-
 
     // let blueprints = []
     // let body = req.body
