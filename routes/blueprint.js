@@ -4,6 +4,7 @@ const router = express()
 const body = require('body-parser')
 const componentController = require("../controllers/component");
 const blueprintController = require("../controllers/blueprint");
+const alert = require('alert')
 
 router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
@@ -35,13 +36,36 @@ router.post("/createBlueprint", async (req, res) => {
             storageMin
         );
     } else {
-        //Vis pæn besked til brugeren
-        console.log("Forkerte værdier i /createBlueprint");
+        alert("Intet blev oprettet, du manglede noget data")
     }
 
     res.render("blueprintAmount", { theBlueprint: newBlueprint, blueprints: blueprints, components: components });
 });
 
+router.post("/updateBlueprint", async (req, res) => {
+    const blueprintID = req.body.dropdownBlueprints;
+    const blueprint = await blueprintController.getBlueprintById(blueprintID);
+    const amount = req.body.updateamount;
+    const name = req.body.updatename;
+    const minimum = req.body.updatemin;
+
+    if (valider.test(amount)) {
+        await blueprintController.updateAmount(blueprint, amount);
+    }
+
+    if (valider.test(name)) {
+        await blueprintController.updateName(blueprint, name);
+    }
+
+    if (valider.test(minimum)) {
+        await blueprintController.updatestorageMin(blueprint, minimum);
+    }
+
+    if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+        alert("Du har ikke indtastet noget data")
+    }
+    res.redirect("/");
+});
 
 router.post('/amount', (req, res) => {
 
@@ -85,16 +109,6 @@ router.post('/addBlueprint', (req, res) => {
 
 //Delete blueprint
 router.post('/deleteBlueprint', async (req, res) => {
-
-    let blueprint = req.body.dropdownDeleteBlueprint
-    console.log(typeof blueprint);
-    console.log(blueprint);
-    //let obj = blueprint.JSON.parse()
-    let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
-    // console.log(obj);
-
-    blueprintController.deleteBlueprint(blueprintDelete._id)
-    res.redirect("/");
 })
 
 router.put('/update', (req, res) => {
