@@ -160,12 +160,7 @@ router.post('/deleteBlueprint', async (req, res) => {
         }
     }
     res.redirect("/");
+    */
 })
-*/
 
-    router.put('/update', (req, res) => {
-
-        let blueprint
-    })
-
-    module.exports = router
+module.exports = router
