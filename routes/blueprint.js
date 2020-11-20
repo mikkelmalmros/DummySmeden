@@ -84,17 +84,16 @@ router.post('/addBlueprint', (req, res) => {
 })
 
 //Delete blueprint
-router.delete('/delete', (req, res) => {
+router.post('/deleteBlueprint', async (req, res) => {
 
-    let blueprint = req.body.blueprint
+    let blueprint = req.body.dropdownDeleteBlueprint
+    console.log(typeof blueprint);
+    console.log(blueprint);
+    //let obj = blueprint.JSON.parse()
+    let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
+    // console.log(obj);
 
-    if (!blueprint) {
-        return res
-            .status(404)
-            .json({ error: 'Blueprint not found' })
-    }
-
-    blueprintController.deleteBlueprint(req.body.blueprint)
+    blueprintController.deleteBlueprint(blueprintDelete._id)
     res.redirect("/");
 })
 
