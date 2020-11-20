@@ -1,5 +1,5 @@
 body{
-    background: #ffffff;
+    background: #999999;
 }
 
 .headlineTop{
@@ -14,6 +14,7 @@ text-align: center;
     grid-template-rows: 1;
     border: 2px solid black;
     background-color:#777777;
+    font-size:1.2em;
 }
 
 /* Kolonne 1 i vores grid */
@@ -29,33 +30,4 @@ text-align: center;
     border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
-}
-
-.data:hover {
-    background-color: rgb(85, 85, 125);
-}
-
-.accordion {
-    cursor: pointer;
-    transition: 0.5s;
-    outline: none;
-    padding: 18px;
-    width: 100%;
-}
-
-.accordion:after {
-    content: '\002B';
-    color: #555555;
-    font-weight: bold;
-}
-
-.active:after{
-    content: '\2212';
-}
-
-.hidden{
-    background-color: #555555;
-    display: none;
-    overflow: hidden;
-    padding: 0 18px;
 }

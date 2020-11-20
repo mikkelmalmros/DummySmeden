@@ -1,0 +1,78 @@
+table{
+    font-size:0.65em;
+    font-family: sans-serif;
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.tableHeader{
+    border: 1px solid black;
+}
+
+.name:hover {
+    background-color: #555555;
+}
+
+.name {
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 34px;
+}
+
+.headerName{
+    border: 1px solid black;
+    font-size: 25px;
+    height: 37px;
+}
+
+.headerAmount{
+    border: 1px solid black;
+    font-size: 25px;
+    height: 37px;
+}
+
+.amount{
+    text-align: center;
+    line-height: 34px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.name::after {
+    content: '\25be';
+    font-size:25px;
+    color: #000000;
+    font-weight: bold;
+    float: right;
+}
+
+.active.name {
+    background-color: #555555;
+    border-bottom: none;
+
+}
+
+.active::after{
+    content: '\25b4';
+    font-size:25px;
+}
+
+.hidden{
+    background-color: #555555;
+    display: none;
+    overflow: hidden;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-right: -67px;
+    margin-bottom: -1px;
+}
+
+.content {
+    border: none;
+    background-color: #555555;
+}
