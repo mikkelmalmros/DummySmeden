@@ -9,6 +9,8 @@
     background: #333333;
     color: #ffffff;
     text-align: left;
+    font-size:1.2em;
+    line-height: 34px;
     transition: background 0.2s;
 }
 
@@ -16,6 +18,7 @@
 .collapsibleButton::after{
     content: '\25be';
     float: right;
+    font-size:25px;
     transform: scale(1.5);
 }
 
@@ -27,6 +30,7 @@
 /* Pul efter collapsible er sat til active */
 .collapsibleButton--active::after{
     content: '\25b4';
+    font-size:25px;
 }
 
 /* Styling til det der er 'indeni' collapsible */
@@ -39,4 +43,3 @@
     padding-right: 5px;
     background: #eeeeee;
 }
-
