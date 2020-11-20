@@ -6,13 +6,9 @@ const blueprintSchema = Schema({
     amount: Number,
     storageMin: Number,
     components: [{
-        type: Schema.Types.ObjectId, ref: 'Component',
-        componentAmount: Number
-    }],
+        type: Schema.Types.ObjectId, ref: 'ComponentAmount'}],
     blueprints: [{
-        type: Schema.Types.ObjectId, ref: 'Blueprint',
-        blueprintAmount: Number
-    }]
+        type: Schema.Types.ObjectId, ref: 'BlueprintAmount'}]
 })
 
 module.exports = mongoose.model('Blueprint', blueprintSchema)
