@@ -29,7 +29,8 @@ app.use(body.urlencoded({ extended: false }));
 
 const blueprintRouter = require('./routes/blueprint')
 app.use('/blueprint', blueprintRouter)
-
+const componentRouter = require('./routes/component')
+app.use('/component', componentRouter)
 
 
 //Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)
@@ -44,7 +45,9 @@ app.get("/", async (req, res) => {
   res.render("storage", { components: components, blueprints: blueprints });
 });
 
+// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
 //Opretter en komponent
+/*
 app.post("/createComponent", async (req, res) => {
   const name = req.body.name2;
   const amount = req.body.amount2;
@@ -59,7 +62,11 @@ app.post("/createComponent", async (req, res) => {
 
   res.redirect("/");
 });
+*/
 
+// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
+
+/*
 //Opdaterer attributter i komponent
 app.post("/updateComponent", async (req, res) => {
   const componentID = req.body.dropdownComponents;
@@ -91,13 +98,20 @@ app.post("/updateComponent", async (req, res) => {
 
   res.redirect("/");
 });
+*/
 
+// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
+
+
+// 
+/*
 //Sletter en komponent fuldstændigt fra DB
 app.post("/deleteComponent", async (req, res) => {
   const componentID = req.body.dropdownDelete;
   await componentController.deleteComponent(componentID);
   res.redirect("/");
 });
+*/
 
 //Start server
 app.listen(port, () => {
