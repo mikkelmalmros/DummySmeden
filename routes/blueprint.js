@@ -36,9 +36,32 @@ router.post("/createBlueprint", async (req, res) => {
     res.render("blueprintAmount", {mainBlueprintName: pbname, amount:amount, storageMin:storageMin, blueprints: blueprints, components: components });
 });
 
+router.post("/updateBlueprint", async (req, res) => {
+    const blueprintID = req.body.dropdownBlueprints;
+    const blueprint = await blueprintController.getBlueprintById(blueprintID);
+    const amount = req.body.updateamount;
+    const name = req.body.updatename;
+    const minimum = req.body.updatemin;
+
+    if (valider.test(amount)) {
+        await blueprintController.updateAmount(blueprint, amount);
+    }
+
+    if (valider.test(name)) {
+        await blueprintController.updateName(blueprint, name);
+    }
+
+    if (valider.test(minimum)) {
+        await blueprintController.updatestorageMin(blueprint, minimum);
+    }
+
+    if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+        alert("Du har ikke indtastet noget data")
+    }
+    res.redirect("/");
+});
 
 router.post('/amount', async (req, res) => {
-
     let blueprintName = req.body.mainBlueprintName
     let blueprintAmount = req.body.mainBlueprintAmount
     let blueprintStorageMin = req.body.mainBlueprintStorageMin
@@ -83,7 +106,6 @@ router.post('/addBlueprint', (req, res) => {
 
 //Delete blueprint
 router.post('/deleteBlueprint', async (req, res) => {
-
     let blueprint = req.body.dropdownDeleteBlueprint
     console.log(typeof blueprint);
     console.log(blueprint);
@@ -93,7 +115,7 @@ router.post('/deleteBlueprint', async (req, res) => {
     // Find en liste med alle blueprints
     let allBlueprints = blueprintController.getBlueprints
 
-    // find alle blueprints og kør dem igennem for at finde ud af om deres "blueprints" indeholder 
+    // find alle blueprints og kør dem igennem for at finde ud af om deres "blueprints" indeholder
     // noget der matcher BlueprintDelete's id.
 
     // dette kommer ikke til at virke når andreas pusher 20-11-2020 11:00
@@ -104,20 +126,12 @@ router.post('/deleteBlueprint', async (req, res) => {
             //hvis den er indeholdt i en anden så smid et allert!
             //if not delete
             if (tempBlueprint.blueprints[j]._id == blueprintDelete._id) {
-
                 alert(blueprintDelete + " Er en del af " + tempBlueprint.blueprints[j].name)
             } else {
-
                 blueprintController.deleteBlueprint(blueprintDelete._id)
             }
-
         }
-
-
-
     }
-
-
     res.redirect("/");
     */
 })
@@ -128,4 +142,4 @@ router.post('/deleteBlueprint', async (req, res) => {
         let blueprint
     })
 
-    module.exports = router
+module.exports = router

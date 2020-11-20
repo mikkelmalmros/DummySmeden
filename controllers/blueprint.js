@@ -113,7 +113,6 @@ exports.removeBlueprintFromBlueprint = async function (blueprintId, blueprintAmo
 
 //Delete a blueprint
 exports.deleteBlueprint = async function (blueprint) {
-
   let id = blueprint;
   return await Blueprint.deleteOne().where("_id").equals(id).exec();
 };

@@ -103,7 +103,7 @@ app.post("/updateComponent", async (req, res) => {
 // DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
 
 
-// 
+//
 /*
 //Sletter en komponent fuldstændigt fra DB
 app.post("/deleteComponent", async (req, res) => {
