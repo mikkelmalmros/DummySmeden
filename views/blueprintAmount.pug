@@ -4,13 +4,17 @@ html
             include ../styles/addAmount.css
         title Tilføj antal til blueprints
     body
+        
         form(action='/blueprint/amount' method='post')
+                    input(type="hidden" name="mainBlueprintName"  value=mainBlueprintName)
+                    input(type="hidden" name="mainBlueprintAmount"  value=amount)
+                    input(type="hidden" name="mainBlueprintStorageMin"  value=storageMin)
                     h2 Blueprints
                     each blueprint in blueprints
                         label #{blueprint.name}
                         br
-                        //- input(type="hidden" name="hidden:"+blueprint.name value=blueprint)
-                        input(type='text' name=blueprint.name placeholder='Antal' value=blueprint)
+                        input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
+                        input(type='text' name=blueprint._id placeholder='Antal')
                         br
                         br
 
@@ -18,14 +22,13 @@ html
                     each component in components
                         label #{component.name}
                         br
-                        //- input(type="hidden" name="hidden:"+component.name value=component)
-                        input(type='text' name=component.name  placeholder='Antal' value=blueprint)
+                        input(type="hidden" name="hiddenComponent:"+component._id value=component._id)
+                        input(type='text' name=component._id  placeholder='Antal')
                         br
                         br
                     br
                     button(type='submit' name='create') Opret blueprint
         div.div1
-            input(type="hidden" name="mainBlueprint"  value=theBlueprint)
             div.item1
 
 

@@ -2,6 +2,8 @@
 const { json } = require("body-parser");
 const Blueprint = require("../models/blueprint");
 const Component = require("../models/component");
+const BlueprintAmount = require('../models/blueprintAmount')
+const ComponentAmount = require('../models/componentAmount')
 
 //Creates ablueprint and saves it on MongoDB
 exports.createBlueprint = async function (name, amount, storageMin, components, blueprints) {
@@ -71,47 +73,38 @@ exports.getBlueprintByName = async function (name) {
 };
 
 //Adds a component to a blueprint
-exports.addComponentToBluePrint = async function (blueprint, component) {
-  let tempBp = JSON.parse(blueprint);
-  let tempC = JSON.parse(component);
-  //let blueprint = await Blueprint.findById(blueprint).populate('components').populate('blueprints').exec()
-  //let component = await Component.findById(componentId).exec()
-  tempBp.components.push(tempC);
+exports.addComponentToBluePrint = async function (blueprintId, componentAmountId) {
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
+  let componentAmount = await ComponentAmount.findById(componentAmountId).exec()
+  blueprint.components.push(componentAmount);
   return await tempBp.save();
 };
 
 //Removes a component from a blueprint
-exports.removeComponentFromBlueprint = async function (blueprint, component) {
-  //let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
+exports.removeComponentFromBlueprint = async function (blueprintId, componentAmountId) {
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   let components = blueprint.components;
-  let index = components.indexOf(component._id);
+  let index = components.indexOf(componentAmountId);
   components.splice(index, 1);
   return await blueprint.save();
 };
 
 //Adds a blueprint to a blueprint
 //The first blueprint will have the second blueprint added to it
-exports.addBlueprintToBlueprint = async function (
-  firstBlueprint,
-  secondBLueprint
-) {
-  // let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
-  // let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
-  firstBlueprint.blueprints.push(secondBLueprint);
-  return await firstBlueprint.save();
+exports.addBlueprintToBlueprint = async function (blueprintId, blueprintAmountId) {
+  let blueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
+  let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).exec()
+  blueprint.blueprints.push(blueprintAmount);
+  return await blueprint.save();
 };
 
 //Removes a blueprint from a blueprint
 //The first blueprint will have the second blueprint removed from it
-exports.removeBlueprintFromBlueprint = async function (
-  firstBlueprint,
-  secondBLueprint
-) {
-  // let firstBlueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
-  // let secondBLueprint = await Blueprint.findById(secondBLueprintId).populate('components').populate('blueprints').exec()
+exports.removeBlueprintFromBlueprint = async function (blueprintId, blueprintAmountId) {
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
 
-  let firstBlueprints = firstBlueprint.blueprints;
-  let index = blueprints.indexOf(secondBLueprint._id);
+  let blueprints = blueprint.blueprints;
+  let index = blueprints.indexOf(blueprintAmountId);
 
   blueprints.splice(index, 1);
   return await firstBlueprint.save();
