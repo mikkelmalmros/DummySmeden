@@ -27,7 +27,7 @@
     background: #555555;
 }
 
-/* Pul efter collapsible er sat til active */
+/* Pil efter collapsible er sat til active */
 .collapsibleButton--active::after{
     content: '\25b4';
     font-size:25px;
@@ -41,5 +41,5 @@
     transition: max-height 0.2s;
     padding-left: 5px;
     padding-right: 5px;
-    background: #eeeeee;
+    background: #555555;
 }

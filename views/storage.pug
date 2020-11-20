@@ -10,7 +10,7 @@ html
     body
         div.div1
             div.item1
-                h2 Blueprints
+                h1 Blueprints
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
                     div.content
@@ -31,11 +31,12 @@ html
                                 tr
                                     td.name #{blueprint.name}
                                     td.amount #{blueprint.amount}
-                                tr.hidden
-                                    td.content Minimumsantal på lager før der gives notifikation: #{blueprint.storageMin}
+                                tr
+                                    td.contentT
+                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{blueprint.storageMin}
 
             div.item2
-                h2 Komponenter
+                h1 Komponenter
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
                     div.content
@@ -56,5 +57,6 @@ html
                                 tr
                                     td.name #{component.name}
                                     td.amount #{component.amount}
-                                tr.hidden
-                                    td.content Minimumsantal på lager før der gives notifikation: #{component.storageMin}
+                                tr
+                                    td.contentT
+                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{component.storageMin}

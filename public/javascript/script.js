@@ -13,16 +13,18 @@ document.querySelectorAll('.collapsibleButton').forEach(button => {
     })
 })
 
-let acc = document.getElementsByClassName('name')
-let i;
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-        this.classList.toggle("active")
-        let panel = this.parentElement.nextElementSibling
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
+
+document.querySelectorAll('.name').forEach(clickable => {
+    clickable.addEventListener('click', () => {
+        let firstChild = clickable.parentElement.nextElementSibling.children[0]
+        let content = firstChild.children[0]
+
+        clickable.classList.toggle('name--active')
+
+        if (clickable.classList.contains('name--active')) {
+            content.style.maxHeight = content.scrollHeight + 'px'
         } else {
-            panel.style.display = "block";
+            content.style.maxHeight = 0
         }
     })
-}
+})
