@@ -89,17 +89,44 @@ router.post('/deleteBlueprint', async (req, res) => {
     let blueprint = req.body.dropdownDeleteBlueprint
     console.log(typeof blueprint);
     console.log(blueprint);
-    //let obj = blueprint.JSON.parse()
-    let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
-    // console.log(obj);
 
-    blueprintController.deleteBlueprint(blueprintDelete._id)
+    //Find det blueprint vi skal slette
+    let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
+    // Find en liste med alle blueprints
+    let allBlueprints = blueprintController.getBlueprints
+
+    // find alle blueprints og kør dem igennem for at finde ud af om deres "blueprints" indeholder 
+    // noget der matcher BlueprintDelete's id.
+
+    // dette kommer ikke til at virke når andreas pusher 20-11-2020 11:00
+    /*
+    for (let i = 0; i < allBlueprints.length; i++) {
+        let tempBlueprint = allBlueprints[i].blueprints
+        for (let j = 0; j < allBlueprints[i].blueprints.length; j++) {
+            //hvis den er indeholdt i en anden så smid et allert!
+            //if not delete
+            if (tempBlueprint.blueprints[j]._id == blueprintDelete._id) {
+
+                alert(blueprintDelete + " Er en del af " + tempBlueprint.blueprints[j].name)
+            } else {
+
+                blueprintController.deleteBlueprint(blueprintDelete._id)
+            }
+
+        }
+
+
+
+    }
+
+
     res.redirect("/");
 })
+*/
 
-router.put('/update', (req, res) => {
+    router.put('/update', (req, res) => {
 
-    let blueprint
-})
+        let blueprint
+    })
 
-module.exports = router
+    module.exports = router
