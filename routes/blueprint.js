@@ -93,7 +93,9 @@ router.delete('/delete', (req, res) => {
             .status(404)
             .json({ error: 'Blueprint not found' })
     }
+
     blueprintController.deleteBlueprint(req.body.blueprint)
+    res.redirect("/");
 })
 
 router.put('/update', (req, res) => {

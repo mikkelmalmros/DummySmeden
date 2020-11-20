@@ -43,14 +43,14 @@ text-align: center;
     width: 100%;
 }
 
-.accordion:after {
-    content: '\002B';
+.accordion::after {
+    content: '\25be';
     color: #555555;
     font-weight: bold;
 }
 
-.active:after{
-    content: '\2212';
+.active::after{
+    content: '\25b4';
 }
 
 .hidden{

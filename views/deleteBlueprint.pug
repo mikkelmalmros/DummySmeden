@@ -1,1 +1,9 @@
-h1 Shiiiit det er jo ikke færdigt
+form(action='/deleteBlueprint' method='post')
+    h2 Slet et blueprint
+    label Vælg et blueprint der skal slettes
+    select(name="dropdownDeleteBlueprint" style="")
+        each blueprint in blueprints
+            option(value=blueprint.id) #{blueprint.name}
+    br
+    br
+    button(type='submit' name='delete') Slet valgte blueprint
