@@ -134,3 +134,25 @@ exports.updatestorageMin = async function (blueprint, storageMin) {
   blueprint.storageMin = storageMin
   return await blueprint.save()
 }
+
+// check if id og a blueprint is contained in another blueprint
+exports.findBlueprintInBlueprint = async function (blueprintId) {
+  let allBlueprints = await this.getBlueprints();
+
+
+  for (let i = 0; i < allBlueprints.length; i++) {
+    for (let j = 0; j < allBlueprints[i].blueprints.length; j++) {
+
+      const element = allBlueprints[i].blueprints[j].blueprint._id;
+
+      //console.log("El: " + element);
+      //console.log("bp: " + blueprintId._id);
+
+      if ((element + "") == (blueprintId._id + "")) {
+        return blueprintId
+      }
+
+    }
+  }
+  return "intet"
+}
