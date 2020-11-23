@@ -93,7 +93,10 @@ exports.removeComponentFromBlueprint = async function (blueprintId, componentAmo
 //Adds a blueprint to a blueprint
 //The first blueprint will have the second blueprint added to it
 exports.addBlueprintToBlueprint = async function (blueprintId, blueprintAmountId) {
-  let blueprint = await Blueprint.findById(firstBlueprintId).populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId)
+    .populate('components')
+    .populate('blueprints').exec()
+
   let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).exec()
   blueprint.blueprints.push(blueprintAmount);
   return await blueprint.save();

@@ -121,6 +121,19 @@ router.post('/deleteBlueprint', async (req, res) => {
     } else {
         console.log("lav et conferm alert" + " og slet: ");
         console.log(check.name);
+        //Indsæt confirm her
+        //let confirm = window.confirm("");
+        //let confirm = confirm("")
+
+
+
+        if (confirm == true) {
+            blueprintController.deleteBlueprint(blueprintDelete)
+        } else {
+            res.redirect("/");
+
+        }
+
     }
 
 
