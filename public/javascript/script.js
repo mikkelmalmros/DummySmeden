@@ -31,7 +31,7 @@ document.querySelectorAll('.name').forEach(clickable => {
 
 async function pickBlueprint() {
     let selected = document.querySelector('#blueprintSelector')
-    let div = document.querySelector('.divComponents')
+    let div = document.querySelector('#divUpdateComponents')
     console.log('Div : ' + div);
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
