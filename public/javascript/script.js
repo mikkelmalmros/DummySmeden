@@ -29,15 +29,16 @@ document.querySelectorAll('.name').forEach(clickable => {
     })
 })
 
+
+//Is called when the dropdown in the updateblueprint is changed
 async function pickBlueprint() {
+    //Selects the right things from the DOM
     let selected = document.querySelector('#blueprintSelector')
     let div = document.querySelector('#divUpdateComponents')
-    console.log('Div : ' + div);
+
+    //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
-    console.log('JsonValues : ' + jsonValues);
-    console.log('Selected blueprint : ' + selected.value);
-    console.log('ComponentAmounts on the blueprint : ' + JSON.stringify(jsonValues));
     let components = []
     for (const jsonValue of jsonValues) {
         let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
@@ -45,15 +46,9 @@ async function pickBlueprint() {
         components.push(jsonComponent)
         console.log('Component : ' + JSON.stringify(jsonComponent));
     }
-    // jsonValues.forEach(async element => {
-    //     let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + element._id)
-    //     let jsonComponent = await component.json()
-    //     components.push(jsonComponent)
-    //     console.log('Component : ' + JSON.stringify(jsonComponent));
-    // })
 
+    //Puts the fetched data into html
     let html = ''
-    console.log("Start");
     for (const jsonValue of jsonValues) {
         for (const component of components) {
             if(jsonValue.component == component._id) {
