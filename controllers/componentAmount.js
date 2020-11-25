@@ -10,6 +10,12 @@ exports.createComponentAmount = async function(component, amount) {
       return componentAmount
 }
 
+//Get a componentAmount by Id
+exports.getComponentAmountById = async function(componentAmountId) {
+  let componentAmount = await ComponentAmount.findById().populate('component').exec()
+  return componentAmount
+}
+
 //Update a componentAmount
 exports.updateComponentAmount = async function () {
   // Denne tror jeg ikke vi skal bruge... slet og lav en ny i stedet
@@ -17,7 +23,7 @@ exports.updateComponentAmount = async function () {
 
 //Update a componentAmount
 exports.updateComponentAmountAmount = async function (componentAmountId, nAmount) {
-  let componentAmount = ComponentAmount.findById(blueprintAmountId).populate("component").exec()
+  let componentAmount = await ComponentAmount.findById(blueprintAmountId).populate("component").exec()
 
   componentAmount.amount = nAmount
   return await componentAmount.save()

@@ -43,15 +43,15 @@ router.post("/updateBlueprint", async (req, res) => {
     const minimum = req.body.updatemin;
 
     if (valider.test(amount)) {
-        await blueprintController.updateAmount(blueprint, amount);
+        await blueprintController.updateAmount(blueprint._id, amount);
     }
 
     if (valider.test(name)) {
-        await blueprintController.updateName(blueprint, name);
+        await blueprintController.updateName(blueprint._id, name);
     }
 
     if (valider.test(minimum)) {
-        await blueprintController.updatestorageMin(blueprint, minimum);
+        await blueprintController.updatestorageMin(blueprint_id, minimum);
     }
 
     if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
@@ -95,12 +95,12 @@ router.post('/amount', async (req, res) => {
 
 //Adds a component to a blueprint
 router.post('/addComponent', (req, res) => {
-    blueprintController.addComponentToBluePrint(req.body.blueprint, req.body.components)
+    blueprintController.addComponentAmountToBluePrint(req.body.blueprint, req.body.components)
 })
 
 //Adds a blueprint to a blueprint
 router.post('/addBlueprint', (req, res) => {
-    blueprintController.addBlueprintToBlueprint(req.body.firstBlueprint, req.body.secondBlueprint)
+    blueprintController.addBlueprintAmountToBlueprint(req.body.firstBlueprint, req.body.secondBlueprint)
 })
 
 //Delete blueprint
@@ -116,7 +116,7 @@ router.post('/deleteBlueprint', async (req, res) => {
 
     check = await blueprintController.findBlueprintInBlueprint(blueprintDelete)
     if (check == "intet") {
-        blueprintController.deleteBlueprint(blueprintDelete)
+        blueprintController.deleteBlueprint(blueprintDelete._id)
         res.redirect("/");
     } else {
         console.log("lav et conferm alert" + " og slet: ");
@@ -128,7 +128,7 @@ router.post('/deleteBlueprint', async (req, res) => {
 
 
         if (confirm == true) {
-            blueprintController.deleteBlueprint(blueprintDelete)
+            blueprintController.deleteBlueprint(blueprintDelete._id)
         } else {
             res.redirect("/");
 
