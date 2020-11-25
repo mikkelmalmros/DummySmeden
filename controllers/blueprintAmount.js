@@ -13,7 +13,7 @@ exports.createBlueprintAmount = async function (blueprint, amount) {
 
 //Get a blueprintAmount by Id
 exports.getBlueprintAmountById = async function(blueprintAmountId) {
-    let blueprintAmount = await BlueprintAmount.findById().populate('blueprint').exec()
+    let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
     return blueprintAmount
 }
 

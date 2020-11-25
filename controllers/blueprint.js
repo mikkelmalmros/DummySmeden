@@ -98,9 +98,8 @@ exports.addBlueprintAmountToBlueprint = async function (blueprintId, blueprintAm
     .populate('components')
     .populate('blueprints').exec()
 
-
-  
   let blueprintAmount = await blueprintAmountController.findById(blueprintAmountId)
+
   blueprint.blueprints.push(blueprintAmount);
   return await blueprint.save();
 };
@@ -137,34 +136,34 @@ exports.deleteBlueprint = async function (blueprintId) {
 
 //Update name on a blueprint
 exports.updateName = async function (blueprintId, name) {
-  let blueprint = await Blueprint.findById().populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   blueprint.name = name;
   return await blueprint.save();
 };
 
 //Update amount on a blueprint
 exports.updateAmount = async function (blueprintId, amount) {
-  let blueprint = await Blueprint.findById().populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   blueprint.amount = amount
   return await blueprint.save()
 }
 
 //Update storageMin on a blueprint
 exports.updatestorageMin = async function (blueprintId, storageMin) {
-  let blueprint = await Blueprint.findById().populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   blueprint.storageMin = storageMin
   return await blueprint.save()
 }
 
 //Get all componentAmounts on a blueprint
 exports.getAllComponentAmounts = async function (blueprintId) {
-  let blueprint = await Blueprint.findById().populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   return blueprint.components
 }
 
 //Get all blueprintAmounts on a blueprint
 exports.getAllBlueprintAmounts = async function (blueprintId) {
-  let blueprint = await Blueprint.findById().populate('components').populate('blueprints').exec()
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   return blueprint.blueprints
 }
 

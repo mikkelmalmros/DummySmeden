@@ -12,8 +12,13 @@ exports.createComponentAmount = async function(component, amount) {
 
 //Get a componentAmount by Id
 exports.getComponentAmountById = async function(componentAmountId) {
-  let componentAmount = await ComponentAmount.findById().populate('component').exec()
+  let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
   return componentAmount
+}
+
+exports.getComponentOfComponentAmount = async function(componentAmountId) {
+  let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
+  return componentAmount.component
 }
 
 //Update a componentAmount

@@ -31,6 +31,8 @@ const blueprintRouter = require('./routes/blueprint')
 app.use('/blueprint', blueprintRouter)
 const componentRouter = require('./routes/component')
 app.use('/component', componentRouter)
+const apiRouter = require('./routes/api')
+app.use('/api', apiRouter)
 
 
 //Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)

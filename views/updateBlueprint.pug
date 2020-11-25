@@ -1,7 +1,7 @@
 form(action='/blueprint/updateBlueprint' method='post')
     h2 Opdater blueprint
     label Vælg blueprint til at opdateres
-    select(name="dropdownBlueprints" style="width: 100%")
+    select(name="dropdownBlueprints" id="blueprintSelector" onchange="pickBlueprint()" style="width: 100%")
         each blueprint in blueprints
             option(value=blueprint.id) #{blueprint.name}
     br
@@ -21,10 +21,9 @@ form(action='/blueprint/updateBlueprint' method='post')
     input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
     br
     br
-    label Blueprints
-    br
-    br
     label Komponenter
+        div.components
+            p Ingen komponenter på blueprintet
     br
     br
     button(type='submit' name='update') Opdater blueprint
