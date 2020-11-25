@@ -31,3 +31,9 @@ text-align: center;
     padding-left: 5px;
     padding-right: 5px;
 }
+
+/* Special div for updateing blueprint */
+.divComponents{
+    overflow: auto;
+    max-height: 100%;
+}

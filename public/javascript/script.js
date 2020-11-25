@@ -31,7 +31,7 @@ document.querySelectorAll('.name').forEach(clickable => {
 
 async function pickBlueprint() {
     let selected = document.querySelector('#blueprintSelector')
-    let div = document.querySelector('.components')
+    let div = document.querySelector('.divComponents')
     console.log('Div : ' + div);
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
@@ -59,7 +59,7 @@ async function pickBlueprint() {
             if(jsonValue.component == component._id) {
                 console.log('Name of component : ' + component.name);
 
-                html += '<p> Name:' + component.name + ' Amount: ' + jsonValue.amount + ' </p>'
+                html += '<p>' + component.name + '</p><input type="text" name="' + component._id + '" value="' + jsonValue.amount + '"> <br>'
             }
             
             
@@ -67,6 +67,7 @@ async function pickBlueprint() {
         
     }
     div.innerHTML = html
+    div.style.overflow = "auto"
     
     
 }

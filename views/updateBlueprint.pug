@@ -2,6 +2,7 @@ form(action='/blueprint/updateBlueprint' method='post')
     h2 Opdater blueprint
     label Vælg blueprint til at opdateres
     select(name="dropdownBlueprints" id="blueprintSelector" onchange="pickBlueprint()" style="width: 100%")
+        option(value="" disabled selected) Vælg et blueprint
         each blueprint in blueprints
             option(value=blueprint.id) #{blueprint.name}
     br
@@ -22,7 +23,7 @@ form(action='/blueprint/updateBlueprint' method='post')
     br
     br
     label Komponenter
-        div.components
+        div.divComponents
             p Ingen komponenter på blueprintet
     br
     br
