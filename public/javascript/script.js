@@ -44,11 +44,11 @@ async function pickBlueprint() {
     let div = document.querySelector('#divUpdateComponents')
 
     //Fetches the rigth data from API
-    let values = await fetch("http://http://dummysmeden.herokuapp.com/api/getComponentAmounts/" + selected.value)
+    let values = await fetch("http://dummysmeden.herokuapp.com/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
     let components = []
     for (const jsonValue of jsonValues) {
-        let component = await fetch("http://http://dummysmeden.herokuapp.com/api/getComponentOnComponentAmount/" + jsonValue._id)
+        let component = await fetch("http://dummysmeden.herokuapp.com/api/getComponentOnComponentAmount/" + jsonValue._id)
         let jsonComponent = await component.json()
         components.push(jsonComponent)
         console.log('Component : ' + JSON.stringify(jsonComponent));

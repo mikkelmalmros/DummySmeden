@@ -119,19 +119,15 @@ exports.removeBlueprintAmountFromBlueprint = async function (blueprintId, bluepr
 
 //Delete a blueprint and delete all blueprintAmounts and componentAmounts connected to it
 exports.deleteBlueprint = async function (blueprintId) {
-  let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
-  let blueprintAmounts = blueprint.blueprints
+  let blueprint = await Blueprint.findById(blueprintId).populate('components').exec()
   let componentAmounts = blueprint.components
 
-  blueprintAmounts.forEach(element => {
-    blueprintAmountController.deleteBlueprintAmount(element._id)
-  });
 
   componentAmounts.forEach(element => {
     componentAmountController.deleteComponentAmount(element._id)
   });
 
-  return await Blueprint.deleteOne().where("_id").equals(id).exec();
+  return await Blueprint.deleteOne().where("_id").equals(blueprintId).exec()
 };
 
 //Update name on a blueprint
