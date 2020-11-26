@@ -1,22 +1,22 @@
 const ComponentAmount = require('../models/componentAmount')
 
 // Create componentAmount
-exports.createComponentAmount = async function(component, amount) {
-    const componentAmount = ComponentAmount({
-        component:component,
-        amount:amount
-      });
-      await componentAmount.save();
-      return componentAmount
+exports.createComponentAmount = async function (component, amount) {
+  const componentAmount = ComponentAmount({
+    component: component,
+    amount: amount
+  });
+  await componentAmount.save();
+  return componentAmount
 }
 
 //Get a componentAmount by Id
-exports.getComponentAmountById = async function(componentAmountId) {
+exports.getComponentAmountById = async function (componentAmountId) {
   let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
   return componentAmount
 }
 
-exports.getComponentOfComponentAmount = async function(componentAmountId) {
+exports.getComponentOfComponentAmount = async function (componentAmountId) {
   let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
   return componentAmount.component
 }
