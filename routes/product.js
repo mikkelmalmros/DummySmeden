@@ -29,6 +29,12 @@ router.post("/createProduct", async (req, res) => {
 router.post("/updateProduct", async (req, res) => {
     console.log('ikke lavet endnu');
 
+    const blueprintID = req.body.dropdownBlueprints;
+    const blueprint = await blueprintController.getBlueprintById(blueprintID);
+    const amount = req.body.updateamount;
+    const name = req.body.updatename;
+    const minimum = req.body.updatemin;
+
     if (valider.test(amount)) {
     }
 
