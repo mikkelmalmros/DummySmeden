@@ -38,7 +38,7 @@ exports.getBlueprintById = async function (blueprintId) {
 };
 
 //Get a list of blueprints by IDs
-exports.getBlueprintssById = async function (ids) {
+exports.getBlueprintsById = async function (ids) {
   let list = [];
   if (ids != null || ids != undefined) {
     if (Array.isArray(ids)) {

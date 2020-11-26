@@ -71,6 +71,36 @@ async function pickBlueprint() {
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
+}
 
+//Is called when the dropdown in the updateproduct is changed
+async function pickProduct() {
+    //Selects the right things from the DOM
+    let selected = document.querySelector('#productSelector')
+    let div = document.querySelector('#divUpdateBlueprints')
 
+    //Fetches the rigth data from API
+    let values = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintAmounts/" + selected.value)
+    let jsonValues = await values.json()
+    let blueprints = []
+    for (const jsonValue of jsonValues) {
+        let blueprint = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintOnBlueprintAmount/" + jsonValue._id)
+        let jsonBlueprint = await blueprint.json()
+        blueprints.push(jsonBlueprint)
+        console.log('Blueprint : ' + JSON.stringify(jsonBlueprint));
+    }
+
+    //Puts the fetched data into html-string
+    let html = ''
+    for (const jsonValue of jsonValues) {
+        for (const blueprint of blueprints) {
+            if (jsonValue.blueprint == blueprint._id) {
+                console.log('Name of blueprint : ' + blueprint.name);
+                html += '<p>' + blueprint.name + '</p><input type="text" name="' + blueprint._id + '" value="' + jsonValue.amount + '"> <br>'
+            }
+        }
+    }
+    //Puts the html string into the div
+    div.innerHTML = html
+    // div.style.overflow = "auto"
 }

@@ -12,7 +12,7 @@ exports.createBlueprintAmount = async function (blueprint, amount) {
 }
 
 //Get a blueprintAmount by Id
-exports.getBlueprintAmountById = async function(blueprintAmountId) {
+exports.getBlueprintAmountById = async function (blueprintAmountId) {
     let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
     return blueprintAmount
 }
@@ -32,4 +32,9 @@ exports.updateBlueprintAmountAmount = async function (blueprintAmountId, nAmount
 // detele a blueprintAmount object
 exports.deleteBlueprintAmount = async function (blueprintAmountId) {
     return await BlueprintAmount.deleteOne().where("_id").equals(blueprintAmountId).exec()
+}
+
+exports.getBlueprintOfBlueprintAmount = async function (blueprintAmountId) {
+    let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
+    return blueprintAmount.blueprint
 }

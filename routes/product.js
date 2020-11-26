@@ -3,8 +3,9 @@ const express = require('express')
 const router = express()
 const body = require('body-parser')
 // component controller
-const productController = require("../controllers/component");
-
+const productController = require("../controllers/product")
+const blueprintController = require('../controllers/blueprint')
+const blueprintAmountController = require('../controllers/blueprintAmount')
 
 router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
@@ -17,31 +18,62 @@ router.post("/createProduct", async (req, res) => {
     const amount = req.body.inputProdAmount;
     const storageMin = req.body.InputProdMin;
 
-    if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-        await productController.createComponent(name, amount, storageMin);
-    } else {
+    const blueprints = await blueprintController.getBlueprintsById(
+        req.body.dropdownBlueprint
+    );
 
-    }
-    res.redirect("/");
+    // if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
+    //     await productController.createProduct(name, amount, storageMin, blueprints);
+    // } else {
+
+    // }
+    res.render("productAmount", { mainProductName: name, amount: amount, storageMin: storageMin, blueprints: blueprints });
 });
 
-//update a component using the data in inputfields
+router.post('/amount', async (req, res) => {
+    let productName = req.body.mainProductName
+    let productAmount = req.body.mainProductAmount
+    let productStorageMin = req.body.mainProductStorageMin
+
+    let reqbody = req.body
+
+    let product = await productController.createProduct(productName, productAmount, productStorageMin)
+
+    let tempBlueprint = null
+
+    for (const key of Object.keys(reqbody)) {
+        if (key.includes('hiddenBlueprint')) {
+            tempBlueprint = await blueprintController.getBlueprint(reqbody[key])
+        } else if (tempBlueprint != null && key == tempBlueprint._id) {
+            let amountBlueprint = await blueprintAmountController.createBlueprintAmount(tempBlueprint, reqbody[key])
+            tempBlueprint = null
+            product.blueprints.push(amountBlueprint)
+        }
+    }
+    await product.save()
+    res.redirect('/')
+})
+
+//update a product using the data in inputfields
 router.post("/updateProduct", async (req, res) => {
     console.log('ikke lavet endnu');
 
-    const blueprintID = req.body.dropdownBlueprints;
-    const blueprint = await blueprintController.getBlueprintById(blueprintID);
+    const productID = req.body.dropdownProducts;
+    const product = await productController.getProductById(productID);
     const amount = req.body.updateamount;
     const name = req.body.updatename;
     const minimum = req.body.updatemin;
 
     if (valider.test(amount)) {
+        await productController.updateProductAmountById(product._id, amount)
     }
 
     if (valider.test(name)) {
+        await productController.updateProductNameById(product._id, name)
     }
 
     if (valider.test(minimum)) {
+        await productController.updateProductStorageMinById(product._id, minimum)
     }
 
     if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
