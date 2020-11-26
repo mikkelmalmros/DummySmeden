@@ -23,8 +23,15 @@ document.querySelectorAll('.name').forEach(clickable => {
 
         if (clickable.classList.contains('name--active')) {
             content.style.maxHeight = content.scrollHeight + 'px'
+            setTimeout(function () { console.log('venter på transition') }, 200);
+            content.style.borderBottom = '1px solid black'
+            firstChild.style.display = 'block'
+
         } else {
             content.style.maxHeight = 0
+            setTimeout(function () { console.log('venter på transition 2') }, 200);
+            firstChild.style.display = 'none'
+            content.style.borderBottom = 'none'
         }
     })
 })

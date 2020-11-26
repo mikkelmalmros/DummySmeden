@@ -74,7 +74,7 @@ table{
     margin: none;
     padding: none;
     background: #555555;
-    /* display: none; */
+    display: none;
 }
 
 .hiddenT{
@@ -83,8 +83,8 @@ table{
     max-height: 0;
     transition: max-height 0.2s;
     border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
     margin-right: -68px;
-    margin-bottom: -1px;
+    margin-bottom: -2px;
 
 }
