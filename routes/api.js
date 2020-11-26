@@ -50,7 +50,6 @@ router.put('/updateBlueprint/:id', async (req, res) => {
 )
 //Gets all blueprintAmounts of a given product found by id in the param
 router.get('/getBlueprintAmounts/:id', async (req, res) => {
-    console.log(req.params.id);
     let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)
     res.json(blueprintAmounts)
 })
@@ -67,9 +66,7 @@ router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
 //BlUEPRINTAMOUNTS
 //---------------------------------------------------------------------------------------------------------
 router.get('/getBlueprintOnBlueprintAmount/:id', async (req, res) => {
-    console.log("Spurgt ID : " + req.params.id);
     let blueprint = await blueprintAmountController.getBlueprintOfBlueprintAmount(req.params.id)
-    console.log("Returneret blueprint: " + blueprint);
     res.json(blueprint)
 })
 
