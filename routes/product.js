@@ -13,9 +13,9 @@ const valider = /[a-zA-Z0-9]+/;
 
 //Create a product
 router.post("/createProduct", async (req, res) => {
-    const name = req.body.name2;
-    const amount = req.body.amount2;
-    const storageMin = req.body.storageMin2;
+    const name = req.body.name3;
+    const amount = req.body.amount3;
+    const storageMin = req.body.storageMin3;
 
     if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
         await productController.createComponent(name, amount, storageMin);
@@ -45,7 +45,7 @@ router.post("/updateProduct", async (req, res) => {
 });
 
 //Delete a component by using the data from dropdownDelete menu
-router.post("/deleteComponent", async (req, res) => {
+router.post("/deleteProduct", async (req, res) => {
     console.log('ikke lavet endnu');
     res.redirect("/");
 });
