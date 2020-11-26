@@ -56,8 +56,6 @@ router.post('/amount', async (req, res) => {
 
 //update a product using the data in inputfields
 router.post("/updateProduct", async (req, res) => {
-    console.log('ikke lavet endnu');
-
     const productID = req.body.dropdownProducts;
     const product = await productController.getProductById(productID);
     const amount = req.body.updateamount;
@@ -76,9 +74,9 @@ router.post("/updateProduct", async (req, res) => {
         await productController.updateProductStorageMinById(product._id, minimum)
     }
 
-    if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
-        alert("Du har ikke indtastet noget data")
-    }
+    // if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+    //     // alert("Du har ikke indtastet noget data")
+    // }
     res.redirect("/");
 });
 

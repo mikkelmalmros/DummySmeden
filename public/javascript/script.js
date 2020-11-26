@@ -80,14 +80,14 @@ async function pickProduct() {
     let div = document.querySelector('#divUpdateBlueprints')
 
     //Fetches the rigth data from API
-    let values = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintAmounts/" + selected.value)
+    let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
+
     let jsonValues = await values.json()
     let blueprints = []
     for (const jsonValue of jsonValues) {
-        let blueprint = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintOnBlueprintAmount/" + jsonValue._id)
+        let blueprint = await fetch("http://localhost:8080/api/getBlueprintOnBlueprintAmount/" + jsonValue._id)
         let jsonBlueprint = await blueprint.json()
         blueprints.push(jsonBlueprint)
-        console.log('Blueprint : ' + JSON.stringify(jsonBlueprint));
     }
 
     //Puts the fetched data into html-string
@@ -95,7 +95,6 @@ async function pickProduct() {
     for (const jsonValue of jsonValues) {
         for (const blueprint of blueprints) {
             if (jsonValue.blueprint == blueprint._id) {
-                console.log('Name of blueprint : ' + blueprint.name);
                 html += '<p>' + blueprint.name + '</p><input type="text" name="' + blueprint._id + '" value="' + jsonValue.amount + '"> <br>'
             }
         }
