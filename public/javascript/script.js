@@ -37,17 +37,17 @@ async function pickBlueprint() {
     let div = document.querySelector('#divUpdateComponents')
 
     //Fetches the rigth data from API
-    let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
+    let values = await fetch("http://http://dummysmeden.herokuapp.com/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
     let components = []
     for (const jsonValue of jsonValues) {
-        let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
+        let component = await fetch("http://http://dummysmeden.herokuapp.com/api/getComponentOnComponentAmount/" + jsonValue._id)
         let jsonComponent = await component.json()
         components.push(jsonComponent)
         console.log('Component : ' + JSON.stringify(jsonComponent));
     }
 
-    //Puts the fetched data into html
+    //Puts the fetched data into html-string
     let html = ''
     for (const jsonValue of jsonValues) {
         for (const component of components) {
@@ -61,8 +61,9 @@ async function pickBlueprint() {
         }
         
     }
+    //Puts the html string into the div
     div.innerHTML = html
-    div.style.overflow = "auto"
+    // div.style.overflow = "auto"
     
     
 }
