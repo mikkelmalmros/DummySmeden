@@ -2,8 +2,10 @@ form(action='/component/updateComponent' method='post')
     h2 Opdater komponent
     label Vælg komponent til at opdateres
     select(name="dropdownComponents" style="width: 100%")
+        
         each component in components
             option(value=component.id) #{component.name}
+        option(value="" ) Test
     br
     br
     label Name

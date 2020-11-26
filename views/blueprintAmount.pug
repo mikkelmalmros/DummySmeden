@@ -9,14 +9,14 @@ html
                     input(type="hidden" name="mainBlueprintName"  value=mainBlueprintName)
                     input(type="hidden" name="mainBlueprintAmount"  value=amount)
                     input(type="hidden" name="mainBlueprintStorageMin"  value=storageMin)
-                    h2 Blueprints
-                    each blueprint in blueprints
-                        label #{blueprint.name}
-                        br
-                        input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
-                        input(type='text' name=blueprint._id placeholder='Antal')
-                        br
-                        br
+                    //- h2 Blueprints
+                    //- each blueprint in blueprints
+                    //-     label #{blueprint.name}
+                    //-     br
+                    //-     input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
+                    //-     input(type='text' name=blueprint._id placeholder='Antal')
+                    //-     br
+                    //-     br
 
                     h2 Komponenter
                     each component in components
