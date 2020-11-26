@@ -111,8 +111,11 @@ async function deleteBlueprint() {
     let id = div.value
     await fetch('http://localhost:8080/api/deleteBlueprint/' + id, {
         method: 'delete'
-    }).then(window.location.reload())
+    }).then(console.log("Blueprint er Slettet")).then(setTimeout(() => {
+        window.location.reload()
+    }, 100))
 }
+
 async function updateBlueprint() {
     console.log("Der er mad!!!!")
 
