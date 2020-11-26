@@ -57,3 +57,17 @@
 #divUpdateComponents {
     border: 2px solid black;
 }
+
+#divBlueprints{
+    overflow-y: auto;
+    max-height: 0;
+    border: none;
+    transition: max-height 0.2s;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #555555;
+}
+
+#divUpdateBlueprints {
+    border: 2px solid black;
+}

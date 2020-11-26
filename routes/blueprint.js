@@ -15,9 +15,9 @@ const valider = /[a-zA-Z0-9]+/;
 
 //The first step in creating a blueprint - the creation happens in the endpont "/amount"
 router.post("/createBlueprint", async (req, res) => {
-    const pbname = req.body.name1;
-    const amount = req.body.amount1;
-    const storageMin = req.body.storageMin1;
+    const pbname = req.body.inputBPName;
+    const amount = req.body.inputBPAmount;
+    const storageMin = req.body.InputBPMin;
 
     const components = await componentController.getComponentsById(
         req.body.dropdownComp

@@ -1,0 +1,33 @@
+head
+    style
+        include ../styles/collapsible.css
+body
+    form(action='/product/updateProduct' method='post')
+        h2 Opdater produkt
+        label Vælg produkt til at opdateres
+        select(name="dropdownProducts" id="productSelector" onchange="pickProduct()" style="width: 100%")
+            option(value="" disabled selected) Vælg et produkt
+            each product in products
+                option(value=product.id) #{product.name}
+        br
+        br
+        label Name
+        br
+        input(type='text' name='updatename' style="width:100%" placeholder='Nyt navn på produktet')
+        br
+        br
+        label Antal
+        br
+        input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+        br
+        br
+        label Minimumsantal
+        br
+        input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
+        br
+        br
+        label Blueprints
+            div#divUpdateBlueprints
+        br
+        br
+        button(type='submit' name='update') Opdater produkt

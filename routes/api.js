@@ -5,9 +5,15 @@ const body = require('body-parser')
 const componentController = require("../controllers/component")
 const blueprintController = require("../controllers/blueprint")
 const componentAmountController = require('../controllers/componentAmount')
+const productController = require('../controllers/product')
+const blueprintAmountController = require('../controllers/blueprintAmount')
+const blueprintAmount = require('../models/blueprintAmount')
 
 router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
+
+//PRODUCTS
+//--------------------------------------------------------------------------------------------------------
 
 //COMPONENTS
 //--------------------------------------------------------------------------------------------------------
@@ -42,6 +48,12 @@ router.put('/updateBlueprint/:id', async (req, res) => {
     await blueprintController.update
 }
 )
+//Gets all blueprintAmounts of a given product found by id in the param
+router.get('/getBlueprintAmounts/:id', async (req, res) => {
+    console.log(req.params.id);
+    let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)
+    res.json(blueprintAmounts)
+})
 
 //COMPONENTAMOUNTS
 //---------------------------------------------------------------------------------------------------------
@@ -50,6 +62,15 @@ router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
     let component = await componentAmountController.getComponentOfComponentAmount(req.params.id)
     console.log("Returneret component: " + component);
     res.json(component)
+})
+
+//BlUEPRINTAMOUNTS
+//---------------------------------------------------------------------------------------------------------
+router.get('/getBlueprintOnBlueprintAmount/:id', async (req, res) => {
+    console.log("Spurgt ID : " + req.params.id);
+    let blueprint = await blueprintAmountController.getBlueprintOfBlueprintAmount(req.params.id)
+    console.log("Returneret blueprint: " + blueprint);
+    res.json(blueprint)
 })
 
 module.exports = router

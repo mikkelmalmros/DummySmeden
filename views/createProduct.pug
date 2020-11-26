@@ -1,29 +1,29 @@
 style
     include ../styles/storage.css
 body
-    form(action='/blueprint/createBlueprint' method='post')
-        h2 Opret blueprint
+    form(action='/product/createProduct' method='post')
+        h2 Opret produkt
 
         label Navn
         br
-        input(type='text' name='inputBPName' style="width:100%" placeholder='Navn på blueprint')
+        input(type='text' name='inputProdName' style="width:100%" placeholder='Navn på produkt')
         br
         br
         label Antal
         br
-        input(type='text' name='inputBPAmount' style="width:100%" placeholder='Antal på lager')
+        input(type='text' name='inputProdAmount' style="width:100%" placeholder='Antal på lager')
         br
         br
         label Minimumsantal
         br
-        input(type='text' name='inputBPMin' style="width:100%" placeholder='Minimumsantal')
+        input(type='text' name='inputProdMin' style="width:100%" placeholder='Minimumsantal')
         br
         br
 
-        label Tilføj komponenter til blueprintet
-        select(name="dropdownComp" style="width: 100%" multiple)
-            each component in components
-                    option(value=component.id) #{component.name}
+        label Tilføj blueprints til produktet
+        select(name="dropdownBlueprint" style="width: 100%" multiple)
+            each blueprint in blueprints
+                    option(value=blueprint.id) #{blueprint.name}
         br
         br
 
@@ -37,4 +37,4 @@ body
         //- label Vælg andre blueprints til blueprintet
         //- select(name="dropdownBP" style="width: 100%" multiple)
         //- include selectBlueprint.pug
-        button(type='submit' name='create') Put antal på blueprint
+        button(type='submit' name='create') Put antal på produkt

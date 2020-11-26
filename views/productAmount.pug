@@ -1,0 +1,34 @@
+html
+    head
+        style
+            include ../styles/addAmount.css
+        title Tilføj antal til products
+    body
+
+        form(action='/product/amount' method='post')
+                    input(type="hidden" name="mainProductName"  value=mainProductName)
+                    input(type="hidden" name="mainProductAmount"  value=amount)
+                    input(type="hidden" name="mainProductStorageMin"  value=storageMin)
+                    h2 Blueprints
+                    each blueprint in blueprints
+                        label #{blueprint.name}
+                        br
+                        input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
+                        input(type='text' name=blueprint._id placeholder='Antal')
+                        br
+                        br
+                    br
+
+                    //- h2 Komponenter
+                    //- each component in components
+                    //-     label #{component.name}
+                    //-     br
+                    //-     input(type="hidden" name="hiddenComponent:"+component._id value=component._id)
+                    //-     input(type='text' name=component._id  placeholder='Antal')
+                    //-     br
+                    //-     br
+                    //- br
+                    button(type='submit' name='create') Opret produkt
+        div.div1
+            div.item1
+                div.item2
