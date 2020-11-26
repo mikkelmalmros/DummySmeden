@@ -1,9 +1,10 @@
-form(action='/blueprint/deleteBlueprint' method='post')
+//-form(action='/' method='get')
+-//
     h2 Slet et blueprint
     label Vælg et blueprint der skal slettes
-    select(name="dropdownDeleteBlueprint" style="")
+    select(name="dropdownDeleteBlueprint" id='dropdownDeleteBlueprintID' style="")
         each blueprint in blueprints
             option(value=blueprint._id) #{blueprint.name}
     br
     br
-    button(type='submit' name='delete') Slet valgte blueprint
+    button(type='button' name='delete' onclick="deleteBlueprint()") Slet valgte blueprint

@@ -1,3 +1,4 @@
+
 // på eget ansvar
 document.querySelectorAll('.collapsibleButton').forEach(button => {
     button.addEventListener('click', () => {
@@ -44,11 +45,11 @@ async function pickBlueprint() {
     let div = document.querySelector('#divUpdateComponents')
 
     //Fetches the rigth data from API
-    let values = await fetch("http://dummysmeden.herokuapp.com/api/getComponentAmounts/" + selected.value)
+    let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
     let components = []
     for (const jsonValue of jsonValues) {
-        let component = await fetch("http://dummysmeden.herokuapp.com/api/getComponentOnComponentAmount/" + jsonValue._id)
+        let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
         let jsonComponent = await component.json()
         components.push(jsonComponent)
         console.log('Component : ' + JSON.stringify(jsonComponent));
@@ -68,9 +69,46 @@ async function pickBlueprint() {
         }
 
     }
+
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
+
+
+}
+async function deleteBlueprint() {
+    console.log("HEEEEEJ")
+    let div = document.getElementById('dropdownDeleteBlueprintID')
+    let id = div.value
+    await fetch('http://localhost:8080/api/deleteBlueprint/' + id, {
+        method: 'delete'
+    }).then(window.location.reload())
+}
+async function updateBlueprint() {
+    console.log("Der er mad!!!!")
+
+    let data = "{";
+    console.log(document.getElementById("updatenameBlueprint").value);
+    data = data + "name:" + document.getElementById("updatenameBlueprint").value +
+        ", " + "amount: " + document.getElementById("updateamountBlueprint").value +
+        ", " + "storageMin: " + document.getElementById("updateMinAntalBlueprint").value
+
+
+    let nodes = document.getElementById("divUpdateComponents").childNodes
+    console.log(nodes);
+    nodes.forEach(element => {
+        console.log(element.value);
+    });
+
+    /*
+    data.append('amount', document.getElementsByName("updateamount").value)
+    data.append('storageMin', document.getElementsByName("updatemin").value)
+    */
+
+    console.log(data);
+
+
+
 
 
 }

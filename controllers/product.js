@@ -27,6 +27,7 @@ exports.updateProductAmountById = async function (productId, amount) {
     product.amount = amount
     return await product.save()
 }
+
 //update storageMin 
 exports.updateProductStorageMinById = async function (productId, storageMin) {
     let product = await Product.findById(productId).populate("blueprints").exec()
@@ -35,6 +36,7 @@ exports.updateProductStorageMinById = async function (productId, storageMin) {
 }
 
 //Update blueprint
+exports.updateBlueprintAmount
 
 //delete
 exports.deleteProductById = async function (productId) {

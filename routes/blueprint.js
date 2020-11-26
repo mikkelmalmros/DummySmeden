@@ -59,7 +59,7 @@ router.post('/amount', async (req, res) => {
     // }
 
     for (const key of Object.keys(reqbody)) {
-         if (key.includes('hiddenComponent')) {
+        if (key.includes('hiddenComponent')) {
             tempComponent = await componentController.getComponent(reqbody[key])
             console.log('TempComponent : ' + tempComponent);
         } else if (tempComponent != null && key == tempComponent._id) {
@@ -118,8 +118,7 @@ router.post('/addBlueprint', (req, res) => {
 //Delete blueprint
 router.post('/deleteBlueprint', async (req, res) => {
     let blueprint = req.body.dropdownDeleteBlueprint
-
-
+    console.log("Her");
     //Find det blueprint vi skal slette
     let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
     // Find en liste med alle blueprints

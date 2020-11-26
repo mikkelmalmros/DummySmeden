@@ -27,12 +27,25 @@ router.get('/getComponent/:id', async (req, res) => {
 })
 //BLUEPRINTS
 //---------------------------------------------------------------------------------------------------------
+router.delete('/deleteBlueprint/:id', async (req, res) => {
+    console.log("slettet ID : " + req.params.id);
+    await blueprintController.deleteBlueprint(req.params.id)
+    // res.redirect('/')
+})
+router.put('/updateBlueprint/:id', async (req, res) => {
+    console.log("updateret ID: " + req.params.id)
 
 
+
+
+
+    await blueprintController.update
+}
+)
 
 //COMPONENTAMOUNTS
 //---------------------------------------------------------------------------------------------------------
-router.get('/getComponentOnComponentAmount/:id', async (req,res) => {
+router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
     console.log("Spurgt ID : " + req.params.id);
     let component = await componentAmountController.getComponentOfComponentAmount(req.params.id)
     console.log("Returneret component: " + component);

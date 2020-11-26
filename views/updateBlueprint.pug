@@ -2,7 +2,7 @@ head
     style
         include ../styles/collapsible.css
 body
-    form(action='/blueprint/updateBlueprint' method='post')
+    form(action='/' method='get')
         h2 Opdater blueprint
         label Vælg blueprint til at opdateres
         select(name="dropdownBlueprints" id="blueprintSelector" onchange="pickBlueprint()" style="width: 100%")
@@ -13,21 +13,21 @@ body
         br
         label Name
         br
-        input(type='text' name='updatename' style="width:100%" placeholder='Nyt navn på blueprint')
+        input( type='text' id = 'updatenameBlueprint' name='updatename' style="width:100%" placeholder='Nyt navn på blueprint')
         br
         br
         label Antal
         br
-        input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+        input(type='text' id = 'updateamountBlueprint' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
         br
         br
         label Minimumsantal
         br
-        input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
+        input(type='text' id = 'updateMinAntalBlueprint' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
         br
         br
         label Komponenter
             div#divUpdateComponents
         br
         br
-        button(type='submit' name='update') Opdater blueprint
+        button(type='submit' name='update' onclick= 'updateBlueprint()') Opdater blueprint
