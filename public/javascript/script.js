@@ -23,8 +23,15 @@ document.querySelectorAll('.name').forEach(clickable => {
 
         if (clickable.classList.contains('name--active')) {
             content.style.maxHeight = content.scrollHeight + 'px'
+            // setTimeout(function () { console.log('venter på transition') }, 200);
+            content.style.borderBottom = '1px solid black'
+            // firstChild.style.display = 'block'
+
         } else {
             content.style.maxHeight = 0
+            // setTimeout(function () { console.log('venter på transition 2') }, 200);
+            // firstChild.style.display = 'none'
+            content.style.borderBottom = 'none'
         }
     })
 })
@@ -51,20 +58,19 @@ async function pickBlueprint() {
     let html = ''
     for (const jsonValue of jsonValues) {
         for (const component of components) {
-            if(jsonValue.component == component._id) {
+            if (jsonValue.component == component._id) {
                 console.log('Name of component : ' + component.name);
 
                 html += '<p>' + component.name + '</p><input type="text" name="' + component._id + '" value="' + jsonValue.amount + '"> <br>'
             }
-            
-            
+
+
         }
-        
+
     }
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
-    
-    
-}
 
+
+}
