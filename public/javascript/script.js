@@ -119,25 +119,36 @@ async function deleteBlueprint() {
 async function updateBlueprint() {
     console.log("Der er mad!!!!")
 
-    let data = "{";
+    let data = "{ ";
     console.log(document.getElementById("updatenameBlueprint").value);
-    data = data + "name:" + document.getElementById("updatenameBlueprint").value +
-        ", " + "amount: " + document.getElementById("updateamountBlueprint").value +
-        ", " + "storageMin: " + document.getElementById("updateMinAntalBlueprint").value
+    data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
+        ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
+        ", " + '"storageMin": ' + document.getElementById("updateMinAntalBlueprint").value + ", "
 
 
     let nodes = document.getElementById("divUpdateComponents").childNodes
+
     console.log(nodes);
+
     nodes.forEach(element => {
-        console.log(element.value);
+        // console.log(element.toString() + "  " + element.value);
+        if (element.nodeName == "INPUT") {
+            console.log("JUBIIIIIII " + element.value);
+            data += '"' + element.name + '": ' + element.value + ", "
+        }
+
+
     });
-
-    /*
-    data.append('amount', document.getElementsByName("updateamount").value)
-    data.append('storageMin', document.getElementsByName("updatemin").value)
-    */
-
+    data += "}"
     console.log(data);
+
+    // Alt fetch
+    let id = document.getElementById("blueprintSelector").value
+
+    await fetch("http://localhost:8080/api/updateBlueprint/" + id, {
+        method: "put",
+        body: data
+    }).then(console.log("Vi har skubbet data"))
 
 
 
