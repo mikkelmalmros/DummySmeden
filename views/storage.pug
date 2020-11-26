@@ -11,6 +11,31 @@ html
     body
         div.div1
             div.item1
+                h1 Produkter
+                div.collapsible
+                    button.collapsibleButton(type='submit') Opret
+                    div.content
+                        include createProduct.pug
+                    button.collapsibleButton(type='submit') Opdater
+                    div.content#divComponents
+                        include updateProduct.pug
+                    button.collapsibleButton(type='submit') Slet
+                    div.content
+                        include deleteProduct.pug
+
+                    h2 Lagerbeholdning
+                        table
+                            tr
+                                th.headerName Navn
+                                th.headerAmount Antal
+                            each product in products
+                                tr
+                                    td.name #{product.name}
+                                    td.amount #{product.amount}
+                                tr
+                                    td.contentT
+                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{product.storageMin}
+            div.item2
                 h1 Blueprints
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
@@ -36,7 +61,7 @@ html
                                     td.contentT
                                         div.hiddenT Minimumsantal på lager før der gives notifikation: #{blueprint.storageMin}
 
-            div.item2
+            div.item3
                 h1 Komponenter
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret

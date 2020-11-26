@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const body = require("body-parser");
 const componentController = require("./controllers/component");
 const blueprintController = require("./controllers/blueprint");
+const productController = require("./controllers/product")
 
 
 //MongoDB setup
@@ -31,6 +32,8 @@ const blueprintRouter = require('./routes/blueprint')
 app.use('/blueprint', blueprintRouter)
 const componentRouter = require('./routes/component')
 app.use('/component', componentRouter)
+const productRouter = require('./routes/product')
+app.use('/product', productRouter)
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
@@ -43,8 +46,9 @@ const valider = /[a-zA-Z0-9]+/;
 app.get("/", async (req, res) => {
   const components = await componentController.getComponents();
   const blueprints = await blueprintController.getBlueprints();
+  const products = await productController.getAllProducts();
 
-  res.render("storage", { components: components, blueprints: blueprints });
+  res.render("storage", { components: components, blueprints: blueprints, products: products });
 });
 
 // DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT

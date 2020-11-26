@@ -1,0 +1,40 @@
+style
+    include ../styles/storage.css
+body
+    form(action='/product/createProduct' method='post')
+        h2 Opret produkt
+
+        label Navn
+        br
+        input(type='text' name='name1' style="width:100%" placeholder='Navn på produkt')
+        br
+        br
+        label Antal
+        br
+        input(type='text' name='amount1' style="width:100%" placeholder='Antal på lager')
+        br
+        br
+        label Minimumsantal
+        br
+        input(type='text' name='storageMin1' style="width:100%" placeholder='Minimumsantal')
+        br
+        br
+
+        label Tilføj blueprints til produktet
+        select(name="dropdownComp" style="width: 100%" multiple)
+            each blueprint in blueprints
+                    option(value=blueprint.id) #{blueprint.name}
+        br
+        br
+
+        //- label Tilføj blueprints til blueprintet
+        //- select(name="dropdownBP" style="width: 100%" multiple)
+        //-    each blueprint in blueprints
+        //-             option(value=blueprint.id) #{blueprint.name}
+        //- br
+        //- br
+
+        //- label Vælg andre blueprints til blueprintet
+        //- select(name="dropdownBP" style="width: 100%" multiple)
+        //- include selectBlueprint.pug
+        button(type='submit' name='create') Put antal på produkt
