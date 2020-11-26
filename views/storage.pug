@@ -9,15 +9,15 @@ html
         script(src="/static/javascript/confirm.js")
         h1.headlineTop Dummy-smeden lager
     body
-        div.div1
-            div.item1
+        div.gridDiv
+            div.productColumn
                 h1 Produkter
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
                     div.content
                         include createProduct.pug
                     button.collapsibleButton(type='submit') Opdater
-                    div.content#divComponents
+                    div.content#divBlueprints
                         include updateProduct.pug
                     button.collapsibleButton(type='submit') Slet
                     div.content
@@ -35,7 +35,7 @@ html
                                 tr
                                     td.contentT
                                         div.hiddenT Minimumsantal på lager før der gives notifikation: #{product.storageMin}
-            div.item2
+            div.blueprintColumn
                 h1 Blueprints
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret
@@ -60,8 +60,7 @@ html
                                 tr
                                     td.contentT
                                         div.hiddenT Minimumsantal på lager før der gives notifikation: #{blueprint.storageMin}
-
-            div.item3
+            div.componentColumn
                 h1 Komponenter
                 div.collapsible
                     button.collapsibleButton(type='submit') Opret

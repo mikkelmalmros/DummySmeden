@@ -6,22 +6,22 @@ body
 
         label Navn
         br
-        input(type='text' name='name3' style="width:100%" placeholder='Navn på produkt')
+        input(type='text' name='inputProdName' style="width:100%" placeholder='Navn på produkt')
         br
         br
         label Antal
         br
-        input(type='text' name='amount3' style="width:100%" placeholder='Antal på lager')
+        input(type='text' name='inputProdAmount' style="width:100%" placeholder='Antal på lager')
         br
         br
         label Minimumsantal
         br
-        input(type='text' name='storageMin3' style="width:100%" placeholder='Minimumsantal')
+        input(type='text' name='inputProdMin' style="width:100%" placeholder='Minimumsantal')
         br
         br
 
         label Tilføj blueprints til produktet
-        select(name="dropdownProduct" style="width: 100%" multiple)
+        select(name="dropdownBlueprint" style="width: 100%" multiple)
             each blueprint in blueprints
                     option(value=blueprint.id) #{blueprint.name}
         br

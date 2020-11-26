@@ -13,9 +13,9 @@ const valider = /[a-zA-Z0-9]+/;
 
 //Create a product
 router.post("/createProduct", async (req, res) => {
-    const name = req.body.name3;
-    const amount = req.body.amount3;
-    const storageMin = req.body.storageMin3;
+    const name = req.body.inputProdName;
+    const amount = req.body.inputProdAmount;
+    const storageMin = req.body.InputProdMin;
 
     if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
         await productController.createComponent(name, amount, storageMin);
