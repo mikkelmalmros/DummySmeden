@@ -46,12 +46,13 @@ router.delete('/deleteBlueprint/:id', async (req, res) => {
 })
 
 router.put('/updateBlueprint/:id', async (req, res) => {
-    //console.log("updateret ID: " + req.params.id)
-
-    console.log("Min Body: " + req.body);
-    console.log("Parse" + JSON.parse(req.body));
-
-
+    // Find data
+    let blueprint = await blueprintController.getBlueprint(req.params.id)
+    let jsonComponents = req.body.componentAmounts
+    //Updates and saves blueprint
+    blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storrageMin)
+    //Updates and saves components in blueprint, ud fra referance
+    blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
 
     await blueprintController.update
 })

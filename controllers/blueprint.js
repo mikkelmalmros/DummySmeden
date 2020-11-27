@@ -184,3 +184,13 @@ exports.findBlueprintInBlueprint = async function (blueprintId) {
   }
   return "intet"
 }
+
+exports.updateBlueprint = async function (id, name, amount, storageMin) {
+  let blueprint = await Blueprint.findById(id).exec()
+
+  blueprint.name = name
+  blueprint.amount = amount
+  blueprint.storageMin = storageMin
+
+  return await blueprint.save()
+}
