@@ -1,4 +1,5 @@
 const ComponentAmount = require('../models/componentAmount')
+const Blueprint = require('../models/blueprint')
 
 // Create componentAmount
 exports.createComponentAmount = async function (component, amount) {
@@ -34,6 +35,15 @@ exports.updateComponentAmountAmount = async function (componentAmountId, nAmount
   return await componentAmount.save()
 }
 // detele a componentAmount object
-exports.deleteComponentAmount = async function (componentAmountId) {
-  return await ComponentAmount.deleteOne().where("_id").equals(componentAmountId).exec()
+exports.deleteComponentAmount = async function (id) {
+  await Blueprint.updateMany(
+    { "components": id },
+    { "$pull": { "components": id } },
+    { "multi": true }
+  )
+  return await ComponentAmount.deleteOne().where("_id").equals(id).exec()
+}
+
+exports.getAllCompAmounts = async function () {
+  return await ComponentAmount.find().populate('component').exec()
 }

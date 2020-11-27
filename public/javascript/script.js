@@ -154,3 +154,11 @@ async function updateBlueprint() {
 
 
 }
+
+async function deleteComponent() {
+    let div = document.getElementById('dropDownDeleteID')
+    let id = div.value
+    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
+        method: 'delete'
+    }).then(window.location.reload())
+}

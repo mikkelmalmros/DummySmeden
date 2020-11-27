@@ -31,13 +31,20 @@ router.get('/getComponent/:id', async (req, res) => {
     console.log("Returneret component: " + component);
     res.json(component)
 })
+
+router.delete('/deleteComponent/:id', async (req, res) => {
+    console.log("slettet ID : " + req.params.id);
+    await componentController.deleteComponent(req.params.id)
+    res.redirect('/')
+})
 //BLUEPRINTS
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     console.log("slettet ID : " + req.params.id);
     await blueprintController.deleteBlueprint(req.params.id)
-    // res.redirect('/')
+    res.redirect('/')
 })
+
 router.put('/updateBlueprint/:id', async (req, res) => {
     //console.log("updateret ID: " + req.params.id)
 
@@ -47,8 +54,8 @@ router.put('/updateBlueprint/:id', async (req, res) => {
 
 
     await blueprintController.update
-}
-)
+})
+
 //Gets all blueprintAmounts of a given product found by id in the param
 router.get('/getBlueprintAmounts/:id', async (req, res) => {
     let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)

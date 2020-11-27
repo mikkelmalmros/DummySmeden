@@ -1,5 +1,7 @@
 const Component = require('../models/component')
 const Blueprint = require('../models/blueprint')
+const blueprintController = require('./blueprint')
+const compAmountController = require('./componentAmount')
 
 exports.createComponent = async function (name, amount, storageMin) {
     const component = Component({
@@ -47,10 +49,11 @@ exports.getComponentsById = async function (ids) {
 }
 
 exports.deleteComponent = async function (id) {
-    await Blueprint.updateMany(
-        { "components": id },
-        { "$pull": { "components": id } },
-        { "multi": true }
-    )
+    let allCompAmounts = await compAmountController.getAllCompAmounts()
+    for (const element of allCompAmounts) {
+        if (element.component.id === id) {
+            await compAmountController.deleteComponentAmount(element.id)
+        }
+    }
     return await Component.deleteOne().where('_id').equals(id).exec()
 }
