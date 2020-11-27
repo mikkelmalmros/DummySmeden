@@ -60,5 +60,30 @@ router.post("/deleteComponent", async (req, res) => {
     res.redirect("/");
 });
 
+router.post('/deleteComponent', async (req, res) => {
+    let component = req.body.dropdownDeleteComponent
+    //Find det komponent vi skal slette
+    let componentDelete = await componentController.getComponent(component)
+    // Find en liste med alle blueprints
+    let allBlueprints = await blueprintController.getBlueprints
+
+    check = await blueprintController.findBlueprintInBlueprint(blueprintDelete)
+    if (check == "intet") {
+        blueprintController.deleteBlueprint(blueprintDelete._id)
+        res.redirect("/");
+    } else {
+        console.log("lav et conferm alert" + " og slet: ");
+        console.log(check.name);
+        //Indsæt confirm her
+        //let confirm = window.confirm("");
+        //let confirm = confirm("")
+
+        if (confirm == true) {
+            blueprintController.deleteBlueprint(blueprintDelete._id)
+        } else {
+            res.redirect("/");
+        }
+    }
+})
 
 module.exports = router
