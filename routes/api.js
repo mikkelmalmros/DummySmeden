@@ -42,36 +42,14 @@ router.delete('/deleteBlueprint/:id', async (req, res) => {
     // res.redirect('/')
 })
 router.put('/updateBlueprint/:id', async (req, res) => {
-    console.log("updateret ID: " + req.params.id)
-
+    // Find data
     let blueprint = await blueprintController.getBlueprint(req.params.id)
-    blueprint.name = req.body.name
-    blueprint.amount = req.body.amount
-    blueprint.storrageMin = req.body.storrageMin
-
     let jsonComponents = req.body.componentAmounts
-    // for (let i = 0; i < blueprint.componentAmount.length; i++) {
-    //     const element = [i];
-    //     if (element.id == jsonComponents[i].id) {
-    //         console.log("ComponentName: " + jsonComponents[i].amount);
-    //     }
+    //Updates and saves blueprint
+    blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storrageMin)
+    //Updates and saves components in blueprint, ud fra referance 
+    blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
 
-    // }
-    for (const component of jsonComponents) {
-        for (const blueprintComponent of blueprint.components) {
-            console.log('BlueprintComponent id: ' + blueprintComponent.id);
-            if (component.id == blueprintComponent.id) {
-                blueprintComponent.amount = component.value
-                blueprintComponent.save()
-                console.log('OldAmount: ' + blueprintComponent.amount)
-                console.log('NewAmount: ' + component.value);
-            }
-        }
-
-        console.log("ComponentName: " + component.id);
-    }
-
-    return await blueprint.save()
 }
 )
 //Gets all blueprintAmounts of a given product found by id in the param

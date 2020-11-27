@@ -38,3 +38,23 @@ exports.getBlueprintOfBlueprintAmount = async function (blueprintAmountId) {
     let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
     return blueprintAmount.blueprint
 }
+exports.saveBlueprintAmount = async function (jsonComponents, blueprintComponents) {
+    for (const component of jsonComponents) {
+        for (const blueprintComponent of blueprintComponents) {
+            console.log('BlueprintComponent id: ' + blueprintComponent.id);
+            if (component.id == blueprintComponent.id) {
+                blueprintComponent.amount = component.value
+
+                blueprintComponent.save()
+
+                console.log('OldAmount: ' + blueprintComponent.amount)
+                console.log('NewAmount: ' + component.value);
+            }
+        }
+
+        console.log("ComponentName: " + component.id);
+    }
+
+
+}
+
