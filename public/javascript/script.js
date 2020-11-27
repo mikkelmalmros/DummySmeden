@@ -62,7 +62,7 @@ async function pickBlueprint() {
             if (jsonValue.component == component._id) {
                 console.log('Name of component : ' + component.name);
 
-                html += '<p>' + component.name + '</p><input type="text" name="' + component._id + '" value="' + jsonValue.amount + '"> <br>'
+                html += '<p>' + component.name + '</p><input type="text" name="' + jsonValue._id + '" value="' + jsonValue.amount + '"> <br>'
             }
 
 
@@ -130,16 +130,14 @@ async function updateBlueprint() {
 
     console.log(nodes);
 
+    data += '"componentAmounts":['
     nodes.forEach(element => {
-        // console.log(element.toString() + "  " + element.value);
         if (element.nodeName == "INPUT") {
-            console.log("JUBIIIIIII " + element.value);
-            data += '"' + element.name + '": ' + element.value + ", "
+            data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
         }
-
-
     });
-    data += "}"
+    data = data.substring(0, data.length -2)
+    data += "]}"
     console.log(data);
 
     // Alt fetch
@@ -147,8 +145,15 @@ async function updateBlueprint() {
 
     await fetch("http://localhost:8080/api/updateBlueprint/" + id, {
         method: "put",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: data
-    }).then(console.log("Vi har skubbet data"))
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+        console.log(data)
+    }).catch(error => console.log('Fetch failed'))
 
 
 

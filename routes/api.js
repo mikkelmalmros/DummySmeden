@@ -39,14 +39,36 @@ router.delete('/deleteBlueprint/:id', async (req, res) => {
     // res.redirect('/')
 })
 router.put('/updateBlueprint/:id', async (req, res) => {
-    //console.log("updateret ID: " + req.params.id)
+    console.log("updateret ID: " + req.params.id)
 
-    console.log("Min Body: " + req.body);
-    console.log("Parse" + JSON.parse(req.body));
+    let blueprint = await blueprintController.getBlueprint(req.params.id)
+    blueprint.name = req.body.name
+    blueprint.amount = req.body.amount
+    blueprint.storrageMin = req.body.storrageMin
 
+    let jsonComponents = req.body.componentAmounts
+    // for (let i = 0; i < blueprint.componentAmount.length; i++) {
+    //     const element = [i];
+    //     if (element.id == jsonComponents[i].id) {
+    //         console.log("ComponentName: " + jsonComponents[i].amount);
+    //     }
+        
+    // }
+    for (const component of jsonComponents) {
+        for (const blueprintComponent of blueprint.components) {
+            console.log('BlueprintComponent id: ' + blueprintComponent.id);
+            if(component.id == blueprintComponent.id) {
+                blueprintComponent.amount = component.value
+                blueprintComponent.save()
+                console.log('OldAmount: ' + blueprintComponent.amount)
+                console.log('NewAmount: ' + component.value);
+            }
+        }
+        
+        console.log("ComponentName: " + component.id);
+    }
 
-
-    await blueprintController.update
+    return await blueprint.save()
 }
 )
 //Gets all blueprintAmounts of a given product found by id in the param

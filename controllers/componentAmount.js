@@ -27,12 +27,19 @@ exports.updateComponentAmount = async function () {
 }
 
 //Update a componentAmount
-exports.updateComponentAmountAmount = async function (componentAmountId, nAmount) {
+exports.updateComponentAmountAmountById = async function (componentAmountId, nAmount) {
   let componentAmount = await ComponentAmount.findById(blueprintAmountId).populate("component").exec()
 
   componentAmount.amount = nAmount
   return await componentAmount.save()
 }
+
+//Update a componentAmount
+exports.updateComponentAmountAmount = async function (componentAmount, nAmount) {
+    componentAmount.amount = nAmount
+  return await componentAmount.save()
+}
+
 // detele a componentAmount object
 exports.deleteComponentAmount = async function (componentAmountId) {
   return await ComponentAmount.deleteOne().where("_id").equals(componentAmountId).exec()
