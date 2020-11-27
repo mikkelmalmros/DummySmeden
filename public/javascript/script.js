@@ -139,6 +139,7 @@ async function updateBlueprint() {
 
 
     });
+    data = data.split(data.length - 2)[0]
     data += "}"
     console.log(data);
 
@@ -149,9 +150,5 @@ async function updateBlueprint() {
         method: "put",
         body: data
     }).then(console.log("Vi har skubbet data"))
-
-
-
-
 
 }

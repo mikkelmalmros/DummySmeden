@@ -144,7 +144,6 @@ router.post('/deleteBlueprint', async (req, res) => {
             res.redirect("/");
 
         }
-
     }
 
 

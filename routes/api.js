@@ -31,7 +31,10 @@ router.get('/getComponent/:id', async (req, res) => {
     console.log("Returneret component: " + component);
     res.json(component)
 })
-//BLUEPRINTS
+//BLUEPRINTS 
+{
+
+}
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     console.log("slettet ID : " + req.params.id);
@@ -40,11 +43,8 @@ router.delete('/deleteBlueprint/:id', async (req, res) => {
 })
 router.put('/updateBlueprint/:id', async (req, res) => {
     //console.log("updateret ID: " + req.params.id)
-
     console.log("Min Body: " + req.body);
-    console.log("Parse" + JSON.parse(req.body));
-
-
+    console.log("Parse" + JSON.parse(req.bod));
 
     await blueprintController.update
 }
