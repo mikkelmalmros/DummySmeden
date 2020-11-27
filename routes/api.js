@@ -39,9 +39,10 @@ router.delete('/deleteBlueprint/:id', async (req, res) => {
     // res.redirect('/')
 })
 router.put('/updateBlueprint/:id', async (req, res) => {
-    console.log("updateret ID: " + req.params.id)
+    //console.log("updateret ID: " + req.params.id)
 
-
+    console.log("Min Body: " + req.body);
+    console.log("Parse" + JSON.parse(req.body));
 
 
 
