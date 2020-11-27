@@ -53,8 +53,6 @@ router.put('/updateBlueprint/:id', async (req, res) => {
     blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storrageMin)
     //Updates and saves components in blueprint, ud fra referance
     blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
-
-    await blueprintController.update
 })
 
 //Gets all blueprintAmounts of a given product found by id in the param
