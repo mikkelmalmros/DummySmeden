@@ -106,7 +106,6 @@ async function pickProduct() {
     // div.style.overflow = "auto"
 }
 async function deleteBlueprint() {
-    console.log("HEEEEEJ")
     let div = document.getElementById('dropdownDeleteBlueprintID')
     let id = div.value
     await fetch('http://localhost:8080/api/deleteBlueprint/' + id, {

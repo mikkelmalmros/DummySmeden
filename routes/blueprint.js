@@ -118,12 +118,10 @@ router.post('/addBlueprint', (req, res) => {
 //Delete blueprint
 router.post('/deleteBlueprint', async (req, res) => {
     let blueprint = req.body.dropdownDeleteBlueprint
-    console.log("Her");
     //Find det blueprint vi skal slette
     let blueprintDelete = await blueprintController.getBlueprintById(blueprint)
     // Find en liste med alle blueprints
     let allBlueprints = await blueprintController.getBlueprints
-
 
     check = await blueprintController.findBlueprintInBlueprint(blueprintDelete)
     if (check == "intet") {
@@ -136,23 +134,15 @@ router.post('/deleteBlueprint', async (req, res) => {
         //let confirm = window.confirm("");
         //let confirm = confirm("")
 
-
-
         if (confirm == true) {
             blueprintController.deleteBlueprint(blueprintDelete._id)
         } else {
             res.redirect("/");
-
         }
-
     }
-
-
 })
 
-
 router.put('/update', (req, res) => {
-
     let blueprint
 })
 
