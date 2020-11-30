@@ -54,6 +54,9 @@ const valider = /[a-zA-Z0-9]+/;
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
+  //OBS have to be changed!
+  req.session.isLoggedIn = true
+  
   if (req.session.isLoggedIn) {
     const components = await componentController.getComponents();
     const blueprints = await blueprintController.getBlueprints();

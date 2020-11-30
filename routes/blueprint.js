@@ -17,10 +17,7 @@ const valider = /[a-zA-Z0-9]+/;
 
 //The first step in creating a blueprint - the creation happens in the endpont "/amount"
 router.post("/createBlueprint", async (req, res) => {
-    if (req.session.isLoggedIn) {
-
-
-        if (req.session.isLoggedIn) {
+           if (req.session.isLoggedIn) {
             const pbname = req.body.inputBPName;
             const amount = req.body.inputBPAmount;
             const storageMin = req.body.InputBPMin;
@@ -37,12 +34,7 @@ router.post("/createBlueprint", async (req, res) => {
         } else {
             res.redirect('/login')
         }
-
-
-    } else {
-        res.redirect('/login')
-    }
-});
+    });
 
 router.post('/amount', async (req, res) => {
     if (req.session.isLoggedIn) {
