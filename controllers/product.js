@@ -30,14 +30,6 @@ exports.updateProductStorageMinById = async function (productId, storageMin) {
     return await product.save()
 }
 
-//Update blueprint
-exports.updateBlueprintAmount
-
-//delete
-exports.deleteProductById = async function (productId) {
-
-}
-
 //get all
 exports.getAllProducts = async function () {
     return await Product.find().populate("blueprints").exec()
@@ -71,3 +63,22 @@ exports.getAllBlueprintAmounts = async function (productid) {
     let product = await Product.findById(productid).populate('blueprints').exec()
     return product.blueprints
 }
+
+// Delete product
+exports.deleteProduct = async function (id) {
+    let product = await Product.findById(id).populate('blueprints').exec()
+    let componentAmounts = blueprint.components
+
+    componentAmounts.forEach(async element => {
+        await componentAmountController.deleteComponentAmount(element._id)
+    });
+
+    //Delete all references
+    let blueprintAmounts = await blueprintAmountController.getAllBlueprintAmounts()
+    for (const element of blueprintAmounts) {
+        if (element.blueprint.id === blueprintId) {
+            await blueprintAmountController.deleteBlueprintAmount(element.id)
+        }
+    }
+    return await Blueprint.deleteOne().where("_id").equals(blueprintId).exec()
+};

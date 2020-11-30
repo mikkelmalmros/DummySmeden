@@ -35,14 +35,13 @@ router.get('/getComponent/:id', async (req, res) => {
 router.delete('/deleteComponent/:id', async (req, res) => {
     console.log("slettet ID : " + req.params.id);
     await componentController.deleteComponent(req.params.id)
-    res.redirect('/')
 })
 //BLUEPRINTS
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     console.log("slettet ID : " + req.params.id);
     await blueprintController.deleteBlueprint(req.params.id)
-    res.redirect('/')
+        .then(res.redirect('/'))
 })
 
 router.put('/updateBlueprint/:id', async (req, res) => {
