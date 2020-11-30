@@ -59,7 +59,7 @@ app.get("/", async (req, res) => {
     const blueprints = await blueprintController.getBlueprints();
     const products = await productController.getAllProducts();
 
-    res.render("storage", { components: components, blueprints: blueprints, products: products }); res.json(users)
+    res.render("storage", { components: components, blueprints: blueprints, products: products });
   } else {
     res.redirect('/login')
   }
