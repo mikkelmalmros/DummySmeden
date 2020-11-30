@@ -17,27 +17,36 @@ const valider = /[a-zA-Z0-9]+/;
 
 //The first step in creating a blueprint - the creation happens in the endpont "/amount"
 router.post("/createBlueprint", async (req, res) => {
-    if(req.session.isLoggedIn) {
-        const pbname = req.body.inputBPName;
-    const amount = req.body.inputBPAmount;
-    const storageMin = req.body.InputBPMin;
-
-    const components = await componentController.getComponentsById(
-        req.body.dropdownComp
-    );
-
-    // const blueprints = await blueprintController.getBlueprintssById(
-    //     req.body.dropdownBP
-    // );
-
-    res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
-      } else {
+    if (!req.session.isLoggedIn) {
         res.redirect('/login')
-      }
-    
+    }
+
+
+    if (req.session.isLoggedIn) {
+        const pbname = req.body.inputBPName;
+        const amount = req.body.inputBPAmount;
+        const storageMin = req.body.InputBPMin;
+
+        const components = await componentController.getComponentsById(
+            req.body.dropdownComp
+        );
+
+        // const blueprints = await blueprintController.getBlueprintssById(
+        //     req.body.dropdownBP
+        // );
+
+        res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
+    } else {
+        res.redirect('/login')
+    }
+
 });
 
 router.post('/amount', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     let blueprintName = req.body.mainBlueprintName
     let blueprintAmount = req.body.mainBlueprintAmount
     let blueprintStorageMin = req.body.mainBlueprintStorageMin
@@ -84,6 +93,10 @@ router.post('/amount', async (req, res) => {
 
 
 router.post("/updateBlueprint", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     const blueprintID = req.body.dropdownBlueprints;
     const blueprint = await blueprintController.getBlueprintById(blueprintID);
     const amount = req.body.updateamount;
@@ -114,15 +127,26 @@ router.post("/updateBlueprint", async (req, res) => {
 
 //Adds a component to a blueprint
 router.post('/addComponent', (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     blueprintController.addComponentAmountToBluePrint(req.body.blueprint, req.body.components)
 })
 
 //Adds a blueprint to a blueprint
 router.post('/addBlueprint', (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     blueprintController.addBlueprintAmountToBlueprint(req.body.firstBlueprint, req.body.secondBlueprint)
 })
 
 router.put('/update', (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
     let blueprint
 })
 

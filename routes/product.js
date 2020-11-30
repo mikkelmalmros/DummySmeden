@@ -14,6 +14,10 @@ const valider = /[a-zA-Z0-9]+/;
 
 //Create a product
 router.post("/createProduct", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     const name = req.body.inputProdName;
     const amount = req.body.inputProdAmount;
     const storageMin = req.body.InputProdMin;
@@ -31,6 +35,10 @@ router.post("/createProduct", async (req, res) => {
 });
 
 router.post('/amount', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     let productName = req.body.mainProductName
     let productAmount = req.body.mainProductAmount
     let productStorageMin = req.body.mainProductStorageMin
@@ -56,6 +64,10 @@ router.post('/amount', async (req, res) => {
 
 //update a product using the data in inputfields
 router.post("/updateProduct", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     const productID = req.body.dropdownProducts;
     const product = await productController.getProductById(productID);
     const amount = req.body.updateamount;
@@ -82,6 +94,10 @@ router.post("/updateProduct", async (req, res) => {
 
 //Delete a component by using the data from dropdownDelete menu
 router.post("/deleteProduct", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log('ikke lavet endnu');
     res.redirect("/");
 });

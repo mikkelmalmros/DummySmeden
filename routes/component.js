@@ -15,6 +15,10 @@ const valider = /[a-zA-Z0-9]+/;
 
 //Create a component
 router.post("/createComponent", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     const name = req.body.inputCompName;
     const amount = req.body.inputCompAmount;
     const storageMin = req.body.inputCompMin;
@@ -29,6 +33,10 @@ router.post("/createComponent", async (req, res) => {
 
 //update a component using the data in inputfields
 router.post("/updateComponent", async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     const componentID = req.body.dropdownComponents;
     const component = await componentController.getComponent(componentID);
     const amount = req.body.updateamount;

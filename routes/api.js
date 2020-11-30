@@ -20,12 +20,20 @@ router.use(body.json())
 
 //Gets all componentAmounts of a given blueprint found by id in the param
 router.get('/getComponentAmounts/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log(req.params.id);
     let componentAmounts = await blueprintController.getAllComponentAmounts(req.params.id)
     res.json(componentAmounts)
 })
 
 router.get('/getComponent/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log("Spurgt ID : " + req.params.id);
     let component = await componentController.getComponent(req.params.id)
     console.log("Returneret component: " + component);
@@ -33,6 +41,10 @@ router.get('/getComponent/:id', async (req, res) => {
 })
 
 router.delete('/deleteComponent/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log("slettet ID : " + req.params.id);
     await componentController.deleteComponent(req.params.id)
     res.redirect('/')
@@ -40,12 +52,20 @@ router.delete('/deleteComponent/:id', async (req, res) => {
 //BLUEPRINTS
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log("slettet ID : " + req.params.id);
     await blueprintController.deleteBlueprint(req.params.id)
     res.redirect('/')
 })
 
 router.put('/updateBlueprint/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     // Find data
     let blueprint = await blueprintController.getBlueprint(req.params.id)
     let jsonComponents = req.body.componentAmounts
@@ -57,6 +77,10 @@ router.put('/updateBlueprint/:id', async (req, res) => {
 //Fisk
 //Gets all blueprintAmounts of a given product found by id in the param
 router.get('/getBlueprintAmounts/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)
     res.json(blueprintAmounts)
 })
@@ -64,6 +88,10 @@ router.get('/getBlueprintAmounts/:id', async (req, res) => {
 //COMPONENTAMOUNTS
 //---------------------------------------------------------------------------------------------------------
 router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     console.log("Spurgt ID : " + req.params.id);
     let component = await componentAmountController.getComponentOfComponentAmount(req.params.id)
     console.log("Returneret component: " + component);
@@ -73,6 +101,10 @@ router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
 //BlUEPRINTAMOUNTS
 //---------------------------------------------------------------------------------------------------------
 router.get('/getBlueprintOnBlueprintAmount/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        res.redirect('/login')
+    }
+
     let blueprint = await blueprintAmountController.getBlueprintOfBlueprintAmount(req.params.id)
     res.json(blueprint)
 })

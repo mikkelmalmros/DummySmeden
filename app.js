@@ -28,7 +28,7 @@ mongoose.connect(config.mongoDBHost, {
 let port = process.env.PORT || 8080;
 
 const app = express();
-app.use(session({secret: 'DummysmedensMorhundeFælderAPS', saveUninitialized:false, resave:true}))
+app.use(session({ secret: 'DummysmedensMorhundeFælderAPS', saveUninitialized: false, resave: true }))
 app.set("view engine", "pug");
 
 app.use("/static", express.static("public"));
@@ -70,13 +70,12 @@ app.get('/login', (req, res) => {
 
 
 app.get('/users', async (req, res) => {
-  if(req.session.isLoggedIn) {
-    const users = await userController.getUsers() 
-  res.json(users)
+  if (req.session.isLoggedIn) {
+    const users = await userController.getUsers()
+    res.json(users)
   } else {
     res.redirect('/login')
   }
-  
 })
 
 
@@ -85,25 +84,25 @@ app.post('/login', async (req, res) => {
   console.log(req.body.username);
   const user = await userController.getUsersByName(req.body.username)
   console.log("User:" + user);
-    if(user == null) {
-        return res.status(400).json({Error: "Cannot find user"})
+  if (user == null) {
+    return res.status(400).json({ Error: "Cannot find user" })
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      console.log(user.username + " is logged in")
+      req.session.isLoggedIn = true
+      res.send('Sucess')
+    } else {
+      res.send('Not allowed')
     }
-    try {
-        if(await bcrypt.compare(req.body.password, user.password)) {
-            console.log(user.username + " is logged in")
-            req.session.isLoggedIn = true
-            res.send('Sucess')
-        } else {
-            res.send('Not allowed')
-        }
-    } catch (error) {
-        console.log('Error: ' + error);
-        res.status(500).json({Error: error})
-    }
+  } catch (error) {
+    console.log('Error: ' + error);
+    res.status(500).json({ Error: error })
+  }
 })
 
 app.get('/logout', (req, res) => {
-  if(req.session.isLoggedIn) {
+  if (req.session.isLoggedIn) {
     req.session.isLoggedIn = false
     res.redirect('/login')
   } else {
