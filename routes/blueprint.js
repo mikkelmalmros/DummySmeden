@@ -20,15 +20,11 @@ router.post("/createBlueprint", async (req, res) => {
            if (req.session.isLoggedIn) {
             const pbname = req.body.inputBPName;
             const amount = req.body.inputBPAmount;
-            const storageMin = req.body.InputBPMin;
+            const storageMin = req.body.inputBPMin;
 
             const components = await componentController.getComponentsById(
                 req.body.dropdownComp
             );
-
-            // const blueprints = await blueprintController.getBlueprintssById(
-            //     req.body.dropdownBP
-            // );
 
             res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
         } else {
@@ -49,23 +45,6 @@ router.post('/amount', async (req, res) => {
         let blueprint = await blueprintController.createBlueprint(blueprintName, blueprintAmount, blueprintStorageMin)
 
         let tempComponent = null
-
-        // for (const key of Object.keys(reqbody)) {
-        //     if (key.includes('hiddenBlueprint')) {
-        //         tempBlueprint = await blueprintController.getBlueprintById(reqbody[key])
-        //     } else if (key.includes('hiddenComponent')) {
-        //         tempComponent = await componentController.getComponent(reqbody[key])
-        //     } else if (tempBlueprint != null && key == tempBlueprint._id) {
-        //         let amountBlueprint = await blueprintAmountController.createBlueprintAmount(tempBlueprint, reqbody[key])
-
-        //         tempBlueprint = null
-        //         blueprint.blueprints.push(amountBlueprint)
-        //     } else if (tempComponent != null && key == tempComponent._id) {
-        //         let amountComponent = await componentAmountController.createComponentAmount(tempComponent, reqbody[key])
-        //         tempComponent = null
-        //         blueprint.components.push(amountComponent)
-        //     }
-        // }
 
         for (const key of Object.keys(reqbody)) {
             if (key.includes('hiddenComponent')) {
@@ -97,6 +76,7 @@ router.post("/updateBlueprint", async (req, res) => {
         const amount = req.body.updateamount;
         const name = req.body.updatename;
         const minimum = req.body.updatemin;
+        console.log("Update storageMin: " + minimum);
 
         if (valider.test(amount)) {
             await blueprintController.updateAmount(blueprint._id, amount);

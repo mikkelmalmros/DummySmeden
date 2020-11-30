@@ -63,15 +63,8 @@ exports.saveBlueprintAmount = async function (jsonComponents, blueprintComponent
                 blueprintComponent.amount = component.value
 
                 blueprintComponent.save()
-
-                console.log('OldAmount: ' + blueprintComponent.amount)
-                console.log('NewAmount: ' + component.value);
             }
         }
-
-        console.log("ComponentName: " + component.id);
     }
-
-
 }
 
