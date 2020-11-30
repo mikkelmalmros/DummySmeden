@@ -13,7 +13,7 @@ text-align: center;
     grid-template-columns: 33.3%,33.3%,auto;
     grid-template-rows: 1;
     border: 2px solid black;
-    background-color:#777777;
+    background-color:#3838f2;
     font-size:1.2em;
 }
 
@@ -23,6 +23,7 @@ text-align: center;
     border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
+    background-color:#c6db4b;
 }
 
 /* Kolonne 2 i vores grid */
@@ -31,6 +32,7 @@ text-align: center;
     border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
+    background-color:#db5a4f;
 }
 
 /* Kolonne 3 i vores grid */
@@ -39,6 +41,7 @@ text-align: center;
     border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
+    background-color:#8f625e;
 }
 
 /* Special div for updating blueprint */
