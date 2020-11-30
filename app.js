@@ -54,11 +54,16 @@ const valider = /[a-zA-Z0-9]+/;
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
-  const components = await componentController.getComponents();
-  const blueprints = await blueprintController.getBlueprints();
-  const products = await productController.getAllProducts();
+  if (req.session.isLoggedIn) {
+    const components = await componentController.getComponents();
+    const blueprints = await blueprintController.getBlueprints();
+    const products = await productController.getAllProducts();
 
-  res.render("storage", { components: components, blueprints: blueprints, products: products });
+    res.render("storage", { components: components, blueprints: blueprints, products: products }); res.json(users)
+  } else {
+    res.redirect('/login')
+  }
+
 });
 
 app.get('/login', (req, res) => {
@@ -91,7 +96,7 @@ app.post('/login', async (req, res) => {
     if (await bcrypt.compare(req.body.password, user.password)) {
       console.log(user.username + " is logged in")
       req.session.isLoggedIn = true
-      res.send('Sucess')
+      res.redirect('/')
     } else {
       res.send('Not allowed')
     }
