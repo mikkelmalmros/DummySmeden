@@ -15,42 +15,53 @@ const valider = /[a-zA-Z0-9]+/;
 
 //Create a component
 router.post("/createComponent", async (req, res) => {
-    const name = req.body.inputCompName;
-    const amount = req.body.inputCompAmount;
-    const storageMin = req.body.inputCompMin;
+    if (req.session.isLoggedIn) {
+        const name = req.body.inputCompName;
+        const amount = req.body.inputCompAmount;
+        const storageMin = req.body.inputCompMin;
 
-    if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-        await componentController.createComponent(name, amount, storageMin);
+        if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
+            await componentController.createComponent(name, amount, storageMin);
+        } else {
+            alert("Intet blev oprettet, du manglede noget data")
+        }
+        res.redirect("/");
     } else {
-        alert("Intet blev oprettet, du manglede noget data")
+        res.redirect('/login')
     }
-    res.redirect("/");
+
 });
 
 //update a component using the data in inputfields
 router.post("/updateComponent", async (req, res) => {
-    const componentID = req.body.dropdownComponents;
-    const component = await componentController.getComponent(componentID);
-    const amount = req.body.updateamount;
-    const name = req.body.updatename;
-    const minimum = req.body.updatemin;
+    if (req.session.isLoggedIn) {
+        const componentID = req.body.dropdownComponents;
+        const component = await componentController.getComponent(componentID);
+        const amount = req.body.updateamount;
+        const name = req.body.updatename;
+        const minimum = req.body.updatemin;
 
-    if (valider.test(amount)) {
-        await componentController.updateAmount(component, amount);
+        if (valider.test(amount)) {
+            await componentController.updateAmount(component, amount);
+        }
+
+        if (valider.test(name)) {
+            await componentController.updateName(component, name);
+        }
+
+        if (valider.test(minimum)) {
+            await componentController.updateMininum(component, minimum);
+        }
+
+        if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+            alert("Du har ikke indtastet noget data")
+        }
+        res.redirect("/");
+    } else {
+        res.redirect('/login')
     }
 
-    if (valider.test(name)) {
-        await componentController.updateName(component, name);
-    }
 
-    if (valider.test(minimum)) {
-        await componentController.updateMininum(component, minimum);
-    }
-
-    if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
-        alert("Du har ikke indtastet noget data")
-    }
-    res.redirect("/");
 });
 
 //Delete a component by using the data from dropdownDelete menu
