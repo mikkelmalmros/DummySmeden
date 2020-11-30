@@ -70,7 +70,12 @@ app.get("/", async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  if (req.session.isLoggedIn) {
+    res.redirect('/')
+  } else {
+    res.render('login')
+  }
+
 })
 
 
