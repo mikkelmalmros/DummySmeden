@@ -1,4 +1,5 @@
 const BlueprintAmount = require('../models/blueprintAmount')
+const Product = require('../models/product')
 
 
 // Create blueprint amount
@@ -34,10 +35,26 @@ exports.deleteBlueprintAmount = async function (blueprintAmountId) {
     return await BlueprintAmount.deleteOne().where("_id").equals(blueprintAmountId).exec()
 }
 
+// detele a blueprintAmount object
+exports.deleteBlueprintAmount = async function (id) {
+    await Product.updateMany(
+      { "blueprints": id },
+      { "$pull": { "blueprints": id } },
+      { "multi": true }
+    )
+    return await BlueprintAmount.deleteOne().where("_id").equals(id).exec()
+  }
+
 exports.getBlueprintOfBlueprintAmount = async function (blueprintAmountId) {
     let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
     return blueprintAmount.blueprint
 }
+
+//Gets all blueprintAmounts
+exports.getAllBlueprintAmounts = async function() {
+    return await BlueprintAmount.find().populate('blueprint').exec()
+}
+
 exports.saveBlueprintAmount = async function (jsonComponents, blueprintComponents) {
     for (const component of jsonComponents) {
         for (const blueprintComponent of blueprintComponents) {

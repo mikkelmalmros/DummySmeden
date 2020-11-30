@@ -127,6 +127,14 @@ exports.deleteBlueprint = async function (blueprintId) {
     await componentAmountController.deleteComponentAmount(element._id)
   });
 
+  //Delete all references
+  let blueprintAmounts = await blueprintAmountController.getAllBlueprintAmounts()
+  for (const element of blueprintAmounts) {
+    if (element.blueprint.id === blueprintId) {
+        await blueprintAmountController.deleteBlueprintAmount(element.id)
+    }
+}
+
   return await Blueprint.deleteOne().where("_id").equals(blueprintId).exec()
 };
 
