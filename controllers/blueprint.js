@@ -122,7 +122,6 @@ exports.deleteBlueprint = async function (blueprintId) {
   let blueprint = await Blueprint.findById(blueprintId).populate('components').exec()
   let componentAmounts = blueprint.components
 
-
   componentAmounts.forEach(async element => {
     await componentAmountController.deleteComponentAmount(element._id)
   });
@@ -131,10 +130,9 @@ exports.deleteBlueprint = async function (blueprintId) {
   let blueprintAmounts = await blueprintAmountController.getAllBlueprintAmounts()
   for (const element of blueprintAmounts) {
     if (element.blueprint.id === blueprintId) {
-        await blueprintAmountController.deleteBlueprintAmount(element.id)
+      await blueprintAmountController.deleteBlueprintAmount(element.id)
     }
-}
-
+  }
   return await Blueprint.deleteOne().where("_id").equals(blueprintId).exec()
 };
 

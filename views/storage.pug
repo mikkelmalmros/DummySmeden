@@ -7,8 +7,11 @@ html
         title Lager
         script(defer, src="/static/javascript/script.js")
         script(src="/static/javascript/confirm.js")
+
         h1.headlineTop Dummy-smeden lager
     body
+
+        img(src="/static/javascript/DSLogo.jpg")
         div.gridDiv
             div.productColumn
                 h1 Produkter
@@ -33,8 +36,7 @@ html
                                     td.name #{product.name}
                                     td.amount #{product.amount}
                                 tr
-                                    td.contentT
-                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{product.storageMin}
+                                    td.contentT yeet #{product.storageMin}
             div.blueprintColumn
                 h1 Blueprints
                 div.collapsible
@@ -58,8 +60,7 @@ html
                                     td.name #{blueprint.name}
                                     td.amount #{blueprint.amount}
                                 tr
-                                    td.contentT
-                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{blueprint.storageMin}
+                                    td.contentT yeet #{blueprint.storageMin}
             div.componentColumn
                 h1 Komponenter
                 div.collapsible
@@ -83,5 +84,4 @@ html
                                     td.name #{component.name}
                                     td.amount #{component.amount}
                                 tr
-                                    td.contentT
-                                        div.hiddenT Minimumsantal på lager før der gives notifikation: #{component.storageMin}
+                                    td.contentT yeet #{component.storageMin}

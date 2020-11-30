@@ -1,5 +1,6 @@
 const Product = require('../models/product')
-const BlueprintAmount = require('../models/blueprintAmount')
+const BlueprintAmount = require('../models/blueprintAmount');
+const blueprintAmountController = require('./blueprintAmount')
 
 //create
 exports.createProduct = async function (name, amount, storageMin) {
@@ -28,14 +29,6 @@ exports.updateProductStorageMinById = async function (productId, storageMin) {
     let product = await Product.findById(productId).populate("blueprints").exec()
     product.storageMin = storageMin
     return await product.save()
-}
-
-//Update blueprint
-exports.updateBlueprintAmount
-
-//delete
-exports.deleteProductById = async function (productId) {
-
 }
 
 //get all
@@ -71,3 +64,24 @@ exports.getAllBlueprintAmounts = async function (productid) {
     let product = await Product.findById(productid).populate('blueprints').exec()
     return product.blueprints
 }
+
+exports.updateProduct = async function (id, name, amount, storageMin) {
+    let product = await Product.findById(id).exec()
+
+    product.name = name
+    product.amount = amount
+    product.storageMin = storageMin
+
+    return await product.save()
+}
+
+// Delete product
+exports.deleteProduct = async function (id) {
+    let product = await Product.findById(id).populate('blueprints').exec()
+    let blueprintAmounts = product.blueprints
+
+    blueprintAmounts.forEach(async element => {
+        await blueprintAmountController.deleteBlueprintAmount(element._id)
+    });
+    return await Product.deleteOne().where("_id").equals(id).exec()
+};

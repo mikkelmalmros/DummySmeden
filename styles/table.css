@@ -17,22 +17,31 @@ table{
 
 .headerName{
     border: 1px solid black;
-    font-size: 25px;
+    font-size: 20px;
     height: 37px;
+    background-color: #009879;
+    color: #ffffff;
+
 }
 
 .headerAmount{
     border: 1px solid black;
-    font-size: 25px;
+    font-size: 20px;
     height: 37px;
+    background-color: #009879;
+    color: #ffffff;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .amount{
     text-align: center;
     line-height: 34px;
     border-bottom: 1px solid black;
+    border-top: 1px solid black;
     /* margin-bottom: 100px; */
     width: 100%;
+    background: #e6e6e6;
 }
 
 /* Start på lortet */
@@ -43,8 +52,8 @@ table{
     border: 1px solid black;
     text-align: center;
     line-height: 34px;
-    background: #333333;
-    border-bottom: none;
+    background: #e6e6e6;
+    /* border-bottom: none; */
 }
 
 /* Pil i højre side */
@@ -59,7 +68,6 @@ table{
 
 /* Når collapsible er sat til active (se public/javascript/component.js) */
 .name--active {
-    background: #555555;
     border-bottom: none;
 }
 
@@ -70,20 +78,12 @@ table{
 }
 
 .contentT {
-    border: none;
     margin: none;
     padding: none;
-    background: #555555;
-    /* display: none; */
-}
-
-.hiddenT{
-    background: #555555;
     overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.2s;
+    display: none;
+    border-bottom: 1px solid black;
     border-right: 1px solid black;
-    /* border-bottom: 1px solid black; */
-    margin-right: -68px;
-    margin-bottom: -2px;
+    margin-right: -62px;
+    margin-bottom: -1px;
 }

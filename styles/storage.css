@@ -1,5 +1,5 @@
 body{
-    background: #999999;
+    background: #ffffff;
 }
 
 .headlineTop{
@@ -13,35 +13,34 @@ text-align: center;
     grid-template-columns: 33.3%,33.3%,auto;
     grid-template-rows: 1;
     border: 2px solid black;
-    background-color:#3838f2;
+    background-color:#e6e6e6;
     font-size:1.2em;
 }
 
 /* Kolonne 1 i vores grid */
 .productColumn{
     grid-column: 1;
-    border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
-    background-color:#c6db4b;
+    background-color:#e6e6e6;
 }
 
 /* Kolonne 2 i vores grid */
 .blueprintColumn{
     grid-column: 2;
-    border: 2px solid black;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
-    background-color:#db5a4f;
+    background-color:#e6e6e6;
 }
 
 /* Kolonne 3 i vores grid */
 .componentColumn{
     grid-column: 3;
-    border: 2px solid black;
     padding-left: 5px;
     padding-right: 5px;
-    background-color:#8f625e;
+    background-color: #e6e6e6;
 }
 
 /* Special div for updating blueprint */
