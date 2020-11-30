@@ -6,6 +6,8 @@ const blueprintController = require("../controllers/blueprint");
 const blueprintAmountController = require('../controllers/blueprintAmount')
 const componentAmountController = require('../controllers/componentAmount')
 
+
+
 const Blueprint = require('../models/blueprint')
 router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
@@ -15,7 +17,8 @@ const valider = /[a-zA-Z0-9]+/;
 
 //The first step in creating a blueprint - the creation happens in the endpont "/amount"
 router.post("/createBlueprint", async (req, res) => {
-    const pbname = req.body.inputBPName;
+    if(req.session.isLoggedIn) {
+        const pbname = req.body.inputBPName;
     const amount = req.body.inputBPAmount;
     const storageMin = req.body.InputBPMin;
 
@@ -28,6 +31,10 @@ router.post("/createBlueprint", async (req, res) => {
     // );
 
     res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
+      } else {
+        res.redirect('/login')
+      }
+    
 });
 
 router.post('/amount', async (req, res) => {
