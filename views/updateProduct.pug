@@ -2,7 +2,7 @@ head
     style
         include ../styles/collapsible.css
 body
-    form(action='/product/updateProduct' method='post')
+    form(action='/' method='get')
         h2 Opdater produkt
         label Vælg produkt til at opdateres
         select(name="dropdownProducts" id="productSelector" onchange="pickProduct()" style="width: 100%")
@@ -13,21 +13,21 @@ body
         br
         label Name
         br
-        input(type='text' name='updatename' style="width:100%" placeholder='Nyt navn på produktet')
+        input(type='text' id= 'updatenameProduct' name='updatenameProd' style="width:100%" placeholder='Nyt navn på produktet')
         br
         br
         label Antal
         br
-        input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+        input(type='text' id= 'updateamountProduct' name='updateamountProd' style="width:100%" placeholder='Nyt antal på lager')
         br
         br
         label Minimumsantal
         br
-        input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
+        input(type='text' id= 'updateminProduct' name='updateminProd' style="width:100%" placeholder='Nyt minimumsantal')
         br
         br
         label Blueprints
             div#divUpdateBlueprints
         br
         br
-        button(type='submit' name='update') Opdater produkt
+        button(type='submit' name='update' onclick = 'updateProduct()') Opdater produkt

@@ -23,16 +23,14 @@ document.querySelectorAll('.name').forEach(clickable => {
         clickable.classList.toggle('name--active')
 
         if (clickable.classList.contains('name--active')) {
-            content.style.maxHeight = content.scrollHeight + 'px'
+            // firstChild.style.maxHeight = content.scrollHeight + 'px'
             // setTimeout(function () { console.log('venter på transition') }, 200);
-            content.style.borderBottom = '1px solid black'
-            // firstChild.style.display = 'block'
+            firstChild.style.display = 'block'
 
         } else {
-            content.style.maxHeight = 0
+            // firstChild.style.maxHeight = 0
             // setTimeout(function () { console.log('venter på transition 2') }, 200);
-            // firstChild.style.display = 'none'
-            content.style.borderBottom = 'none'
+            firstChild.style.display = 'none'
         }
     })
 })
@@ -116,18 +114,12 @@ async function deleteBlueprint() {
 }
 
 async function updateBlueprint() {
-    console.log("Der er mad!!!!")
-
     let data = "{ ";
-    console.log(document.getElementById("updatenameBlueprint").value);
     data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
         ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
         ", " + '"storageMin": ' + document.getElementById("updateMinAntalBlueprint").value + ", "
 
-
     let nodes = document.getElementById("divUpdateComponents").childNodes
-
-    console.log(nodes);
 
     data += '"componentAmounts":['
     nodes.forEach(element => {
@@ -137,7 +129,6 @@ async function updateBlueprint() {
     });
     data = data.substring(0, data.length - 2)
     data += "]}"
-    console.log(data);
 
     // Alt fetch
     let id = document.getElementById("blueprintSelector").value
@@ -150,10 +141,7 @@ async function updateBlueprint() {
         body: data
     }).then(res => {
         return res.json()
-    }).then(data => {
-        console.log(data)
     }).catch(error => console.log('Fetch failed'))
-
 }
 
 async function deleteComponent() {
@@ -162,4 +150,43 @@ async function deleteComponent() {
     await fetch('http://localhost:8080/api/deleteComponent/' + id, {
         method: 'delete'
     }).then(window.location.reload())
+}
+
+async function deleteProduct() {
+    let div = document.getElementById('dropDownDeleteProductID')
+    let id = div.value
+    await fetch('http://localhost:8080/api/deleteProduct/' + id, {
+        method: 'delete'
+    }).then(window.location.reload())
+}
+
+async function updateProduct() {
+    let data = "{ ";
+    data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
+        ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
+        ", " + '"storageMin": ' + document.getElementById("updateminProduct").value + ", "
+
+    let nodes = document.getElementById("divUpdateBlueprints").childNodes
+
+    data += '"blueprintAmounts":['
+    nodes.forEach(element => {
+        if (element.nodeName == "INPUT") {
+            data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
+        }
+    });
+    data = data.substring(0, data.length - 2)
+    data += "]}"
+
+    // Alt fetch
+    let id = document.getElementById("productSelector").value
+
+    await fetch("http://localhost:8080/api/updateProduct/" + id, {
+        method: "put",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: data
+    }).then(res => {
+        return res.json()
+    }).catch(error => console.log('Fetch failed'))
 }

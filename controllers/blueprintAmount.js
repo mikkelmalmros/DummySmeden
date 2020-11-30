@@ -38,12 +38,12 @@ exports.deleteBlueprintAmount = async function (blueprintAmountId) {
 // detele a blueprintAmount object
 exports.deleteBlueprintAmount = async function (id) {
     await Product.updateMany(
-      { "blueprints": id },
-      { "$pull": { "blueprints": id } },
-      { "multi": true }
+        { "blueprints": id },
+        { "$pull": { "blueprints": id } },
+        { "multi": true }
     )
     return await BlueprintAmount.deleteOne().where("_id").equals(id).exec()
-  }
+}
 
 exports.getBlueprintOfBlueprintAmount = async function (blueprintAmountId) {
     let blueprintAmount = await BlueprintAmount.findById(blueprintAmountId).populate('blueprint').exec()
@@ -51,27 +51,17 @@ exports.getBlueprintOfBlueprintAmount = async function (blueprintAmountId) {
 }
 
 //Gets all blueprintAmounts
-exports.getAllBlueprintAmounts = async function() {
+exports.getAllBlueprintAmounts = async function () {
     return await BlueprintAmount.find().populate('blueprint').exec()
 }
 
-exports.saveBlueprintAmount = async function (jsonComponents, blueprintComponents) {
+exports.saveBlueprintAmount = async function (jsonComponents, blueprintamounts) {
     for (const component of jsonComponents) {
-        for (const blueprintComponent of blueprintComponents) {
-            console.log('BlueprintComponent id: ' + blueprintComponent.id);
-            if (component.id == blueprintComponent.id) {
-                blueprintComponent.amount = component.value
-
-                blueprintComponent.save()
-
-                console.log('OldAmount: ' + blueprintComponent.amount)
-                console.log('NewAmount: ' + component.value);
+        for (const blueprint of blueprintamounts) {
+            if (component.id == blueprint.id) {
+                blueprint.amount = component.value
+                blueprint.save()
             }
         }
-
-        console.log("ComponentName: " + component.id);
     }
-
-
 }
-

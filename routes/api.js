@@ -7,13 +7,25 @@ const blueprintController = require("../controllers/blueprint")
 const componentAmountController = require('../controllers/componentAmount')
 const productController = require('../controllers/product')
 const blueprintAmountController = require('../controllers/blueprintAmount')
-const blueprintAmount = require('../models/blueprintAmount')
 
 router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
 
 //PRODUCTS
 //--------------------------------------------------------------------------------------------------------
+router.delete('/deleteProduct/:id', async (req, res) => {
+    console.log("slettet ID : " + req.params.id);
+    await productController.deleteProduct(req.params.id)
+})
+
+router.put('/updateProduct/:id', async (req, res) => {
+    // Find data
+    let product = await productController.getProductById(req.params.id)
+    let jsonComponents = req.body.blueprintAmounts
+    //Updates and saves product
+    await productController.updateProduct(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
+    await blueprintAmountController.saveBlueprintAmount(jsonComponents, product.blueprints)
+})
 
 //COMPONENTS
 //--------------------------------------------------------------------------------------------------------
@@ -41,7 +53,6 @@ router.delete('/deleteComponent/:id', async (req, res) => {
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     console.log("slettet ID : " + req.params.id);
     await blueprintController.deleteBlueprint(req.params.id)
-        .then(res.redirect('/'))
 })
 
 router.put('/updateBlueprint/:id', async (req, res) => {
@@ -49,11 +60,11 @@ router.put('/updateBlueprint/:id', async (req, res) => {
     let blueprint = await blueprintController.getBlueprint(req.params.id)
     let jsonComponents = req.body.componentAmounts
     //Updates and saves blueprint
-    blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storrageMin)
+    blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
     //Updates and saves components in blueprint, ud fra referance
-    blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
+    componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
 })
-//Fisk
+
 //Gets all blueprintAmounts of a given product found by id in the param
 router.get('/getBlueprintAmounts/:id', async (req, res) => {
     let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)

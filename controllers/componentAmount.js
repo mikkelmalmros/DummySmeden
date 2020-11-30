@@ -37,7 +37,7 @@ exports.updateComponentAmountAmountById = async function (componentAmountId, nAm
 
 //Update a componentAmount
 exports.updateComponentAmountAmount = async function (componentAmount, nAmount) {
-    componentAmount.amount = nAmount
+  componentAmount.amount = nAmount
   return await componentAmount.save()
 }
 
@@ -53,4 +53,15 @@ exports.deleteComponentAmount = async function (id) {
 
 exports.getAllCompAmounts = async function () {
   return await ComponentAmount.find().populate('component').exec()
+}
+
+exports.saveComponentAmount = async function (jsonComponents, blueprintComponents) {
+  for (const component of jsonComponents) {
+    for (const componentAmount of blueprintComponents) {
+      if (component.id == componentAmount.id) {
+        componentAmount.amount = component.value
+        componentAmount.save()
+      }
+    }
+  }
 }
