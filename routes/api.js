@@ -54,7 +54,7 @@ router.put('/updateBlueprint/:id', async (req, res) => {
     //Updates and saves components in blueprint, ud fra referance
     blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
 })
-
+//Fisk
 //Gets all blueprintAmounts of a given product found by id in the param
 router.get('/getBlueprintAmounts/:id', async (req, res) => {
     let blueprintAmounts = await productController.getAllBlueprintAmounts(req.params.id)
