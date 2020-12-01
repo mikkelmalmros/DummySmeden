@@ -9,17 +9,17 @@ form(action='/' method='get')
     br
     label Name
     br
-    input(type='text' name='updatename' style="width:100%" placeholder='Nyt navn på komponent')
+    input(type='text' id='updateComponentNameID' name='updatename' style="width:100%" placeholder='Nyt navn på komponent')
     br
     br
     label Antal
     br
-    input(type='text' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+    input(type='text'  id='updateComponentAmountID' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
     br
     br
     label Minimumsantal
     br
-    input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
+    input(type='text' id='updateComponentStorageMinID' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
     br
     br
     button(type='submit' name='update' onclick="updateProduct()") Opdater komponent
