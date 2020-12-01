@@ -56,8 +56,11 @@ exports.getAllBlueprintAmounts = async function () {
 }
 
 exports.saveBlueprintAmount = async function (jsonComponents, blueprintamounts) {
+    console.log("Update blueprint");
     for (const component of jsonComponents) {
+        console.log('ComponentID: ' + component.id);
         for (const blueprint of blueprintamounts) {
+            console.log('BlueprintID: ' + blueprint.id);
             if (component.id == blueprint.id) {
                 blueprint.amount = component.value
                 blueprint.save()

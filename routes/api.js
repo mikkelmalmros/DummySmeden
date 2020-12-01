@@ -23,7 +23,11 @@ router.put('/updateProduct/:id', async (req, res) => {
     let product = await productController.getProductById(req.params.id)
     let jsonComponents = req.body.blueprintAmounts
     //Updates and saves product
+    console.log("Next: update product");
     await productController.updateProduct(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
+    console.log("Next: update blueprintAmounts");
+    console.log("JsonComponents: " + jsonComponents);
+    console.log("Blueprints: " + product.blueprints);
     await blueprintAmountController.saveBlueprintAmount(jsonComponents, product.blueprints)
 })
 
@@ -81,7 +85,8 @@ router.put('/updateBlueprint/:id', async (req, res) => {
         //Updates and saves blueprint
         blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
         //Updates and saves components in blueprint, ud fra referance
-        blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
+        //blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
+        componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
     } else {
         res.redirect('/login')
     }

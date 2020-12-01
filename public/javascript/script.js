@@ -95,7 +95,7 @@ async function pickProduct() {
     for (const jsonValue of jsonValues) {
         for (const blueprint of blueprints) {
             if (jsonValue.blueprint == blueprint._id) {
-                html += '<p>' + blueprint.name + '</p><input type="text" name="' + blueprint._id + '" value="' + jsonValue.amount + '"> <br>'
+                html += '<p>' + blueprint.name + '</p><input type="text" name="' + jsonValue._id + '" value="' + jsonValue.amount + '"> <br>'
             }
         }
     }
@@ -103,6 +103,7 @@ async function pickProduct() {
     div.innerHTML = html
     // div.style.overflow = "auto"
 }
+
 async function deleteBlueprint() {
     let div = document.getElementById('dropdownDeleteBlueprintID')
     let id = div.value
@@ -180,6 +181,7 @@ async function updateProduct() {
     // Alt fetch
     let id = document.getElementById("productSelector").value
 
+    console.log("Tries to fetch");
     await fetch("http://localhost:8080/api/updateProduct/" + id, {
         method: "put",
         headers: {
@@ -188,5 +190,5 @@ async function updateProduct() {
         body: data
     }).then(res => {
         return res.json()
-    }).catch(error => console.log('Fetch failed'))
+    }).catch(error => console.log('Fetch failed: ' + data))
 }

@@ -1,4 +1,4 @@
-form(action='/component/updateComponent' method='post')
+form(action='/' method='get')
     h2 Opdater komponent
     label Vælg komponent til at opdateres
     select(name="dropdownComponents" style="width: 100%")
@@ -22,4 +22,4 @@ form(action='/component/updateComponent' method='post')
     input(type='text' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
     br
     br
-    button(type='submit' name='update') Opdater komponent
+    button(type='submit' name='update' onclick="updateProduct()") Opdater komponent
