@@ -23,11 +23,7 @@ router.put('/updateProduct/:id', async (req, res) => {
     let product = await productController.getProductById(req.params.id)
     let jsonComponents = req.body.blueprintAmounts
     //Updates and saves product
-    console.log("Next: update product");
     await productController.updateProduct(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
-    console.log("Next: update blueprintAmounts");
-    console.log("JsonComponents: " + jsonComponents);
-    console.log("Blueprints: " + product.blueprints);
     await blueprintAmountController.saveBlueprintAmount(jsonComponents, product.blueprints)
 })
 
