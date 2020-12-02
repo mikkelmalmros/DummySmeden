@@ -10,10 +10,10 @@ form(action='/component/createComponent' method='post')
     input(type='text' name='inputCompAmount' style="width:100%" placeholder='Antal på lager')
     br
     br
-    label Minimumsantal
+    label Note
     br
-    input(type='text' name='inputCompMin' style="width:100%" placeholder='Minimumsantal')
+    input(type='text' name='inputCompNote' style="width:100%" placeholder='Note')
     br
     br
-    button(type='submit' name='create') Opret komponent
+    button(type='submit' name='create' onclick='disableButtons()') Opret komponent
     br

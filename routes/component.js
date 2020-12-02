@@ -18,10 +18,10 @@ router.post("/createComponent", async (req, res) => {
     if (req.session.isLoggedIn) {
         const name = req.body.inputCompName;
         const amount = req.body.inputCompAmount;
-        const storageMin = req.body.inputCompMin;
+        const note = req.body.inputCompNote;
 
-        if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-            await componentController.createComponent(name, amount, storageMin);
+        if (valider.test(name) && valider.test(amount) && valider.test(note)) {
+            await componentController.createComponent(name, amount, note);
         } else {
             alert("Intet blev oprettet, du manglede noget data")
         }
@@ -39,7 +39,7 @@ router.post("/updateComponent", async (req, res) => {
         const component = await componentController.getComponent(componentID);
         const amount = req.body.updateamount;
         const name = req.body.updatename;
-        const minimum = req.body.updatemin;
+        const note = req.body.updateNote;
 
         if (valider.test(amount)) {
             await componentController.updateAmount(component, amount);
@@ -49,11 +49,11 @@ router.post("/updateComponent", async (req, res) => {
             await componentController.updateName(component, name);
         }
 
-        if (valider.test(minimum)) {
-            await componentController.updateMininum(component, minimum);
+        if (valider.test(note)) {
+            await componentController.updateNote(component, note);
         }
 
-        if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+        if (!valider.test(amount) && !valider.test(name) && !valider.test(note)) {
             alert("Du har ikke indtastet noget data")
         }
         res.redirect("/");

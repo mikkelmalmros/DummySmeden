@@ -19,18 +19,18 @@ router.post("/createProduct", async (req, res) => {
 
         const name = req.body.inputProdName;
         const amount = req.body.inputProdAmount;
-        const storageMin = req.body.InputProdMin;
+        const note = req.body.InputProdNote;
 
         const blueprints = await blueprintController.getBlueprintsById(
             req.body.dropdownBlueprint
         );
 
-        // if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-        //     await productController.createProduct(name, amount, storageMin, blueprints);
+        // if (valider.test(name) && valider.test(amount) && valider.test(note)) {
+        //     await productController.createProduct(name, amount, note, blueprints);
         // } else {
 
         // }
-        res.render("productAmount", { mainProductName: name, amount: amount, storageMin: storageMin, blueprints: blueprints });
+        res.render("productAmount", { mainProductName: name, amount: amount, note: note, blueprints: blueprints });
 
     } else {
         res.redirect('/login')
@@ -42,11 +42,11 @@ router.post('/amount', async (req, res) => {
 
         let productName = req.body.mainProductName
         let productAmount = req.body.mainProductAmount
-        let productStorageMin = req.body.mainProductStorageMin
+        let productNote = req.body.mainProductNote
 
         let reqbody = req.body
 
-        let product = await productController.createProduct(productName, productAmount, productStorageMin)
+        let product = await productController.createProduct(productName, productAmount, productNote)
 
         let tempBlueprint = null
 
@@ -75,7 +75,7 @@ router.post("/updateProduct", async (req, res) => {
         const product = await productController.getProductById(productID);
         const amount = req.body.updateamount;
         const name = req.body.updatename;
-        const minimum = req.body.updatemin;
+        const note = req.body.updateNote;
 
         if (valider.test(amount)) {
             await productController.updateProductAmountById(product._id, amount)
@@ -85,11 +85,11 @@ router.post("/updateProduct", async (req, res) => {
             await productController.updateProductNameById(product._id, name)
         }
 
-        if (valider.test(minimum)) {
-            await productController.updateProductStorageMinById(product._id, minimum)
+        if (valider.test(note)) {
+            await productController.updateProductNoteById(product._id, note)
         }
 
-        // if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+        // if (!valider.test(amount) && !valider.test(name) && !valider.test(note)) {
         //     // alert("Du har ikke indtastet noget data")
         // }
         res.redirect("/");
