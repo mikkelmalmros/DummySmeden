@@ -6,6 +6,14 @@ body{
 text-align: center;
 }
 
+.dsLogo{
+display: block;
+height: 139px;
+width: 373px;
+margin-left: auto;
+margin-right: auto;
+}
+
 /* Hele vores grid */
 .gridDiv {
     display: grid;
@@ -47,4 +55,12 @@ text-align: center;
 .divComponents{
     overflow: auto;
     max-height: 100%;
+}
+
+button.disabled,
+button[disabled] {
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.5;
+	pointer-events: none;
 }

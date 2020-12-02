@@ -79,7 +79,8 @@ app.get('/login', (req, res) => {
 })
 
 
-//userController.createUser("admin", "adminadmin")
+// userController.createUser("admin", "adminadmin")
+
 
 
 app.get('/users', async (req, res) => {
@@ -122,74 +123,6 @@ app.get('/logout', (req, res) => {
     res.redirect('/login')
   }
 })
-
-// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
-//Opretter en komponent
-/*
-app.post("/createComponent", async (req, res) => {
-  const name = req.body.name2;
-  const amount = req.body.amount2;
-  const storageMin = req.body.storageMin2;
-
-  if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-    await componentController.createComponent(name, amount, storageMin);
-  } else {
-    //Vis pæn besked til brugeren
-    console.log("Forkerte værdier i /createComponent");
-  }
-
-  res.redirect("/");
-});
-*/
-
-// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
-
-/*
-//Opdaterer attributter i komponent
-app.post("/updateComponent", async (req, res) => {
-  const componentID = req.body.dropdownComponents;
-  const component = await componentController.getComponent(componentID);
-  const amount = req.body.updateamount;
-  const name = req.body.updatename;
-  const minimum = req.body.updatemin;
-
-  if (valider.test(amount)) {
-    await componentController.updateAmount(component, amount);
-  } else {
-    //Vis pæn besked til brugeren
-    console.log("Forkerte værdier i /updateComponent (amount)");
-  }
-
-  if (valider.test(name)) {
-    await componentController.updateName(component, name);
-  } else {
-    //Vis pæn besked til brugeren
-    console.log("Forkerte værdier i /updateComponent (name)");
-  }
-
-  if (valider.test(minimum)) {
-    await componentController.updateMininum(component, minimum);
-  } else {
-    //Vis pæn besked til brugeren
-    console.log("Forkerte værdier i /updateComponent (minimum)");
-  }
-
-  res.redirect("/");
-});
-*/
-
-// DENNE METODE ER FLYTTET TIL /ROUTER/KOMPONENT
-
-
-//
-/*
-//Sletter en komponent fuldstændigt fra DB
-app.post("/deleteComponent", async (req, res) => {
-  const componentID = req.body.dropdownDelete;
-  await componentController.deleteComponent(componentID);
-  res.redirect("/");
-});
-*/
 
 //Start server
 app.listen(port, () => {

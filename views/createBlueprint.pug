@@ -14,9 +14,9 @@ body
         input(type='text' name='inputBPAmount' style="width:100%" placeholder='Antal på lager')
         br
         br
-        label Minimumsantal
+        label Note
         br
-        input(type='text' name='inputBPMin' style="width:100%" placeholder='Minimumsantal')
+        input(type='text' name='inputBPNote' style="width:100%" placeholder='Note')
         br
         br
 
@@ -26,15 +26,4 @@ body
                     option(value=component.id) #{component.name}
         br
         br
-
-        //- label Tilføj blueprints til blueprintet
-        //- select(name="dropdownBP" style="width: 100%" multiple)
-        //-    each blueprint in blueprints
-        //-             option(value=blueprint.id) #{blueprint.name}
-        //- br
-        //- br
-
-        //- label Vælg andre blueprints til blueprintet
-        //- select(name="dropdownBP" style="width: 100%" multiple)
-        //- include selectBlueprint.pug
-        button(type='submit' name='create') Put antal på blueprint
+        button.submitButton(type='submit' name='create') Put antal på blueprint

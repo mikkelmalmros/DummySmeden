@@ -11,6 +11,8 @@ router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
 
 const valider = /[a-zA-Z0-9]+/;
+const validerString = /[a-zA-Z0-9]+/;
+const validerTal = /[0-9]+/;
 
 
 //Create a component
@@ -18,18 +20,15 @@ router.post("/createComponent", async (req, res) => {
     if (req.session.isLoggedIn) {
         const name = req.body.inputCompName;
         const amount = req.body.inputCompAmount;
-        const storageMin = req.body.inputCompMin;
+        const note = req.body.inputCompNote;
 
-        if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-            await componentController.createComponent(name, amount, storageMin);
-        } else {
-            alert("Intet blev oprettet, du manglede noget data")
+        if (valider.test(name) && valider.test(amount) && valider.test(note)) {
+            await componentController.createComponent(name, amount, note);
         }
         res.redirect("/");
     } else {
         res.redirect('/login')
     }
-
 });
 
 //update a component using the data in inputfields
@@ -39,36 +38,26 @@ router.post("/updateComponent", async (req, res) => {
         const component = await componentController.getComponent(componentID);
         const amount = req.body.updateamount;
         const name = req.body.updatename;
-        const minimum = req.body.updatemin;
+        const note = req.body.updateNote;
 
         if (valider.test(amount)) {
+            console.log("så fuck dog af");
             await componentController.updateAmount(component, amount);
         }
 
         if (valider.test(name)) {
+            console.log("så fuck dog af")
             await componentController.updateName(component, name);
         }
 
-        if (valider.test(minimum)) {
-            await componentController.updateMininum(component, minimum);
-        }
-
-        if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
-            alert("Du har ikke indtastet noget data")
+        if (valider.test(note)) {
+            console.log("så fuck dog af");
+            await componentController.updateNote(component, note);
         }
         res.redirect("/");
     } else {
         res.redirect('/login')
     }
-
-
 });
-
-//Delete a component by using the data from dropdownDelete menu
-// router.post("/deleteComponent", async (req, res) => {
-//     const componentID = req.body.dropdownDelete;
-//     await componentController.deleteComponent(componentID);
-//     res.redirect("/");
-// });
 
 module.exports = router

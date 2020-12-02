@@ -21,13 +21,13 @@ body
         input(type='text' id= 'updateamountProduct' name='updateamountProd' style="width:100%" placeholder='Nyt antal på lager')
         br
         br
-        label Minimumsantal
+        label Note
         br
-        input(type='text' id= 'updateminProduct' name='updateminProd' style="width:100%" placeholder='Nyt minimumsantal')
+        input(type='text' id= 'updateNoteProduct' name='updateNoteProd' style="width:100%" placeholder='Ny note')
         br
         br
         label Blueprints
             div#divUpdateBlueprints
         br
         br
-        button(type='submit' name='update' onclick = 'updateProduct(); disableButtons()') Opdater produkt
+        button.submitButton(type='submit' name='update' onclick = 'updateProduct()') Opdater produkt
