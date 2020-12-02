@@ -23,4 +23,4 @@ form(action='/' method='get')
     input(type='text' id='updateComponentStorageMinID' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
     br
     br
-    button(type='submit' name='update' onclick="updateProduct()") Opdater komponent
+    button(type='submit' name='update' onclick="updateProduct(); disableButtons()") Opdater komponent
