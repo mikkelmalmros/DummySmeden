@@ -11,6 +11,8 @@ router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
 
 const valider = /[a-zA-Z0-9]+/;
+const validerString = /[a-zA-Z0-9]+/;
+const validerTal = /[0-9]+/;
 
 
 //Create a component
@@ -19,7 +21,6 @@ router.post("/createComponent", async (req, res) => {
         const name = req.body.inputCompName;
         const amount = req.body.inputCompAmount;
         const storageMin = req.body.inputCompMin;
-
         if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
             await componentController.createComponent(name, amount, storageMin);
         } else {
@@ -29,6 +30,7 @@ router.post("/createComponent", async (req, res) => {
     } else {
         res.redirect('/login')
     }
+
 
 });
 
