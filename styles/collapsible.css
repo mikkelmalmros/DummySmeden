@@ -24,7 +24,7 @@
 
 /* Når collapsible er sat til active (se public/javascript/component.js) */
 .collapsibleButton--active{
-    background: #555555;
+    background: #008a6e;
 }
 
 /* Pil efter collapsible er sat til active */

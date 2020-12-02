@@ -1,4 +1,3 @@
-
 // på eget ansvar
 document.querySelectorAll('.collapsibleButton').forEach(button => {
     button.addEventListener('click', () => {
@@ -13,7 +12,6 @@ document.querySelectorAll('.collapsibleButton').forEach(button => {
         }
     })
 })
-
 
 document.querySelectorAll('.name').forEach(clickable => {
     clickable.addEventListener('click', () => {
@@ -35,6 +33,19 @@ document.querySelectorAll('.name').forEach(clickable => {
     })
 })
 
+function disableButtons() {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(element => {
+        element.disabled = true
+    })
+}
+
+function enableButtons() {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(element => {
+        element.disabled = false
+    })
+}
 
 //Is called when the dropdown in the updateblueprint is changed
 async function pickBlueprint() {
@@ -50,7 +61,6 @@ async function pickBlueprint() {
         let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
         let jsonComponent = await component.json()
         components.push(jsonComponent)
-        console.log('Component : ' + JSON.stringify(jsonComponent));
     }
 
     //Puts the fetched data into html-string
@@ -58,16 +68,10 @@ async function pickBlueprint() {
     for (const jsonValue of jsonValues) {
         for (const component of components) {
             if (jsonValue.component == component._id) {
-                console.log('Name of component : ' + component.name);
-
                 html += '<p>' + component.name + '</p><input type="text" name="' + jsonValue._id + '" value="' + jsonValue.amount + '"> <br>'
             }
-
-
         }
-
     }
-
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
@@ -81,11 +85,9 @@ async function pickProduct() {
     let inputUpdateComponentName = document.querySelector('#updatenameProduct')
     let inputUpdateComponentAmount = document.querySelector('#updateamountProduct')
     let inputUpdateComponentStorageMin = document.querySelector('#updateminProduct')
-    
 
     let product = await fetch("http://localhost:8080/api/getProduct/" + selected.value)
     product = await product.json()
-    console.log(inputUpdateComponentName);
     inputUpdateComponentName.value = product.name
     inputUpdateComponentAmount.value = product.amount
     inputUpdateComponentStorageMin.value = product.storageMin
@@ -116,11 +118,12 @@ async function pickProduct() {
 }
 
 async function deleteBlueprint() {
+    disableButtons()
     let div = document.getElementById('dropdownDeleteBlueprintID')
     let id = div.value
     await fetch('http://localhost:8080/api/deleteBlueprint/' + id, {
         method: 'delete'
-    }).then(console.log("Blueprint er Slettet")).then(setTimeout(() => {
+    }).then(setTimeout(() => {
         window.location.reload()
     }, 100))
 }
@@ -162,6 +165,7 @@ async function deleteComponent() {
     await fetch('http://localhost:8080/api/deleteComponent/' + id, {
         method: 'delete'
     }).then(window.location.reload())
+    disableButtons()
 }
 
 async function deleteProduct() {
@@ -170,6 +174,7 @@ async function deleteProduct() {
     await fetch('http://localhost:8080/api/deleteProduct/' + id, {
         method: 'delete'
     }).then(window.location.reload())
+    disableButtons()
 }
 
 async function updateProduct() {
@@ -192,7 +197,6 @@ async function updateProduct() {
     // Alt fetch
     let id = document.getElementById("productSelector").value
 
-    console.log("Tries to fetch");
     await fetch("http://localhost:8080/api/updateProduct/" + id, {
         method: "put",
         headers: {
@@ -202,11 +206,5 @@ async function updateProduct() {
     }).then(res => {
         return res.json()
     }).catch(error => console.log('Fetch failed: ' + data))
-}
-
-function disableButtons() {
-    let buttons = document.querySelectorAll('button')
-    buttons.forEach(element => {
-        element.disabled = true
-    })
+    disableButtons()
 }

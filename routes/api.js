@@ -14,7 +14,6 @@ router.use(body.json())
 //PRODUCTS
 //--------------------------------------------------------------------------------------------------------
 router.delete('/deleteProduct/:id', async (req, res) => {
-    console.log("slettet ID : " + req.params.id);
     await productController.deleteProduct(req.params.id)
 })
 
@@ -38,7 +37,6 @@ router.get('/getProduct/:id', async (req, res) => {
 //Gets all componentAmounts of a given blueprint found by id in the param
 router.get('/getComponentAmounts/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log(req.params.id);
         let componentAmounts = await blueprintController.getAllComponentAmounts(req.params.id)
         res.json(componentAmounts)
     } else {
@@ -48,9 +46,7 @@ router.get('/getComponentAmounts/:id', async (req, res) => {
 
 router.get('/getComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("Spurgt ID : " + req.params.id);
         let component = await componentController.getComponent(req.params.id)
-        console.log("Returneret component: " + component);
         res.json(component)
     } else {
         res.redirect('/login')
@@ -59,7 +55,6 @@ router.get('/getComponent/:id', async (req, res) => {
 
 router.delete('/deleteComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("slettet ID : " + req.params.id);
         await componentController.deleteComponent(req.params.id)
         res.redirect('/')
     } else {
@@ -70,7 +65,6 @@ router.delete('/deleteComponent/:id', async (req, res) => {
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("slettet ID : " + req.params.id);
         await blueprintController.deleteBlueprint(req.params.id)
         res.redirect('/')
     } else {
@@ -107,7 +101,6 @@ router.get('/getBlueprintAmounts/:id', async (req, res) => {
 //---------------------------------------------------------------------------------------------------------
 router.get('/getComponentOnComponentAmount/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("Spurgt ID : " + req.params.id);
         let component = await componentAmountController.getComponentOfComponentAmount(req.params.id)
         res.json(component)
     } else {

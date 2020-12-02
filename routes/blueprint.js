@@ -17,20 +17,20 @@ const valider = /[a-zA-Z0-9]+/;
 
 //The first step in creating a blueprint - the creation happens in the endpont "/amount"
 router.post("/createBlueprint", async (req, res) => {
-           if (req.session.isLoggedIn) {
-            const pbname = req.body.inputBPName;
-            const amount = req.body.inputBPAmount;
-            const storageMin = req.body.inputBPMin;
+    if (req.session.isLoggedIn) {
+        const pbname = req.body.inputBPName;
+        const amount = req.body.inputBPAmount;
+        const storageMin = req.body.inputBPMin;
 
-            const components = await componentController.getComponentsById(
-                req.body.dropdownComp
-            );
+        const components = await componentController.getComponentsById(
+            req.body.dropdownComp
+        );
 
-            res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
-        } else {
-            res.redirect('/login')
-        }
-    });
+        res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
+    } else {
+        res.redirect('/login')
+    }
+});
 
 router.post('/amount', async (req, res) => {
     if (req.session.isLoggedIn) {
@@ -49,10 +49,8 @@ router.post('/amount', async (req, res) => {
         for (const key of Object.keys(reqbody)) {
             if (key.includes('hiddenComponent')) {
                 tempComponent = await componentController.getComponent(reqbody[key])
-                console.log('TempComponent : ' + tempComponent);
             } else if (tempComponent != null && key == tempComponent._id) {
                 let amountComponent = await componentAmountController.createComponentAmount(tempComponent, reqbody[key])
-                console.log('AmountComponent : ' + amountComponent);
                 tempComponent = null
                 blueprint.components.push(amountComponent)
             }
@@ -76,7 +74,6 @@ router.post("/updateBlueprint", async (req, res) => {
         const amount = req.body.updateamount;
         const name = req.body.updatename;
         const minimum = req.body.updatemin;
-        console.log("Update storageMin: " + minimum);
 
         if (valider.test(amount)) {
             await blueprintController.updateAmount(blueprint._id, amount);
