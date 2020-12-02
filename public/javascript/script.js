@@ -203,3 +203,10 @@ async function updateProduct() {
         return res.json()
     }).catch(error => console.log('Fetch failed: ' + data))
 }
+
+function disableButtons() {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(element => {
+        element.disabled = true
+    })
+}

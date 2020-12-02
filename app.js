@@ -10,7 +10,7 @@ const productController = require("./controllers/product")
 const userController = require('./controllers/user')
 
 
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const session = require('express-session')
 
@@ -56,7 +56,7 @@ const valider = /[a-zA-Z0-9]+/;
 app.get("/", async (req, res) => {
   //OBS have to be changed!
   req.session.isLoggedIn = true
-  
+
   if (req.session.isLoggedIn) {
     const components = await componentController.getComponents();
     const blueprints = await blueprintController.getBlueprints();
