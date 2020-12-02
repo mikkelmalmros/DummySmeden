@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 //create
 exports.createUser = async function (username, password) {
@@ -11,12 +11,12 @@ exports.createUser = async function (username, password) {
     return await user.save();
 }
 
-exports.getUsersByName = async function(name) {
+exports.getUsersByName = async function (name) {
     const user = await User.findOne().where('username').equals(name).exec()
     return user
 }
 
-exports.getUsers = async function() {
+exports.getUsers = async function () {
     const users = await User.find().exec()
     return users
 }

@@ -60,7 +60,7 @@ exports.saveBlueprintAmount = async function (jsonComponents, blueprintamounts) 
         for (const blueprint of blueprintamounts) {
             if (component.id == blueprint.id) {
                 blueprint.amount = component.value
-                blueprint.save()
+                await blueprint.save()
             }
         }
     }
