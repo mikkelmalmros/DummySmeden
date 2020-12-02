@@ -196,6 +196,26 @@ async function updateBlueprint() {
         }).catch(error => console.log('Fetch failed'))
     }
 }
+
+async function updateComponent() {
+    disableButtons()
+    
+    let id = document.querySelector('#componentSelector')
+
+    let data = "{ ";
+    data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
+        ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
+        ", " + '"note": ' + document.getElementById("updateComponentNoteID").value + "}"
+
+    await fetch("http://localhost:8080/api/updateComponent/" + id, {
+        method: "put",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: data
+    })
+}
+
 async function deleteComponent() {
     disableButtons()
     let div = document.getElementById('dropDownDeleteID')

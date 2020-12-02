@@ -66,6 +66,16 @@ router.delete('/deleteComponent/:id', async (req, res) => {
         res.redirect('/login')
     }
 })
+
+router.put('/updateComponent/:id', async (req, res) => {
+    if (req.session.isLoggedIn) {
+        let component = await componentController.getComponent(req.params.id)
+        await componentController.updateComponent(component, req.body.name, req.body.amount, req.body.note)
+        res.redirect('/')
+    } else {
+        res.redirect('/login')
+    }
+})
 //BLUEPRINTS
 //---------------------------------------------------------------------------------------------------------
 router.delete('/deleteBlueprint/:id', async (req, res) => {

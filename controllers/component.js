@@ -31,6 +31,13 @@ exports.updateNote = async function (component, note) {
     return await component.save()
 }
 
+exports.updateComponent = async function (component, name, amount, note) {
+    component.name = name
+    component.amount = amount
+    component.note = note
+    return await component.save()
+}
+
 exports.getComponent = async function (id) {
     return await Component.findById(id).exec()
 }
