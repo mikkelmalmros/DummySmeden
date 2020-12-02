@@ -1,7 +1,8 @@
 form(action='/' method='get')
     h2 Opdater komponent
     label Vælg komponent til at opdateres
-    select(name="dropdownComponents" style="width: 100%")
+    select(name="dropdownComponents" id="componentSelector" onchange="pickComponent()" style="width: 100%")
+        option(value="" disabled selected) Vælg et component
         each component in components
             option(value=component.id) #{component.name}
         option(value="" ) Test

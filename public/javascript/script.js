@@ -1,3 +1,6 @@
+// Begge disse skal implamenteres med !
+const validerString = /[a-zA-Z0-9]+/;
+const validerTal = /[0-9]+/;
 // på eget ansvar
 document.querySelectorAll('.collapsibleButton').forEach(button => {
     button.addEventListener('click', () => {
@@ -52,6 +55,17 @@ async function pickBlueprint() {
     //Selects the right things from the DOM
     let selected = document.querySelector('#blueprintSelector')
     let div = document.querySelector('#divUpdateComponents')
+    let inputUpdateBlueprintName = document.querySelector('#updatenameBlueprint')
+    let inputUpdateBlueprintAmount = document.querySelector('#updateamountBlueprint')
+    let inputUpdateBlueprintStorageMin = document.querySelector('#updateMinAntalBlueprint')
+
+    console.log(selected.value);
+    let blueprint = await fetch("http://localhost:8080/api/getBlueprint/" + selected.value)
+    blueprint = await blueprint.json()
+    console.log(inputUpdateBlueprintName);
+    inputUpdateBlueprintName.value = blueprint.name
+    inputUpdateBlueprintAmount.value = blueprint.amount
+    inputUpdateBlueprintStorageMin.value = blueprint.storageMin
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
@@ -117,6 +131,22 @@ async function pickProduct() {
     // div.style.overflow = "auto"
 }
 
+async function pickComponent() {
+    let selected = document.querySelector('#componentSelector')
+    let nameInput = document.querySelector('#updateComponentNameID')
+    let amountInput = document.querySelector('#updateComponentAmountID')
+    let storageMinInput = document.querySelector('#updateComponentStorageMinID')
+
+    let component = await fetch('/api/getComponent/' + selected.value)
+
+    component = await component.json()
+    console.log(component);
+
+    nameInput.value = component.name
+    amountInput.value = component.amount
+    storageMinInput.value = component.storageMin
+}
+
 async function deleteBlueprint() {
     disableButtons()
     let div = document.getElementById('dropdownDeleteBlueprintID')
@@ -129,36 +159,43 @@ async function deleteBlueprint() {
 }
 
 async function updateBlueprint() {
-    let data = "{ ";
-    data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
-        ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
-        ", " + '"storageMin": ' + document.getElementById("updateMinAntalBlueprint").value + ", "
+    if (
+        !validerString.test(document.getElementById("updatenameBlueprint").value) ||
+        !validerTal.test(document.getElementById("updateamountBlueprint").value) ||
+        !validerTal.test(document.getElementById("updateMinAntalBlueprint").value)
+    ) {
+        alert("Udfyld venligst blueprint navn, antal og minimums antal")
+    } else {
+        let data = "{ ";
+        data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
+            ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
+            ", " + '"storageMin": ' + document.getElementById("updateMinAntalBlueprint").value + ", "
 
-    let nodes = document.getElementById("divUpdateComponents").childNodes
+        let nodes = document.getElementById("divUpdateComponents").childNodes
 
-    data += '"componentAmounts":['
-    nodes.forEach(element => {
-        if (element.nodeName == "INPUT") {
-            data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
-        }
-    });
-    data = data.substring(0, data.length - 2)
-    data += "]}"
+        data += '"componentAmounts":['
+        nodes.forEach(element => {
+            if (element.nodeName == "INPUT") {
+                data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
+            }
+        });
+        data = data.substring(0, data.length - 2)
+        data += "]}"
 
-    // Alt fetch
-    let id = document.getElementById("blueprintSelector").value
+        // Alt fetch
+        let id = document.getElementById("blueprintSelector").value
 
-    await fetch("http://localhost:8080/api/updateBlueprint/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    }).then(res => {
-        return res.json()
-    }).catch(error => console.log('Fetch failed'))
+        await fetch("http://localhost:8080/api/updateBlueprint/" + id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(res => {
+            return res.json()
+        }).catch(error => console.log('Fetch failed'))
+    }
 }
-
 async function deleteComponent() {
     let div = document.getElementById('dropDownDeleteID')
     let id = div.value
@@ -178,6 +215,13 @@ async function deleteProduct() {
 }
 
 async function updateProduct() {
+    if (
+        !validerString.test(document.getElementById("updatenameProduct").value) ||
+        !validerTal.test(document.getElementById("updateamountProduct").value) ||
+        !validerTal.test(document.getElementById("updateminProduct").value)
+    ) { alert("Intast Ting!") } else {
+
+    }
     let data = "{ ";
     data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
         ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
@@ -206,5 +250,5 @@ async function updateProduct() {
     }).then(res => {
         return res.json()
     }).catch(error => console.log('Fetch failed: ' + data))
-    disableButtons()
+
 }
