@@ -21,15 +21,16 @@ router.post("/createBlueprint", async (req, res) => {
         const pbname = req.body.inputBPName;
         const amount = req.body.inputBPAmount;
         const note = req.body.inputBPNote;
-
-        const components = await componentController.getComponentsById(
-            req.body.dropdownComp
-        );
-
-        res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, note: note, components: components });
+        if (valider.test(pbname) || valider.test(amount) || valider.test(storageMin)) {
+            const components = await componentController.getComponentsById(req.body.dropdownComp);
+            res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, note: note, components: components });
+        } else {
+            // MANGLER ALERT
+        }
     } else {
         res.redirect('/login')
     }
+
 });
 
 router.post('/amount', async (req, res) => {

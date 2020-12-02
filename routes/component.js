@@ -11,6 +11,8 @@ router.use(body.urlencoded({ extended: false }))
 router.use(body.json())
 
 const valider = /[a-zA-Z0-9]+/;
+const validerString = /[a-zA-Z0-9]+/;
+const validerTal = /[0-9]+/;
 
 
 //Create a component
@@ -29,7 +31,6 @@ router.post("/createComponent", async (req, res) => {
     } else {
         res.redirect('/login')
     }
-
 });
 
 //update a component using the data in inputfields
