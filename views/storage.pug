@@ -6,7 +6,6 @@ html
             include ../styles/table.css
         title Lager
         script(defer, src="/static/javascript/script.js")
-        script(src="/static/javascript/confirm.js")
 
     body
         img.dsLogo(src="/static/assets/DSLogo.PNG", alt="Dummysmeden logo")
@@ -34,7 +33,7 @@ html
                                     td.name #{product.name}
                                     td.amount #{product.amount}
                                 tr
-                                    td.contentT Note br #{product.note}
+                                    td.contentT Note: #{product.note}
             div.blueprintColumn
                 h1 Blueprints
                 div.collapsible
@@ -58,7 +57,7 @@ html
                                     td.name #{blueprint.name}
                                     td.amount #{blueprint.amount}
                                 tr
-                                    td.contentT yeet #{blueprint.note}
+                                    td.contentT Note: #{blueprint.note}
             div.componentColumn
                 h1 Komponenter
                 div.collapsible
@@ -82,4 +81,4 @@ html
                                     td.name #{component.name}
                                     td.amount #{component.amount}
                                 tr
-                                    td.contentT yeet #{component.note}
+                                    td.contentT Note: #{component.note}
