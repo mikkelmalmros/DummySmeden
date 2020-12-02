@@ -21,13 +21,13 @@ body
         input(type='text' id = 'updateamountBlueprint' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
         br
         br
-        label Minimumsantal
+        label Note
         br
-        input(type='text' id = 'updateMinAntalBlueprint' name='updatemin' style="width:100%" placeholder='Nyt minimumsantal')
+        input(type='text' id = 'updateNoteBlueprint' name='updateNote' style="width:100%" placeholder='Nyt note')
         br
         br
         label Komponenter
             div#divUpdateComponents
         br
         br
-        button(type='submit' name='update' onclick= 'updateBlueprint(); disabled = true') Opdater blueprint
+        button(type='submit' name='update' onclick= 'updateBlueprint()') Opdater blueprint

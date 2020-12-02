@@ -3,11 +3,11 @@ const BlueprintAmount = require('../models/blueprintAmount');
 const blueprintAmountController = require('./blueprintAmount')
 
 //create
-exports.createProduct = async function (name, amount, storageMin) {
+exports.createProduct = async function (name, amount, note) {
     const product = Product({
         name: name,
         amount: amount,
-        storageMin: storageMin,
+        note: note,
     })
     return await product.save();
 }
@@ -24,10 +24,10 @@ exports.updateProductAmountById = async function (productId, amount) {
     product.amount = amount
     return await product.save()
 }
-//update storageMin
-exports.updateProductStorageMinById = async function (productId, storageMin) {
+//update note
+exports.updateProductNoteById = async function (productId, note) {
     let product = await Product.findById(productId).populate("blueprints").exec()
-    product.storageMin = storageMin
+    product.note = note
     return await product.save()
 }
 
@@ -65,12 +65,12 @@ exports.getAllBlueprintAmounts = async function (productid) {
     return product.blueprints
 }
 
-exports.updateProduct = async function (id, name, amount, storageMin) {
+exports.updateProduct = async function (id, name, amount, note) {
     let product = await Product.findById(id).exec()
 
     product.name = name
     product.amount = amount
-    product.storageMin = storageMin
+    product.note = note
 
     return await product.save()
 }

@@ -5,9 +5,9 @@ const blueprintAmountController = require('../controllers/blueprintAmount')
 const componentAmountController = require('../controllers/componentAmount')
 
 //Creates ablueprint and saves it on MongoDB
-exports.createBlueprint = async function (name, amount, storageMin, components, blueprints) {
+exports.createBlueprint = async function (name, amount, note, components, blueprints) {
   const blueprint = Blueprint({
-    name: name, amount: amount, storageMin: storageMin, components: components, blueprints: blueprints,
+    name: name, amount: amount, note: note, components: components, blueprints: blueprints,
   });
   await blueprint.save();
   return blueprint
@@ -149,10 +149,10 @@ exports.updateAmount = async function (blueprintId, amount) {
   return await blueprint.save()
 }
 
-//Update storageMin on a blueprint
-exports.updatestorageMin = async function (blueprintId, storageMin) {
+//Update note on a blueprint
+exports.updateNote = async function (blueprintId, note) {
   let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
-  blueprint.storageMin = storageMin
+  blueprint.note = note
   return await blueprint.save()
 }
 
@@ -190,12 +190,12 @@ exports.findBlueprintInBlueprint = async function (blueprintId) {
   return "intet"
 }
 
-exports.updateBlueprint = async function (id, name, amount, storageMin) {
+exports.updateBlueprint = async function (id, name, amount, note) {
   let blueprint = await Blueprint.findById(id).exec()
 
   blueprint.name = name
   blueprint.amount = amount
-  blueprint.storageMin = storageMin
+  blueprint.note = note
 
   return await blueprint.save()
 }

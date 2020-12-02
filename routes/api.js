@@ -22,18 +22,18 @@ router.put('/updateProduct/:id', async (req, res) => {
     let product = await productController.getProductById(req.params.id)
     let jsonComponents = req.body.blueprintAmounts
     //Updates and saves product
-    await productController.updateProduct(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
+    await productController.updateProduct(req.params.id, req.body.name, req.body.amount, req.body.note)
     await blueprintAmountController.saveBlueprintAmount(jsonComponents, product.blueprints)
 })
 
 router.get('/getProduct/:id', async (req, res) => {
-    if(req.session.isLoggedIn) {
+    if (req.session.isLoggedIn) {
         let product = await productController.getProductById(req.params.id)
         res.json(product)
     } else {
         res.redirect('/login')
     }
-    
+
 })
 
 //COMPONENTS
@@ -83,7 +83,7 @@ router.put('/updateBlueprint/:id', async (req, res) => {
         let blueprint = await blueprintController.getBlueprint(req.params.id)
         let jsonComponents = req.body.componentAmounts
         //Updates and saves blueprint
-        blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.storageMin)
+        blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.note)
         //Updates and saves components in blueprint, ud fra referance
         //blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
         componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
@@ -103,13 +103,13 @@ router.get('/getBlueprintAmounts/:id', async (req, res) => {
 })
 
 router.get('/getBlueprint/:id', async (req, res) => {
-    if(req.session.isLoggedIn) {
+    if (req.session.isLoggedIn) {
         let blueprint = await blueprintController.getBlueprintById(req.params.id)
-        res.json(blueprint) 
+        res.json(blueprint)
     } else {
         res.redirect('/login')
     }
-    
+
 })
 
 //COMPONENTAMOUNTS

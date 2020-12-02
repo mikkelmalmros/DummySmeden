@@ -39,7 +39,7 @@ document.querySelectorAll('.name').forEach(clickable => {
 function disableButtons() {
     let buttons = document.querySelectorAll('button')
     buttons.forEach(element => {
-        element.disabled = true
+        element.classList.add('disabled')
     })
 }
 
@@ -57,7 +57,7 @@ async function pickBlueprint() {
     let div = document.querySelector('#divUpdateComponents')
     let inputUpdateBlueprintName = document.querySelector('#updatenameBlueprint')
     let inputUpdateBlueprintAmount = document.querySelector('#updateamountBlueprint')
-    let inputUpdateBlueprintStorageMin = document.querySelector('#updateMinAntalBlueprint')
+    let inputUpdateBlueprintNote = document.querySelector('#updateNoteBlueprint')
 
     console.log(selected.value);
     let blueprint = await fetch("http://localhost:8080/api/getBlueprint/" + selected.value)
@@ -65,7 +65,7 @@ async function pickBlueprint() {
     console.log(inputUpdateBlueprintName);
     inputUpdateBlueprintName.value = blueprint.name
     inputUpdateBlueprintAmount.value = blueprint.amount
-    inputUpdateBlueprintStorageMin.value = blueprint.storageMin
+    inputUpdateBlueprintNote.value = blueprint.note
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
@@ -98,13 +98,13 @@ async function pickProduct() {
     let div = document.querySelector('#divUpdateBlueprints')
     let inputUpdateComponentName = document.querySelector('#updatenameProduct')
     let inputUpdateComponentAmount = document.querySelector('#updateamountProduct')
-    let inputUpdateComponentStorageMin = document.querySelector('#updateminProduct')
+    let inputUpdateComponentNote = document.querySelector('#updateNoteProduct')
 
     let product = await fetch("http://localhost:8080/api/getProduct/" + selected.value)
     product = await product.json()
     inputUpdateComponentName.value = product.name
     inputUpdateComponentAmount.value = product.amount
-    inputUpdateComponentStorageMin.value = product.storageMin
+    inputUpdateComponentNote.value = product.Note
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
@@ -135,7 +135,7 @@ async function pickComponent() {
     let selected = document.querySelector('#componentSelector')
     let nameInput = document.querySelector('#updateComponentNameID')
     let amountInput = document.querySelector('#updateComponentAmountID')
-    let storageMinInput = document.querySelector('#updateComponentStorageMinID')
+    let noteInput = document.querySelector('#updateComponentNoteID')
 
     let component = await fetch('/api/getComponent/' + selected.value)
 
@@ -144,7 +144,7 @@ async function pickComponent() {
 
     nameInput.value = component.name
     amountInput.value = component.amount
-    storageMinInput.value = component.storageMin
+    noteInput.value = component.note
 }
 
 async function deleteBlueprint() {
@@ -159,17 +159,18 @@ async function deleteBlueprint() {
 }
 
 async function updateBlueprint() {
+    disableButtons()
     if (
         !validerString.test(document.getElementById("updatenameBlueprint").value) ||
         !validerTal.test(document.getElementById("updateamountBlueprint").value) ||
-        !validerTal.test(document.getElementById("updateMinAntalBlueprint").value)
+        !validerTal.test(document.getElementById("updateNoteBlueprint").value)
     ) {
-        alert("Udfyld venligst blueprint navn, antal og minimums antal")
+        alert("Udfyld venligst blueprint navn, antal og note")
     } else {
         let data = "{ ";
         data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
             ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
-            ", " + '"storageMin": ' + document.getElementById("updateMinAntalBlueprint").value + ", "
+            ", " + '"note": ' + document.getElementById("updateNoteAntalBlueprint").value + ", "
 
         let nodes = document.getElementById("divUpdateComponents").childNodes
 
@@ -197,35 +198,36 @@ async function updateBlueprint() {
     }
 }
 async function deleteComponent() {
+    disableButtons()
     let div = document.getElementById('dropDownDeleteID')
     let id = div.value
     await fetch('http://localhost:8080/api/deleteComponent/' + id, {
         method: 'delete'
     }).then(window.location.reload())
-    disableButtons()
 }
 
 async function deleteProduct() {
+    disableButtons()
     let div = document.getElementById('dropDownDeleteProductID')
     let id = div.value
     await fetch('http://localhost:8080/api/deleteProduct/' + id, {
         method: 'delete'
     }).then(window.location.reload())
-    disableButtons()
 }
 
 async function updateProduct() {
+    disableButtons()
     if (
         !validerString.test(document.getElementById("updatenameProduct").value) ||
         !validerTal.test(document.getElementById("updateamountProduct").value) ||
-        !validerTal.test(document.getElementById("updateminProduct").value)
+        !validerTal.test(document.getElementById("updateNoteProduct").value)
     ) { alert("Intast Ting!") } else {
 
     }
     let data = "{ ";
     data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
         ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
-        ", " + '"storageMin": ' + document.getElementById("updateminProduct").value + ", "
+        ", " + '"note": ' + document.getElementById("updateNoteProduct").value + ", "
 
     let nodes = document.getElementById("divUpdateBlueprints").childNodes
 
@@ -250,5 +252,4 @@ async function updateProduct() {
     }).then(res => {
         return res.json()
     }).catch(error => console.log('Fetch failed: ' + data))
-
 }

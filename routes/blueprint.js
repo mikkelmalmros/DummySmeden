@@ -20,13 +20,10 @@ router.post("/createBlueprint", async (req, res) => {
     if (req.session.isLoggedIn) {
         const pbname = req.body.inputBPName;
         const amount = req.body.inputBPAmount;
-        const storageMin = req.body.inputBPMin;
+        const note = req.body.inputBPNote;
         if (valider.test(pbname) || valider.test(amount) || valider.test(storageMin)) {
-            const components = await componentController.getComponentsById(
-                req.body.dropdownComp
-            );
-
-            res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
+            const components = await componentController.getComponentsById(req.body.dropdownComp);
+            res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, note: note, components: components });
         } else {
             console.log("der manger name, amount eller storageMin");
         }
@@ -43,11 +40,11 @@ router.post('/amount', async (req, res) => {
 
         let blueprintName = req.body.mainBlueprintName
         let blueprintAmount = req.body.mainBlueprintAmount
-        let blueprintStorageMin = req.body.mainBlueprintStorageMin
+        let blueprintNote = req.body.mainBlueprintNote
 
         let reqbody = req.body
 
-        let blueprint = await blueprintController.createBlueprint(blueprintName, blueprintAmount, blueprintStorageMin)
+        let blueprint = await blueprintController.createBlueprint(blueprintName, blueprintAmount, blueprintNote)
 
         let tempComponent = null
 
@@ -78,7 +75,7 @@ router.post("/updateBlueprint", async (req, res) => {
         const blueprint = await blueprintController.getBlueprintById(blueprintID);
         const amount = req.body.updateamount;
         const name = req.body.updatename;
-        const minimum = req.body.updatemin;
+        const note = req.body.updateNote;
 
         if (valider.test(amount)) {
             await blueprintController.updateAmount(blueprint._id, amount);
@@ -88,11 +85,11 @@ router.post("/updateBlueprint", async (req, res) => {
             await blueprintController.updateName(blueprint._id, name);
         }
 
-        if (valider.test(minimum)) {
-            await blueprintController.updatestorageMin(blueprint._id, minimum);
+        if (valider.test(note)) {
+            await blueprintController.updateNote(blueprint._id, note);
         }
 
-        if (!valider.test(amount) && !valider.test(name) && !valider.test(minimum)) {
+        if (!valider.test(amount) && !valider.test(name) && !valider.test(note)) {
             alert("Du har ikke indtastet noget data")
         }
 

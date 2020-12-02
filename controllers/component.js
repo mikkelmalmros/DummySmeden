@@ -3,11 +3,11 @@ const Blueprint = require('../models/blueprint')
 const blueprintController = require('./blueprint')
 const compAmountController = require('./componentAmount')
 
-exports.createComponent = async function (name, amount, storageMin) {
+exports.createComponent = async function (name, amount, note) {
     const component = Component({
         name: name,
         amount: amount,
-        storageMin: storageMin
+        note: note
     })
     return await component.save()
 }
@@ -26,8 +26,8 @@ exports.updateName = async function (component, name) {
     return await component.save()
 }
 
-exports.updateMininum = async function (component, minimum) {
-    component.storageMin = minimum
+exports.updateNote = async function (component, note) {
+    component.note = note
     return await component.save()
 }
 

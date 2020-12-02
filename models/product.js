@@ -4,7 +4,7 @@ const Schema = mogoose.Schema
 const productSchema = Schema({
     name: String,
     amount: Number,
-    storageMin: Number,
+    note: String,
     blueprints: [{
         type: Schema.Types.ObjectId, ref: 'BlueprintAmount'
     }]
