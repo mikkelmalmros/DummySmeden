@@ -15,22 +15,18 @@ const valider = /[a-zA-Z0-9]+/;
 //Create a product
 router.post("/createProduct", async (req, res) => {
     if (req.session.isLoggedIn) {
-
-
         const name = req.body.inputProdName;
         const amount = req.body.inputProdAmount;
         const storageMin = req.body.InputProdMin;
-
+        //  if (valider.test(name) || valider.test(amount) || valider.test(storageMin)) {
         const blueprints = await blueprintController.getBlueprintsById(
             req.body.dropdownBlueprint
         );
 
-        // if (valider.test(name) && valider.test(amount) && valider.test(storageMin)) {
-        //     await productController.createProduct(name, amount, storageMin, blueprints);
-        // } else {
-
-        // }
         res.render("productAmount", { mainProductName: name, amount: amount, storageMin: storageMin, blueprints: blueprints });
+        //  } else {
+        //    console.log("FUUUUCk skriv det igen!");
+        //    res.redirect('/')
 
     } else {
         res.redirect('/login')

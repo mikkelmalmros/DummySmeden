@@ -28,8 +28,11 @@ router.post("/createBlueprint", async (req, res) => {
 
             res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, storageMin: storageMin, components: components });
         } else {
-            res.redirect('/login')
+            console.log("der manger name, amount eller storageMin");
         }
+
+    } else {
+        res.redirect('/login')
     }
 
 });
