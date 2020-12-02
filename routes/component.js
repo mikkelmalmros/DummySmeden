@@ -61,15 +61,6 @@ router.post("/updateComponent", async (req, res) => {
     } else {
         res.redirect('/login')
     }
-
-
 });
-
-//Delete a component by using the data from dropdownDelete menu
-// router.post("/deleteComponent", async (req, res) => {
-//     const componentID = req.body.dropdownDelete;
-//     await componentController.deleteComponent(componentID);
-//     res.redirect("/");
-// });
 
 module.exports = router

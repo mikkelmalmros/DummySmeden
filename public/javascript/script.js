@@ -37,18 +37,18 @@ document.querySelectorAll('.name').forEach(clickable => {
 })
 
 function disableButtons() {
-    let buttons = document.querySelectorAll('button')
+    let buttons = document.querySelectorAll('.submitButton')
     buttons.forEach(element => {
         element.classList.add('disabled')
     })
 }
 
-function enableButtons() {
-    let buttons = document.querySelectorAll('button')
-    buttons.forEach(element => {
-        element.disabled = false
-    })
-}
+// function enableButtons() {
+//     let buttons = document.querySelectorAll('.button')
+//     buttons.forEach(element => {
+//         element.disabled = false
+//     })
+// }
 
 //Is called when the dropdown in the updateblueprint is changed
 async function pickBlueprint() {
