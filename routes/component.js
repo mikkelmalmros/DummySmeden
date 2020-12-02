@@ -24,8 +24,6 @@ router.post("/createComponent", async (req, res) => {
 
         if (valider.test(name) && valider.test(amount) && valider.test(note)) {
             await componentController.createComponent(name, amount, note);
-        } else {
-            alert("Intet blev oprettet, du manglede noget data")
         }
         res.redirect("/");
     } else {
@@ -43,19 +41,18 @@ router.post("/updateComponent", async (req, res) => {
         const note = req.body.updateNote;
 
         if (valider.test(amount)) {
+            console.log("så fuck dog af");
             await componentController.updateAmount(component, amount);
         }
 
         if (valider.test(name)) {
+            console.log("så fuck dog af")
             await componentController.updateName(component, name);
         }
 
         if (valider.test(note)) {
+            console.log("så fuck dog af");
             await componentController.updateNote(component, note);
-        }
-
-        if (!valider.test(amount) && !valider.test(name) && !valider.test(note)) {
-            alert("Du har ikke indtastet noget data")
         }
         res.redirect("/");
     } else {

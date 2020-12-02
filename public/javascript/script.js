@@ -140,7 +140,6 @@ async function pickComponent() {
     let component = await fetch('/api/getComponent/' + selected.value)
 
     component = await component.json()
-    console.log(component);
 
     nameInput.value = component.name
     amountInput.value = component.amount
@@ -170,7 +169,7 @@ async function updateBlueprint() {
         let data = "{ ";
         data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
             ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
-            ", " + '"note": ' + document.getElementById("updateNoteAntalBlueprint").value + ", "
+            ", " + '"note": ' + document.getElementById("updateNoteBlueprint").value + ", "
 
         let nodes = document.getElementById("divUpdateComponents").childNodes
 
