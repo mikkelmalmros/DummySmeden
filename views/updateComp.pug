@@ -1,25 +1,25 @@
-form(action='/' method='post')
-    h2 Opdater komponent
-    label Vælg komponent til at opdateres
-    select(name="dropdownComponents" id="componentSelector" onchange="pickComponent()" style="width: 100%")
-        option(value="" disabled selected) Vælg et component
-        each component in components
-            option(value=component.id) #{component.name}
-    br
-    br
-    label Name
-    br
-    input(type='text' id='updateComponentNameID' name='updatename' style="width:100%" placeholder='Nyt navn på komponent')
-    br
-    br
-    label Antal
-    br
-    input(type='text'  id='updateComponentAmountID' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
-    br
-    br
-    label Note
-    br
-    input(type='text' id='updateComponentNoteID' name='updateNote' style="width:100%" placeholder='Ny note')
-    br
-    br
-    button.submitButton(type='submit' name='update' onclick="disableButtons()") Opdater komponent
+
+h2 Opdater komponent
+label Vælg komponent til at opdateres
+select(name="dropdownComponents" id="componentSelector" onchange="pickComponent()" style="width: 100%")
+    option(value="" disabled selected) Vælg et component
+    each component in components
+        option(value=component.id) #{component.name}
+br
+br
+label Name
+br
+input(type='text' id='updateComponentNameID' name='updatename' style="width:100%" placeholder='Nyt navn på komponent')
+br
+br
+label Antal
+br
+input(type='text'  id='updateComponentAmountID' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+br
+br
+label Note
+br
+input(type='text' id='updateComponentNoteID' name='updateNote' style="width:100%" placeholder='Ny note')
+br
+br
+button.submitButton(type='button' name='update' onclick="updateComponent(); disableButtons()") Opdater komponent
