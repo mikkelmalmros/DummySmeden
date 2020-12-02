@@ -21,7 +21,7 @@ router.post("/createBlueprint", async (req, res) => {
         const pbname = req.body.inputBPName;
         const amount = req.body.inputBPAmount;
         const note = req.body.inputBPNote;
-        if (valider.test(pbname) || valider.test(amount) || valider.test(storageMin)) {
+        if (valider.test(pbname) || valider.test(amount) || valider.test(note)) {
             const components = await componentController.getComponentsById(req.body.dropdownComp);
             res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, note: note, components: components });
         } else {
