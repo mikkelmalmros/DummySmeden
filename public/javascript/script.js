@@ -41,6 +41,17 @@ async function pickBlueprint() {
     //Selects the right things from the DOM
     let selected = document.querySelector('#blueprintSelector')
     let div = document.querySelector('#divUpdateComponents')
+    let inputUpdateBlueprintName = document.querySelector('#updatenameBlueprint')
+    let inputUpdateBlueprintAmount = document.querySelector('#updateamountBlueprint')
+    let inputUpdateBlueprintStorageMin = document.querySelector('#updateMinAntalBlueprint')
+
+    console.log(selected.value);
+    let blueprint = await fetch("http://localhost:8080/api/getBlueprint/" + selected.value)
+    blueprint = await blueprint.json()
+    console.log(inputUpdateBlueprintName);
+    inputUpdateBlueprintName.value = blueprint.name
+    inputUpdateBlueprintAmount.value = blueprint.amount
+    inputUpdateBlueprintStorageMin.value = blueprint.storageMin
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
@@ -113,6 +124,22 @@ async function pickProduct() {
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
+}
+
+async function pickComponent() {
+    let selected = document.querySelector('#componentSelector')
+    let nameInput = document.querySelector('#updateComponentNameID')
+    let amountInput = document.querySelector('#updateComponentAmountID')
+    let storageMinInput = document.querySelector('#updateComponentStorageMinID')
+
+    let component = await fetch('/api/getComponent/' + selected.value)
+    
+    component = await component.json()
+    console.log(component);
+
+    nameInput.value = component.name
+    amountInput.value = component.amount
+    storageMinInput.value = component.storageMin
 }
 
 async function deleteBlueprint() {

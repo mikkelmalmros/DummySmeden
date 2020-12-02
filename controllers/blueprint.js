@@ -33,7 +33,6 @@ exports.getBlueprint = async function (blueprintId) {
 exports.getBlueprintById = async function (blueprintId) {
   return await Blueprint.findById(blueprintId)
     .populate("components")
-    .populate("blueprints")
     .exec();
 };
 

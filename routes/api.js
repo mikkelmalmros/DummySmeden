@@ -28,8 +28,13 @@ router.put('/updateProduct/:id', async (req, res) => {
 })
 
 router.get('/getProduct/:id', async (req, res) => {
-    let product = await productController.getProductById(req.params.id)
-    res.json(product)
+    if(req.session.isLoggedIn) {
+        let product = await productController.getProductById(req.params.id)
+        res.json(product)
+    } else {
+        res.redirect('/login')
+    }
+    
 })
 
 //COMPONENTS
@@ -48,9 +53,7 @@ router.get('/getComponentAmounts/:id', async (req, res) => {
 
 router.get('/getComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("Spurgt ID : " + req.params.id);
         let component = await componentController.getComponent(req.params.id)
-        console.log("Returneret component: " + component);
         res.json(component)
     } else {
         res.redirect('/login')
@@ -101,6 +104,16 @@ router.get('/getBlueprintAmounts/:id', async (req, res) => {
     } else {
         res.redirect('/login')
     }
+})
+
+router.get('/getBlueprint/:id', async (req, res) => {
+    if(req.session.isLoggedIn) {
+        let blueprint = await blueprintController.getBlueprintById(req.params.id)
+        res.json(blueprint) 
+    } else {
+        res.redirect('/login')
+    }
+    
 })
 
 //COMPONENTAMOUNTS
