@@ -25,8 +25,9 @@ router.post("/createBlueprint", async (req, res) => {
             const components = await componentController.getComponentsById(req.body.dropdownComp);
             res.render("blueprintAmount", { mainBlueprintName: pbname, amount: amount, note: note, components: components });
         } else {
-            // MANGLER ALERT
+            console.log("der manger name, amount eller storageMin");
         }
+
     } else {
         res.redirect('/login')
     }

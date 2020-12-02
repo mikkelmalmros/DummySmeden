@@ -15,8 +15,6 @@ const valider = /[a-zA-Z0-9]+/;
 //Create a product
 router.post("/createProduct", async (req, res) => {
     if (req.session.isLoggedIn) {
-
-
         const name = req.body.inputProdName;
         const amount = req.body.inputProdAmount;
         const note = req.body.InputProdNote;

@@ -162,7 +162,7 @@ async function updateBlueprint() {
     if (
         !validerString.test(document.getElementById("updatenameBlueprint").value) ||
         !validerTal.test(document.getElementById("updateamountBlueprint").value) ||
-        !validerTal.test(document.getElementById("updateNoteBlueprint").value)
+        !validerString.test(document.getElementById("updateNoteBlueprint").value)
     ) {
         alert("Udfyld venligst blueprint navn, antal og note")
     } else {
@@ -219,7 +219,7 @@ async function updateProduct() {
     if (
         !validerString.test(document.getElementById("updatenameProduct").value) ||
         !validerTal.test(document.getElementById("updateamountProduct").value) ||
-        !validerTal.test(document.getElementById("updateNoteProduct").value)
+        !validerString.test(document.getElementById("updateNoteProduct").value)
     ) { alert("Intast Ting!") } else {
 
     }
