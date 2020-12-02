@@ -80,6 +80,17 @@ async function pickProduct() {
     //Selects the right things from the DOM
     let selected = document.querySelector('#productSelector')
     let div = document.querySelector('#divUpdateBlueprints')
+    let inputUpdateComponentName = document.querySelector('#updatenameProduct')
+    let inputUpdateComponentAmount = document.querySelector('#updateamountProduct')
+    let inputUpdateComponentStorageMin = document.querySelector('#updateminProduct')
+
+
+    let product = await fetch("http://localhost:8080/api/getProduct/" + selected.value)
+    product = await product.json()
+    console.log(inputUpdateComponentName);
+    inputUpdateComponentName.value = product.name
+    inputUpdateComponentAmount.value = product.amount
+    inputUpdateComponentStorageMin.value = product.storageMin
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
@@ -207,4 +218,11 @@ async function updateProduct() {
     }).then(res => {
         return res.json()
     }).catch(error => console.log('Fetch failed: ' + data))
+}
+
+function disableButtons() {
+    let buttons = document.querySelectorAll('button')
+    buttons.forEach(element => {
+        element.disabled = true
+    })
 }

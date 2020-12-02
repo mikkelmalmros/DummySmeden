@@ -27,6 +27,11 @@ router.put('/updateProduct/:id', async (req, res) => {
     await blueprintAmountController.saveBlueprintAmount(jsonComponents, product.blueprints)
 })
 
+router.get('/getProduct/:id', async (req, res) => {
+    let product = await productController.getProductById(req.params.id)
+    res.json(product)
+})
+
 //COMPONENTS
 //--------------------------------------------------------------------------------------------------------
 
