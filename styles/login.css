@@ -1,0 +1,45 @@
+body{
+    background: #ffffff;
+}
+
+.divGrid {
+    display: grid;
+    min-height: 95%;
+    grid-template-columns: 33.3%, 33.3%, auto;
+    border: 2px solid black;
+    background-color: #ffffff;
+}
+
+.divColumnOne {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    min-width: 100%;
+    grid-row: 2;
+    background-color: green;
+}
+
+.divColumnTwo {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+    max-width: 100%;
+    border: 2px solid black;
+    background-color: blue;
+} 
+
+.divColumnThree{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 2;
+    background-color: red;
+    min-width: 100%;
+    
+}
+
+.divColumnFour {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+
+
