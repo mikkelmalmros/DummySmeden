@@ -33,12 +33,14 @@ router.post("/createComponent", async (req, res) => {
 
 //update a component using the data in inputfields
 router.post("/updateComponent", async (req, res) => {
+    console.log("hej");
     if (req.session.isLoggedIn) {
         const componentID = req.body.dropdownComponents;
         const component = await componentController.getComponent(componentID);
         const amount = req.body.updateamount;
         const name = req.body.updatename;
         const note = req.body.updateNote;
+        console.log("så fuck nu af!!!!!");
 
         if (valider.test(amount)) {
             console.log("så fuck dog af");

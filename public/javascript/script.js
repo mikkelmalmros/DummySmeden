@@ -59,10 +59,8 @@ async function pickBlueprint() {
     let inputUpdateBlueprintAmount = document.querySelector('#updateamountBlueprint')
     let inputUpdateBlueprintNote = document.querySelector('#updateNoteBlueprint')
 
-    console.log(selected.value);
     let blueprint = await fetch("http://localhost:8080/api/getBlueprint/" + selected.value)
     blueprint = await blueprint.json()
-    console.log(inputUpdateBlueprintName);
     inputUpdateBlueprintName.value = blueprint.name
     inputUpdateBlueprintAmount.value = blueprint.amount
     inputUpdateBlueprintNote.value = blueprint.note
@@ -169,7 +167,7 @@ async function updateBlueprint() {
         let data = "{ ";
         data = data + '"name": "' + document.getElementById("updatenameBlueprint").value + '"' +
             ", " + '"amount": ' + document.getElementById("updateamountBlueprint").value +
-            ", " + '"note": ' + document.getElementById("updateNoteBlueprint").value + ", "
+            ", " + '"note": "' + document.getElementById("updateNoteBlueprint").value + '",'
 
         let nodes = document.getElementById("divUpdateComponents").childNodes
 
@@ -246,7 +244,7 @@ async function updateProduct() {
     let data = "{ ";
     data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
         ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
-        ", " + '"note": ' + document.getElementById("updateNoteProduct").value + ", "
+        ", " + '"note": "' + document.getElementById("updateNoteProduct").value + '", '
 
     let nodes = document.getElementById("divUpdateBlueprints").childNodes
 

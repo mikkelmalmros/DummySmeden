@@ -2,6 +2,7 @@ html
     head
         style
             include ../styles/addAmount.css
+        script(defer, src="/static/javascript/script.js")
         title Tilføj antal til blueprints
     body
         div.div1
@@ -19,4 +20,4 @@ html
                     br
                     br
                 br
-                button.doneButton(type='submit' name='create') Opret blueprint
+                button.submitButton(type='submit' name='create' onclick='disableButtons()') Opret blueprint

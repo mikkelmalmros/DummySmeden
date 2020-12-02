@@ -27,3 +27,11 @@ body{
     font-size: 1em;
     font-family: sans-serif;
 }
+
+button.disabled,
+button[disabled] {
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.5;
+	pointer-events: none;
+}

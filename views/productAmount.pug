@@ -2,6 +2,7 @@ html
     head
         style
             include ../styles/addAmount.css
+        script(defer, src="/static/javascript/script.js")
         title Tilføj antal til products
     body
 
@@ -18,4 +19,4 @@ html
                         br
                         br
                     br
-                    button(type='submit' name='create') Opret produkt
+                    button.submitButton(type='submit' name='create' onclick= 'disableButtons()') Opret produkt
