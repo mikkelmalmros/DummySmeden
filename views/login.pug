@@ -4,21 +4,22 @@ html
         style
             include ../styles/login.css
     body
-
+        img.dsLogo(src="/static/assets/DSLogo.PNG", alt="Dummysmeden logo")
         div.divGrid
- 
             dvs.divColumnOne
-                img.dsLogo(src="/static/assets/DSLogo.PNG", alt="Dummysmeden logo")
             div.divColumnTwo
-                h1 Login
-                form(action="/login" method="post")
-                    div.divUsername
-                        Label(for="username:") Username
-                        input(type="text" id="usernameInput" name="username" placeholder="Username" autofocus required)
-                    div.divPassowrd
-                        Label(for="password :") Password
-                        input(type="password" id="passwordInput" name="password" placeholder="Password" minlength="8" required)
-                    button(type="submit") Login
+                div.loginDiv
+                    h1 Login
+                    form(action="/login" method="post")
+                        div.divUsername
+                            Label(for="username:") Username
+                            br
+                            input.input(type="text" id="usernameInput" name="username" placeholder="Username" autofocus required)
+                        br
+                        div.divPassowrd
+                            Label(for="password :") Password
+                            br
+                            input.input(type="password" id="passwordInput" name="password" placeholder="Password" minlength="8" required)
+                        br
+                        button.logIn(type="submit") Login
             div.divColumnThree
-                img.dsLogo(src="/static/assets/DSLogo.PNG", alt="Dummysmeden logo")
-            div.divColumnFour
