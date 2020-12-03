@@ -196,100 +196,113 @@ async function updateBlueprint() {
 }
 
 async function updateComponent() {
-    disableButtons()
-    
-    let id = document.querySelector('#componentSelector').value
+    if (
+        !validerString.test(document.getElementById("updateComponentNameID").value) ||
+        !validerTal.test(document.getElementById("updateComponentAmountID").value) ||
+        !validerString.test(document.getElementById("updateComponentNoteID").value)
+    ) { alert("Intast Ting!") } else {
+        disableButtons()
 
-    let data = "{ ";
-    data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
-        ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
-        ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
+        let id = document.querySelector('#componentSelector').value
 
-    console.log(data);
+        let data = "{ ";
+        data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
+            ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
+            ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
 
-    await fetch("http://localhost:8080/api/updateComponent/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    }).then(window.location.reload())
+        console.log(data);
+
+        await fetch("http://localhost:8080/api/updateComponent/" + id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(window.location.reload())
+    }
 }
 
 async function createComponent() {
-
     let nameInput = document.querySelector('#createComponentNameID').value
     let amountInput = document.querySelector('#createComponentAmountID').value
     let noteInput = document.querySelector('#createComponentNoteID').value
-
-    let data = "{ ";
-    data = data + '"name": "' + nameInput + '"' +
-        ", " + '"amount": ' + amountInput +
-        ", " + '"note": "' + noteInput + '"}'
-
-    await fetch("http://localhost:8080/api/updateComponent/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    })
-    
-}
-
-async function deleteComponent() {
-    disableButtons()
-    let div = document.getElementById('dropDownDeleteID')
-    let id = div.value
-    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
-        method: 'delete'
-    }).then(window.location.reload())
-}
-
-async function deleteProduct() {
-    disableButtons()
-    let div = document.getElementById('dropDownDeleteProductID')
-    let id = div.value
-    await fetch('http://localhost:8080/api/deleteProduct/' + id, {
-        method: 'delete'
-    }).then(window.location.reload())
-}
-
-async function updateProduct() {
-    disableButtons()
+    console.log(nameInput + " " + amountInput);
     if (
-        !validerString.test(document.getElementById("updatenameProduct").value) ||
-        !validerTal.test(document.getElementById("updateamountProduct").value) ||
-        !validerString.test(document.getElementById("updateNoteProduct").value)
+        !validerString.test(nameInput) ||
+        !validerTal.test(amountInput) ||
+        !validerString.test(noteInput)
     ) { alert("Intast Ting!") } else {
 
+        let data = "{ ";
+        data = data + '"name": "' + nameInput + '"' +
+            ", " + '"amount": ' + amountInput +
+            ", " + '"note": "' + noteInput + '"}'
+
+        await fetch("http://localhost:8080/api/updateComponent/" + id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        })
+
     }
-    let data = "{ ";
-    data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
-        ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
-        ", " + '"note": "' + document.getElementById("updateNoteProduct").value + '", '
 
-    let nodes = document.getElementById("divUpdateBlueprints").childNodes
+    async function deleteComponent() {
+        disableButtons()
+        let div = document.getElementById('dropDownDeleteID')
+        let id = div.value
+        await fetch('http://localhost:8080/api/deleteComponent/' + id, {
+            method: 'delete'
+        }).then(window.location.reload())
+    }
 
-    data += '"blueprintAmounts":['
-    nodes.forEach(element => {
-        if (element.nodeName == "INPUT") {
-            data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
+    async function deleteProduct() {
+        disableButtons()
+        let div = document.getElementById('dropDownDeleteProductID')
+        let id = div.value
+        await fetch('http://localhost:8080/api/deleteProduct/' + id, {
+            method: 'delete'
+        }).then(window.location.reload())
+    }
+
+    async function updateProduct() {
+
+        if (
+            !validerString.test(document.getElementById("updatenameProduct").value) ||
+            !validerTal.test(document.getElementById("updateamountProduct").value) ||
+            !validerString.test(document.getElementById("updateNoteProduct").value)
+        ) { alert("Intast Ting!") } else {
+            disableButtons()
+
+            let data = "{ ";
+            data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
+                ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
+                ", " + '"note": "' + document.getElementById("updateNoteProduct").value + '", '
+
+            let nodes = document.getElementById("divUpdateBlueprints").childNodes
+
+            data += '"blueprintAmounts":['
+            nodes.forEach(element => {
+                if (element.nodeName == "INPUT") {
+                    data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
+                }
+            });
+            data = data.substring(0, data.length - 2)
+            data += "]}"
+
+            // Alt fetch
+            let id = document.getElementById("productSelector").value
+
+            await fetch("http://localhost:8080/api/updateProduct/" + id, {
+                method: "put",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            }).then(res => {
+                return res.json()
+            }).catch(error => console.log('Fetch failed: ' + data))
         }
-    });
-    data = data.substring(0, data.length - 2)
-    data += "]}"
-
-    // Alt fetch
-    let id = document.getElementById("productSelector").value
-
-    await fetch("http://localhost:8080/api/updateProduct/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    }).then(res => {
-        return res.json()
-    }).catch(error => console.log('Fetch failed: ' + data))
+    }
 }
