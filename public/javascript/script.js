@@ -126,6 +126,7 @@ async function pickProduct() {
             }
         }
     }
+    console.log(html);
     //Puts the html string into the div
     div.innerHTML = html
     // div.style.overflow = "auto"
@@ -192,9 +193,9 @@ async function updateBlueprint() {
                 'Content-Type': 'application/json'
             },
             body: data
-        }).then(res => {
-            return res.json()
-        }).catch(error => console.log('Fetch failed'))
+        }).then(
+            window.location.reload()
+        ).catch(error => console.log('Fetch failed'))
     }
 }
 
@@ -252,7 +253,6 @@ async function createComponent() {
         }).then(res => { window.location.href = res.url })
     }
 }
-
 async function deleteComponent() {
     disableButtons()
     let div = document.getElementById('dropDownDeleteID')
@@ -261,6 +261,7 @@ async function deleteComponent() {
         method: 'delete'
     })
 }
+
 
 async function deleteProduct() {
     disableButtons()
@@ -305,8 +306,6 @@ async function updateProduct() {
                 'Content-Type': 'application/json'
             },
             body: data
-        }).then(res => {
-            return res.json()
-        }).catch(error => console.log('Fetch failed: ' + data))
+        }).then(window.location.reload()).catch(error => console.log('Fetch failed: ' + data))
     }
 }

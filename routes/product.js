@@ -30,35 +30,35 @@ router.post("/createProduct", async (req, res) => {
     }
 });
 
-// router.post('/amount', async (req, res) => {
-//     if (req.session.isLoggedIn) {
+router.post('/amount', async (req, res) => {
+    if (req.session.isLoggedIn) {
 
-//         let productName = req.body.mainProductName
-//         let productAmount = req.body.mainProductAmount
-//         let productNote = req.body.mainProductNote
+        let productName = req.body.mainProductName
+        let productAmount = req.body.mainProductAmount
+        let productNote = req.body.mainProductNote
 
-//         let reqbody = req.body
+        let reqbody = req.body
 
-//         let product = await productController.createProduct(productName, productAmount, productNote)
+        let product = await productController.createProduct(productName, productAmount, productNote)
 
-//         let tempBlueprint = null
+        let tempBlueprint = null
 
-//         for (const key of Object.keys(reqbody)) {
-//             if (key.includes('hiddenBlueprint')) {
-//                 tempBlueprint = await blueprintController.getBlueprint(reqbody[key])
-//             } else if (tempBlueprint != null && key == tempBlueprint._id) {
-//                 let amountBlueprint = await blueprintAmountController.createBlueprintAmount(tempBlueprint, reqbody[key])
-//                 tempBlueprint = null
-//                 product.blueprints.push(amountBlueprint)
-//             }
-//         }
-//         await product.save()
-//         res.redirect('/')
+        for (const key of Object.keys(reqbody)) {
+            if (key.includes('hiddenBlueprint')) {
+                tempBlueprint = await blueprintController.getBlueprint(reqbody[key])
+            } else if (tempBlueprint != null && key == tempBlueprint._id) {
+                let amountBlueprint = await blueprintAmountController.createBlueprintAmount(tempBlueprint, reqbody[key])
+                tempBlueprint = null
+                product.blueprints.push(amountBlueprint)
+            }
+        }
+        await product.save()
+        res.redirect('/')
 
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
+    } else {
+        res.redirect('/login')
+    }
+})
 
 //update a product using the data in inputfields
 // router.post("/updateProduct", async (req, res) => {
