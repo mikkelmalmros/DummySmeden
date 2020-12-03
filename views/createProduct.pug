@@ -1,28 +1,29 @@
 style
     include ../styles/storage.css
 body
-    h2 Opret produkt
+    form(action="/product/createProduct", method="post")
+        h2 Opret produkt
 
-    label Navn
-    br
-    input(type='text' id='createComponentNameID' name='inputProdName' style="width:100%" placeholder='Navn på produkt')
-    br
-    br
-    label Antal
-    br
-    input(type='text' id='createComponentAmountID' name='inputProdAmount' style="width:100%" placeholder='Antal på lager')
-    br
-    br
-    label Note
-    br
-    input(type='text' id='createComponentNoteID' name='inputProdNote' style="width:100%" placeholder='Note')
-    br
-    br
+        label Navn
+        br
+        input(type='text' id='createComponentNameID' name='inputProdName' style="width:100%" placeholder='Navn på produkt')
+        br
+        br
+        label Antal
+        br
+        input(type='text' id='createComponentAmountID' name='inputProdAmount' style="width:100%" placeholder='Antal på lager')
+        br
+        br
+        label Note
+        br
+        input(type='text' id='createComponentNoteID' name='inputProdNote' style="width:100%" placeholder='Note')
+        br
+        br
 
-    label Tilføj blueprints til produktet
-    select(name="dropdownBlueprint" style="width: 100%" multiple)
-        each blueprint in blueprints
-                option(value=blueprint.id) #{blueprint.name}
-    br
-    br
-    button.submitButton(type='button' name='create' onclick='createComponent(); disableButtons()') Put antal på produkt
+        label Tilføj blueprints til produktet
+        select(name="dropdownBlueprint" style="width: 100%" multiple)
+            each blueprint in blueprints
+                    option(value=blueprint.id) #{blueprint.name}
+        br
+        br
+        button.submitButton(type='submit' name='create' onclick='disableButtons()') Put antal på produkt
