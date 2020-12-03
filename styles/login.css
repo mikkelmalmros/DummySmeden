@@ -5,7 +5,7 @@ body{
 .divGrid {
     display: grid;
     min-height: 95%;
-    grid-template-columns: auto, auto, auto;
+    grid-template-columns: repeat(3,minmax(0,1fr));
     background-color: #ffffff;
 }
 
@@ -36,21 +36,18 @@ body{
     background-color: beige;
     border-radius: 25px;
     padding-left: 10px;
-} 
+}
 
 .divColumnThree{
     grid-column-start: 6;
     grid-column-end: 6;
     grid-row: 2;
-    
+
     min-width: 100%;
-    
+
 }
 
 .divColumnFour {
     grid-column: 7;
     grid-row: 7;
 }
-
-
-

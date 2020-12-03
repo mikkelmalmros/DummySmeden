@@ -1,9 +1,16 @@
 body{
     background: #ffffff;
+    text-align: center;
 }
 
 .headlineTop{
 text-align: center;
+}
+
+.logOut{
+display: block;
+margin-left: auto;
+font-size: 1.2em;
 }
 
 .dsLogo{
@@ -12,6 +19,7 @@ height: 139px;
 width: 373px;
 margin-left: auto;
 margin-right: auto;
+margin-bottom: 10px;
 }
 
 /* Hele vores grid */

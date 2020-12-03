@@ -77,7 +77,6 @@ router.put('/updateComponent/:id', async (req, res) => {
 
 router.post('/createComponent', async (req, res) => {
     if (req.session.isLoggedIn) {
-        console.log("Opret!");
         await componentController.createComponent(req.body.name, req.body.amount, req.body.note)
         res.redirect('/')
     } else {
