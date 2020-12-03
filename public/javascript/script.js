@@ -104,7 +104,7 @@ async function pickProduct() {
     product = await product.json()
     inputUpdateComponentName.value = product.name
     inputUpdateComponentAmount.value = product.amount
-    inputUpdateComponentNote.value = product.Note
+    inputUpdateComponentNote.value = product.note
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
@@ -199,45 +199,69 @@ async function updateBlueprint() {
 }
 
 async function updateComponent() {
-    disableButtons()
+    if (
+        !validerString.test(document.getElementById("updateComponentNameID").value) ||
+        !validerTal.test(document.getElementById("updateComponentAmountID").value) ||
+        !validerString.test(document.getElementById("updateComponentNoteID").value)
+    ) { alert("Intast Ting!") } else {
+        disableButtons()
 
-    let id = document.querySelector('#componentSelector').value
+        let id = document.querySelector('#componentSelector').value
 
-    let data = "{ ";
-    data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
-        ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
-        ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
+        let data = "{ ";
+        data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
+            ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
+            ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
 
+        console.log(data);
 
-    await fetch("http://localhost:8080/api/updateComponent/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    }).then(window.location.reload())
+        await fetch("http://localhost:8080/api/updateComponent/" + id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(window.location.reload())
+    }
 }
 
 async function createComponent() {
+    let nameInput = document.getElementById('createComponentNameID').value
+    let amountInput = document.getElementById('createComponentAmountID').value
+    let noteInput = document.getElementById('createComponentNoteID').value
+    console.log(nameInput);
+    if (
+        !validerString.test(nameInput) ||
+        !validerTal.test(amountInput) ||
+        !validerString.test(noteInput)
+    ) {
+        alert("Intast Ting!")
+    } else {
 
-    let nameInput = document.querySelector('#createComponentNameID').value
-    let amountInput = document.querySelector('#createComponentAmountID').value
-    let noteInput = document.querySelector('#createComponentNoteID').value
+        let data = "{ ";
+        data = data + '"name": "' + nameInput + '"' +
+            ", " + '"amount": ' + amountInput +
+            ", " + '"note": "' + noteInput + '"}'
 
-    let data = "{ ";
-    data = data + '"name": "' + nameInput + '"' +
-        ", " + '"amount": ' + amountInput +
-        ", " + '"note": "' + noteInput + '"}'
-
-    await fetch("http://localhost:8080/api/updateComponent/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    })
-
+        await fetch("http://localhost:8080/api/createComponent/", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(res => { window.location.href = res.url })
+    }
 }
+async function deleteComponent() {
+    disableButtons()
+    let div = document.getElementById('dropDownDeleteID')
+    let id = div.value
+    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
+        method: 'delete'
+    }).then(window.location.reload())
+}
+
+
 
 async function deleteComponent() {
     disableButtons()
@@ -258,40 +282,41 @@ async function deleteProduct() {
 }
 
 async function updateProduct() {
-    disableButtons()
+
     if (
         !validerString.test(document.getElementById("updatenameProduct").value) ||
         !validerTal.test(document.getElementById("updateamountProduct").value) ||
         !validerString.test(document.getElementById("updateNoteProduct").value)
     ) { alert("Intast Ting!") } else {
+        disableButtons()
 
+        let data = "{ ";
+        data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
+            ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
+            ", " + '"note": "' + document.getElementById("updateNoteProduct").value + '", '
+
+        let nodes = document.getElementById("divUpdateBlueprints").childNodes
+
+        data += '"blueprintAmounts":['
+        nodes.forEach(element => {
+            if (element.nodeName == "INPUT") {
+                data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
+            }
+        });
+        data = data.substring(0, data.length - 2)
+        data += "]}"
+
+        // Alt fetch
+        let id = document.getElementById("productSelector").value
+
+        await fetch("http://localhost:8080/api/updateProduct/" + id, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(res => {
+            return res.json()
+        }).catch(error => console.log('Fetch failed: ' + data))
     }
-    let data = "{ ";
-    data = data + '"name": "' + document.getElementById("updatenameProduct").value + '"' +
-        ", " + '"amount": ' + document.getElementById("updateamountProduct").value +
-        ", " + '"note": "' + document.getElementById("updateNoteProduct").value + '", '
-
-    let nodes = document.getElementById("divUpdateBlueprints").childNodes
-
-    data += '"blueprintAmounts":['
-    nodes.forEach(element => {
-        if (element.nodeName == "INPUT") {
-            data += '{"id": "' + element.name + '", "value": "' + element.value + '"}, '
-        }
-    });
-    data = data.substring(0, data.length - 2)
-    data += "]}"
-
-    // Alt fetch
-    let id = document.getElementById("productSelector").value
-
-    await fetch("http://localhost:8080/api/updateProduct/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    }).then(res => {
-        return res.json()
-    }).catch(error => console.log('Fetch failed: ' + data))
 }

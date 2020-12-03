@@ -2,32 +2,32 @@ head
     style
         include ../styles/collapsible.css
 body
-    form(action='/' method='get')
-        h2 Opdater produkt
-        label Vælg produkt til at opdateres
-        select(name="dropdownProducts" id="productSelector" onchange="pickProduct()" style="width: 100%")
-            option(value="" disabled selected) Vælg et produkt
-            each product in products
-                option(value=product.id) #{product.name}
-        br
-        br
-        label Name
-        br
-        input(type='text' id= 'updatenameProduct' name='updatenameProd' style="width:100%" placeholder='Nyt navn på produktet')
-        br
-        br
-        label Antal
-        br
-        input(type='text' id= 'updateamountProduct' name='updateamountProd' style="width:100%" placeholder='Nyt antal på lager')
-        br
-        br
-        label Note
-        br
-        input(type='text' id= 'updateNoteProduct' name='updateNoteProd' style="width:100%" placeholder='Ny note')
-        br
-        br
-        label Blueprints
-            div#divUpdateBlueprints
-        br
-        br
-        button.submitButton(type='submit' name='update' onclick = 'updateProduct()') Opdater produkt
+    h2 Opdater produkt
+    label Vælg produkt til at opdateres
+    select(name="dropdownProducts" id="productSelector" onchange="pickProduct()" style="width: 100%")
+        option(value="" disabled selected) Vælg et produkt
+        each product in products
+            option(value=product.id) #{product.name}
+    br
+    br
+    label Name
+    br
+    input(type='text' id= 'updatenameProduct' name='updatenameProd' style="width:100%" placeholder='Nyt navn på produktet')
+    br
+    br
+    label Antal
+    br
+    input(type='text' id= 'updateamountProduct' name='updateamountProd' style="width:100%" placeholder='Nyt antal på lager')
+    br
+    br
+    label Note
+    br
+    input(type='text' id= 'updateNoteProduct' name='updateNoteProd' style="width:100%" placeholder='Ny note')
+    br
+    br
+    label Blueprints
+        div#divUpdateBlueprintsS
+    br
+    br
+    button.submitButton(type='button' name='update' onclick = 'updateProduct()') Opdater produkt
+    br

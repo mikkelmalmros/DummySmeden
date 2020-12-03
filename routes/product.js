@@ -17,7 +17,7 @@ router.post("/createProduct", async (req, res) => {
     if (req.session.isLoggedIn) {
         const name = req.body.inputProdName;
         const amount = req.body.inputProdAmount;
-        const note = req.body.InputProdNote;
+        const note = req.body.inputProdNote;
 
         const blueprints = await blueprintController.getBlueprintsById(
             req.body.dropdownBlueprint
