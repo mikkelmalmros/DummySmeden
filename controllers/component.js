@@ -1,6 +1,4 @@
 const Component = require('../models/component')
-const Blueprint = require('../models/blueprint')
-const blueprintController = require('./blueprint')
 const compAmountController = require('./componentAmount')
 
 exports.createComponent = async function (name, amount, note) {

@@ -33,7 +33,6 @@ router.get('/getProduct/:id', async (req, res) => {
     } else {
         res.redirect('/login')
     }
-
 })
 
 //COMPONENTS
@@ -78,7 +77,6 @@ router.put('/updateComponent/:id', async (req, res) => {
 router.post('/createComponent', async (req, res) => {
     if (req.session.isLoggedIn) {
         await componentController.createComponent(req.body.name, req.body.amount, req.body.note)
-        res.redirect('/')
     } else {
         res.redirect('/login')
     }
@@ -99,9 +97,9 @@ router.put('/updateBlueprint/:id', async (req, res) => {
         let blueprint = await blueprintController.getBlueprint(req.params.id)
         let jsonComponents = req.body.componentAmounts
         //Updates and saves blueprint
-        blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.note)
+        await blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.note)
         //Updates and saves components in blueprint, ud fra referance
-        componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
+        await componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
     } else {
         res.redirect('/login')
     }

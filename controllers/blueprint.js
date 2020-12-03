@@ -1,16 +1,14 @@
 // Requires
 const Blueprint = require("../models/blueprint");
-
 const blueprintAmountController = require('../controllers/blueprintAmount')
 const componentAmountController = require('../controllers/componentAmount')
 
-//Creates ablueprint and saves it on MongoDB
+//Creates a blueprint and saves it on MongoDB
 exports.createBlueprint = async function (name, amount, note, components, blueprints) {
   const blueprint = Blueprint({
     name: name, amount: amount, note: note, components: components, blueprints: blueprints,
   });
-  await blueprint.save();
-  return blueprint
+  return await blueprint.save();
 };
 
 // Get all blueprints
@@ -166,28 +164,6 @@ exports.getAllComponentAmounts = async function (blueprintId) {
 exports.getAllBlueprintAmounts = async function (blueprintId) {
   let blueprint = await Blueprint.findById(blueprintId).populate('components').populate('blueprints').exec()
   return blueprint.blueprints
-}
-
-// check if id og a blueprint is contained in another blueprint
-exports.findBlueprintInBlueprint = async function (blueprintId) {
-  let allBlueprints = await this.getBlueprints();
-
-
-  for (let i = 0; i < allBlueprints.length; i++) {
-    for (let j = 0; j < allBlueprints[i].blueprints.length; j++) {
-
-      const element = allBlueprints[i].blueprints[j].blueprint._id;
-
-      //console.log("El: " + element);
-      //console.log("bp: " + blueprintId._id);
-
-      if ((element + "") == (blueprintId._id + "")) {
-        return blueprintId
-      }
-
-    }
-  }
-  return "intet"
 }
 
 exports.updateBlueprint = async function (id, name, amount, note) {

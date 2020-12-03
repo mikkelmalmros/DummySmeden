@@ -7,30 +7,21 @@ exports.createComponentAmount = async function (component, amount) {
     component: component,
     amount: amount
   });
-  await componentAmount.save();
-  return componentAmount
+  return await componentAmount.save();
 }
 
 //Get a componentAmount by Id
 exports.getComponentAmountById = async function (componentAmountId) {
-  let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
-  return componentAmount
+  return await ComponentAmount.findById(componentAmountId).populate('component').exec()
 }
 
 exports.getComponentOfComponentAmount = async function (componentAmountId) {
-  let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
-  return componentAmount.component
-}
-
-//Update a componentAmount
-exports.updateComponentAmount = async function () {
-  // Denne tror jeg ikke vi skal bruge... slet og lav en ny i stedet
+  return await ComponentAmount.findById(componentAmountId).populate('component').exec()
 }
 
 //Update a componentAmount
 exports.updateComponentAmountAmountById = async function (componentAmountId, nAmount) {
   let componentAmount = await ComponentAmount.findById(blueprintAmountId).populate("component").exec()
-
   componentAmount.amount = nAmount
   return await componentAmount.save()
 }

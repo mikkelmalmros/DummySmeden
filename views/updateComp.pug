@@ -22,4 +22,4 @@ br
 input(type='text' id='updateComponentNoteID' name='updateNote' style="width:100%" placeholder='Ny note')
 br
 br
-button.submitButton(type='button' name='update' onclick="updateComponent(); disableButtons()") Opdater komponent
+button.submitButton(type='button' name='update' onclick="updateComponent().then(location.reload())") Opdater komponent

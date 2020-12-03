@@ -3,17 +3,12 @@ const express = require("express");
 const config = require("./config");
 const mongoose = require("mongoose");
 const body = require("body-parser");
-
 const componentController = require("./controllers/component");
 const blueprintController = require("./controllers/blueprint");
 const productController = require("./controllers/product")
 const userController = require('./controllers/user')
-
-
 const bcrypt = require('bcryptjs')
-
 const session = require('express-session')
-
 
 //MongoDB setup
 mongoose.Promise = global.Promise;
@@ -45,12 +40,6 @@ app.use('/product', productRouter)
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
-
-
-
-//Tjek af at vi ikke får tomme strenge ind (eller strenge bestående af spaces)
-const valider = /[a-zA-Z0-9]+/;
-
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
@@ -61,12 +50,10 @@ app.get("/", async (req, res) => {
     const components = await componentController.getComponents();
     const blueprints = await blueprintController.getBlueprints();
     const products = await productController.getAllProducts();
-
     res.render("storage", { components: components, blueprints: blueprints, products: products });
   } else {
     res.redirect('/login')
   }
-
 });
 
 app.get('/login', (req, res) => {
@@ -75,13 +62,9 @@ app.get('/login', (req, res) => {
   } else {
     res.render('login')
   }
-
 })
 
-
 // userController.createUser("admin", "adminadmin")
-
-
 
 app.get('/users', async (req, res) => {
   if (req.session.isLoggedIn) {
@@ -92,25 +75,19 @@ app.get('/users', async (req, res) => {
   }
 })
 
-
-
 app.post('/login', async (req, res) => {
-  console.log(req.body.username);
   const user = await userController.getUsersByName(req.body.username)
-  console.log("User:" + user);
   if (user == null) {
     return res.status(400).json({ Error: "Cannot find user" })
   }
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
-      console.log(user.username + " is logged in")
       req.session.isLoggedIn = true
       res.redirect('/')
     } else {
       res.send('Not allowed')
     }
   } catch (error) {
-    console.log('Error: ' + error);
     res.status(500).json({ Error: error })
   }
 })

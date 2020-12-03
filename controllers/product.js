@@ -43,9 +43,7 @@ exports.getProductById = async function (productId) {
 //Add a blueprint to a product
 exports.addBlueprintToProduct = async function (blueprintId, productId) {
     let product = await Product.findById(productId).populate("blueprints").exec()
-
     let blueprint = await BlueprintAmount.findById(blueprintId).populate("blueprint").exec()
-
     product.blueprints.push(blueprint)
     return await product.save()
 
@@ -55,7 +53,6 @@ exports.removeBlueprintFromProduct = async function (blueprintId, productId) {
     let product = await Product.findById(productId).populate("blueprints").exec()
     let blueprint = await BlueprintAmount.findById(blueprintId).populate("blueprint").exec()
     product.blueprints.splice(product.blueprint.indexOf(blueprint), 1)
-
     return await product.save()
 }
 
@@ -67,11 +64,9 @@ exports.getAllBlueprintAmounts = async function (productid) {
 
 exports.updateProduct = async function (id, name, amount, note) {
     let product = await Product.findById(id).exec()
-
     product.name = name
     product.amount = amount
     product.note = note
-
     return await product.save()
 }
 
@@ -79,7 +74,6 @@ exports.updateProduct = async function (id, name, amount, note) {
 exports.deleteProduct = async function (id) {
     let product = await Product.findById(id).populate('blueprints').exec()
     let blueprintAmounts = product.blueprints
-
     blueprintAmounts.forEach(async element => {
         await blueprintAmountController.deleteBlueprintAmount(element._id)
     });
