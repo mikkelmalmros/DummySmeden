@@ -81,23 +81,9 @@ app.get('/login', (req, res) => {
 
 // userController.createUser("admin", "adminadmin")
 
-
-
-app.get('/users', async (req, res) => {
-  if (req.session.isLoggedIn) {
-    const users = await userController.getUsers()
-    res.json(users)
-  } else {
-    res.redirect('/login')
-  }
-})
-
-
-
 app.post('/login', async (req, res) => {
   console.log(req.body.username);
   const user = await userController.getUsersByName(req.body.username)
-  console.log("User:" + user);
   if (user == null) {
     return res.status(400).json({ Error: "Cannot find user" })
   }
@@ -118,7 +104,8 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
   if (req.session.isLoggedIn) {
     req.session.isLoggedIn = false
-    res.redirect('/login')
+    console.log("Someone logged out");
+    res.redirect('')
   } else {
     res.redirect('/login')
   }

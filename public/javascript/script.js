@@ -309,3 +309,14 @@ async function updateProduct() {
         }).then(window.location.reload()).catch(error => console.log('Fetch failed: ' + data))
     }
 }
+
+async function logout() {
+    await fetch("http://localhost:8080/logout", {
+        method: "get",
+        redirect: "follow"
+    }).then(res => {
+        if(res.redirected) {
+            window.location.href = res.url
+        }
+    })
+ }
