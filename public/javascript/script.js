@@ -43,12 +43,12 @@ function disableButtons() {
     })
 }
 
-// function enableButtons() {
-//     let buttons = document.querySelectorAll('.button')
-//     buttons.forEach(element => {
-//         element.disabled = false
-//     })
-// }
+function enableButtons() {
+    let buttons = document.querySelectorAll('.submitButton')
+    buttons.forEach(element => {
+        element.classList.remove('disabled')
+    })
+}
 
 //Is called when the dropdown in the updateblueprint is changed
 async function pickBlueprint() {
@@ -162,6 +162,7 @@ async function updateBlueprint() {
         !validerTal.test(document.getElementById("updateamountBlueprint").value) ||
         !validerString.test(document.getElementById("updateNoteBlueprint").value)
     ) {
+        enableButtons()
         alert("Udfyld venligst blueprint navn, antal og note")
     } else {
         let data = "{ ";
@@ -197,7 +198,7 @@ async function updateBlueprint() {
 
 async function updateComponent() {
     disableButtons()
-    
+
     let id = document.querySelector('#componentSelector')
 
     let data = "{ ";
