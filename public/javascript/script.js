@@ -58,6 +58,7 @@ async function pickBlueprint() {
     let components = []
     for (const jsonValue of jsonValues) {
         let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
+        
         let jsonComponent = await component.json()
         components.push(jsonComponent)
     }
@@ -67,10 +68,11 @@ async function pickBlueprint() {
     for (const jsonValue of jsonValues) {
         for (const component of components) {
             if (jsonValue.component == component._id) {
-                html += '<p>' + component.name + '</p><input type="text" name="' + jsonValue._id + '" value="' + jsonValue.amount + '"> <br>'
+                html = html + '<p>' + component.name + '</p><input type="text" name="' + jsonValue._id + '" value="' + jsonValue.amount + '"> <br>'
             }
         }
     }
+    html += ' <br>'
     //Puts the html string into the div
     div.innerHTML = html
 }
@@ -110,6 +112,7 @@ async function pickProduct() {
             }
         }
     }
+    html += ' <br>'
     //Puts the html string into the div
     div.innerHTML = html
 }

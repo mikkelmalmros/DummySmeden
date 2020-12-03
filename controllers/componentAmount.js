@@ -16,7 +16,7 @@ exports.getComponentAmountById = async function (componentAmountId) {
 }
 
 exports.getComponentOfComponentAmount = async function (componentAmountId) {
-  let componentAmount = ComponentAmount.findById(componentAmountId).populate('component').exec()
+  let componentAmount = await ComponentAmount.findById(componentAmountId).populate('component').exec()
   return componentAmount.component
 }
 
