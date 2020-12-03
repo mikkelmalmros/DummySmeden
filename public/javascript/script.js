@@ -224,7 +224,7 @@ async function updateComponent() {
 }
 
 async function createComponent() {
-    let nameInput = document.getElementById('createComponentNameID')
+    let nameInput = document.getElementById('createComponentNameID').value
     let amountInput = document.getElementById('createComponentAmountID').value
     let noteInput = document.getElementById('createComponentNoteID').value
     console.log(nameInput);
@@ -233,23 +233,21 @@ async function createComponent() {
         !validerTal.test(amountInput) ||
         !validerString.test(noteInput)
     ) {
-        // alert("Intast Ting!") 
+        alert("Intast Ting!")
     } else {
-        /*
-                let data = "{ ";
-                data = data + '"name": "' + nameInput + '"' +
-                    ", " + '"amount": ' + amountInput +
-                    ", " + '"note": "' + noteInput + '"}'
-        
-                await fetch("http://localhost:8080/api/updateComponent/" + id, {
-                    method: "put",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: data
-                })
-            
-            */
+
+        let data = "{ ";
+        data = data + '"name": "' + nameInput + '"' +
+            ", " + '"amount": ' + amountInput +
+            ", " + '"note": "' + noteInput + '"}'
+
+        await fetch("http://localhost:8080/api/createComponent/", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        }).then(res => { window.location.href = res.url })
     }
 }
 async function deleteComponent() {
