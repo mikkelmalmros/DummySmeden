@@ -2,7 +2,7 @@
 h2 Opdater komponent
 label Vælg komponent til at opdateres
 select(name="dropdownComponents" id="componentSelector" onchange="pickComponent()" style="width: 100%")
-    option(value="" disabled selected) Vælg et component
+    option(value="" disabled selected) Vælg et komponent
     each component in components
         option(value=component.id) #{component.name}
 br

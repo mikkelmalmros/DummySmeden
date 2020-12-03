@@ -66,15 +66,6 @@ app.get('/login', (req, res) => {
 
 // userController.createUser("admin", "adminadmin")
 
-app.get('/users', async (req, res) => {
-  if (req.session.isLoggedIn) {
-    const users = await userController.getUsers()
-    res.json(users)
-  } else {
-    res.redirect('/login')
-  }
-})
-
 app.post('/login', async (req, res) => {
   const user = await userController.getUsersByName(req.body.username)
   if (user == null) {
@@ -95,7 +86,8 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
   if (req.session.isLoggedIn) {
     req.session.isLoggedIn = false
-    res.redirect('/login')
+    console.log("Someone logged out");
+    res.redirect('')
   } else {
     res.redirect('/login')
   }
