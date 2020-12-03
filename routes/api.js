@@ -60,8 +60,7 @@ router.get('/getComponent/:id', async (req, res) => {
 
 router.delete('/deleteComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        await componentController.deleteComponent(req.params.id)
-        res.redirect('/')
+        return await componentController.deleteComponent(req.params.id)
     } else {
         res.redirect('/login')
     }
@@ -71,16 +70,14 @@ router.put('/updateComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
         let component = await componentController.getComponent(req.params.id)
         await componentController.updateComponent(component, req.body.name, req.body.amount, req.body.note)
-        res.redirect('/')
     } else {
         res.redirect('/login')
     }
 })
 
 router.post('/createComponent', async (req, res) => {
-    if(req.session.isLoggedIn) {
-         await componentController.createComponent(req.body.name, req.body.amount, req.body.note)
-         res.redirect('/')
+    if (req.session.isLoggedIn) {
+        await componentController.createComponent(req.body.name, req.body.amount, req.body.note)
     } else {
         res.redirect('/login')
     }
@@ -90,7 +87,6 @@ router.post('/createComponent', async (req, res) => {
 router.delete('/deleteBlueprint/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
         await blueprintController.deleteBlueprint(req.params.id)
-        res.redirect('/')
     } else {
         res.redirect('/login')
     }
@@ -104,7 +100,6 @@ router.put('/updateBlueprint/:id', async (req, res) => {
         //Updates and saves blueprint
         blueprintController.updateBlueprint(req.params.id, req.body.name, req.body.amount, req.body.note)
         //Updates and saves components in blueprint, ud fra referance
-        //blueprintAmountController.saveBlueprintAmount(jsonComponents, blueprint.components)
         componentAmountController.saveComponentAmount(jsonComponents, blueprint.components)
     } else {
         res.redirect('/login')

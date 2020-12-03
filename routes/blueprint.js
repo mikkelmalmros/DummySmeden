@@ -34,37 +34,37 @@ router.post("/createBlueprint", async (req, res) => {
 
 });
 
-router.post('/amount', async (req, res) => {
-    if (req.session.isLoggedIn) {
+// router.post('/amount', async (req, res) => {
+//     if (req.session.isLoggedIn) {
 
 
-        let blueprintName = req.body.mainBlueprintName
-        let blueprintAmount = req.body.mainBlueprintAmount
-        let blueprintNote = req.body.mainBlueprintNote
+//         let blueprintName = req.body.mainBlueprintName
+//         let blueprintAmount = req.body.mainBlueprintAmount
+//         let blueprintNote = req.body.mainBlueprintNote
 
-        let reqbody = req.body
+//         let reqbody = req.body
 
-        let blueprint = await blueprintController.createBlueprint(blueprintName, blueprintAmount, blueprintNote)
+//         let blueprint = await blueprintController.createBlueprint(blueprintName, blueprintAmount, blueprintNote)
 
-        let tempComponent = null
+//         let tempComponent = null
 
-        for (const key of Object.keys(reqbody)) {
-            if (key.includes('hiddenComponent')) {
-                tempComponent = await componentController.getComponent(reqbody[key])
-            } else if (tempComponent != null && key == tempComponent._id) {
-                let amountComponent = await componentAmountController.createComponentAmount(tempComponent, reqbody[key])
-                tempComponent = null
-                blueprint.components.push(amountComponent)
-            }
-        }
+//         for (const key of Object.keys(reqbody)) {
+//             if (key.includes('hiddenComponent')) {
+//                 tempComponent = await componentController.getComponent(reqbody[key])
+//             } else if (tempComponent != null && key == tempComponent._id) {
+//                 let amountComponent = await componentAmountController.createComponentAmount(tempComponent, reqbody[key])
+//                 tempComponent = null
+//                 blueprint.components.push(amountComponent)
+//             }
+//         }
 
-        await blueprint.save()
-        res.redirect('/')
+//         await blueprint.save()
+//         res.redirect('/')
 
-    } else {
-        res.redirect('/login')
-    }
-})
+//     } else {
+//         res.redirect('/login')
+//     }
+// })
 
 
 

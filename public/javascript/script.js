@@ -27,11 +27,13 @@ document.querySelectorAll('.name').forEach(clickable => {
             // firstChild.style.maxHeight = content.scrollHeight + 'px'
             // setTimeout(function () { console.log('venter på transition') }, 200);
             firstChild.style.display = 'block'
+            clickable.style.backgroundColor = ' #E8E6D1'
 
         } else {
             // firstChild.style.maxHeight = 0
             // setTimeout(function () { console.log('venter på transition 2') }, 200);
             firstChild.style.display = 'none'
+            clickable.style.backgroundColor = '#e6e6e6'
         }
     })
 })
@@ -243,7 +245,7 @@ async function deleteComponent() {
     let id = div.value
     await fetch('http://localhost:8080/api/deleteComponent/' + id, {
         method: 'delete'
-    }).then(window.location.reload())
+    })
 }
 
 async function deleteProduct() {
