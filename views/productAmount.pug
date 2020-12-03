@@ -5,20 +5,18 @@ html
         script(defer, src="/static/javascript/script.js")
         title Tilføj antal til products
     body
-
-        form(action='/product/amount' method='post')
-                    input(type="hidden" name="mainProductName"  value=mainProductName)
-                    input(type="hidden" name="mainProductAmount"  value=amount)
-                    input(type="hidden" name="mainProductNote"  value=note)
-                    h2 Blueprints
-                    each blueprint in blueprints
-                        label #{blueprint.name}
+        div.div1
+            form(action='/product/amount' method='post')
+                        input(type="hidden" name="mainProductName"  value=mainProductName)
+                        input(type="hidden" name="mainProductAmount"  value=amount)
+                        input(type="hidden" name="mainProductNote"  value=note)
+                        h2 Blueprints
+                        each blueprint in blueprints
+                            label #{blueprint.name}
+                            br
+                            input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
+                            input(type='text' name=blueprint._id placeholder='Indtast antal' style='text-align: center; width: 100px')
+                            br
+                            br
+                        button.submitButton(type='submit' name='create' onclick= 'disableButtons()') Opret produkt
                         br
-                        input(type="hidden" name="hiddenBlueprint:"+blueprint._id value=blueprint._id)
-                        input(type='text' name=blueprint._id placeholder='Antal')
-                        br
-                        br
-                    br
-                    button.submitButton(type='submit' name='create' onclick= 'disableButtons()') Opret produkt
-                    br
-                    br
