@@ -23,11 +23,6 @@ router.post("/createProduct", async (req, res) => {
             req.body.dropdownBlueprint
         );
 
-        // if (valider.test(name) && valider.test(amount) && valider.test(note)) {
-        //     await productController.createProduct(name, amount, note, blueprints);
-        // } else {
-
-        // }
         res.render("productAmount", { mainProductName: name, amount: amount, note: note, blueprints: blueprints });
 
     } else {
