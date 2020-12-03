@@ -224,49 +224,44 @@ async function updateComponent() {
 }
 
 async function createComponent() {
-    let nameInput = document.querySelector('#createComponentNameID').value
-    let amountInput = document.querySelector('#createComponentAmountID').value
-    let noteInput = document.querySelector('#createComponentNoteID').value
-    console.log(nameInput + " " + amountInput);
+    let nameInput = document.getElementById('createComponentNameID')
+    let amountInput = document.getElementById('createComponentAmountID').value
+    let noteInput = document.getElementById('createComponentNoteID').value
+    console.log(nameInput);
     if (
         !validerString.test(nameInput) ||
         !validerTal.test(amountInput) ||
         !validerString.test(noteInput)
-    ) { alert("Intast Ting!") } else {
-
-        let data = "{ ";
-        data = data + '"name": "' + nameInput + '"' +
-            ", " + '"amount": ' + amountInput +
-            ", " + '"note": "' + noteInput + '"}'
-
-        await fetch("http://localhost:8080/api/updateComponent/" + id, {
-            method: "put",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: data
-        })
-
+    ) {
+        // alert("Intast Ting!") 
+    } else {
+        /*
+                let data = "{ ";
+                data = data + '"name": "' + nameInput + '"' +
+                    ", " + '"amount": ' + amountInput +
+                    ", " + '"note": "' + noteInput + '"}'
+        
+                await fetch("http://localhost:8080/api/updateComponent/" + id, {
+                    method: "put",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: data
+                })
+            
+            */
     }
-
-    async function deleteComponent() {
-        disableButtons()
-        let div = document.getElementById('dropDownDeleteID')
-        let id = div.value
-        await fetch('http://localhost:8080/api/deleteComponent/' + id, {
-            method: 'delete'
-        }).then(window.location.reload())
-    }
-
-    await fetch("http://localhost:8080/api/updateComponent/" + id, {
-        method: "put",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    })
-
 }
+async function deleteComponent() {
+    disableButtons()
+    let div = document.getElementById('dropDownDeleteID')
+    let id = div.value
+    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
+        method: 'delete'
+    }).then(window.location.reload())
+}
+
+
 
 async function deleteComponent() {
     disableButtons()
