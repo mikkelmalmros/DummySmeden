@@ -85,7 +85,7 @@ router.post("/updateProduct", async (req, res) => {
         // if (!valider.test(amount) && !valider.test(name) && !valider.test(note)) {
         //     // alert("Du har ikke indtastet noget data")
         // }
-        res.redirect("/");
+        res.redirect('/')
 
     } else {
         res.redirect('/login')
