@@ -1,7 +1,6 @@
 body{
     background: #ffffff;
     font-size: 1.2em;
-    /* text-align: center; */
 }
 
 .divGrid {
@@ -10,10 +9,9 @@ body{
     grid-template-columns: repeat(3,minmax(0,1fr));
     grid-template-rows: 1;
     background-color: #ffffff;
-    
 }
 
-.dsLogo{
+.dsLogo {
     display: block;
     height: 139px;
     width: 373px;
@@ -21,11 +19,10 @@ body{
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 10px;
-    }
+}
 
 .divColumnTwo {
     grid-column: 2;
-    
 }
 
 .loginDiv{
@@ -33,7 +30,6 @@ body{
     border: 2px solid black;
     background-color: #e6e6e6;
     border-radius: 25px;
-     /* padding-left: 10px; */
 }
 
 .input{
@@ -43,4 +39,3 @@ body{
 .logIn{
     font-size: 1em;
 }
-

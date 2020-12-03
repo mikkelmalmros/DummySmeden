@@ -16,10 +16,8 @@ html
                     label #{component.name}
                     br
                     input(type="hidden" name="hiddenComponent:"+component._id value=component._id)
-                    input.inputAmount(type='text' name=component._id  placeholder='Indtast antal')
+                    input.inputAmount(type='text' name=component._id  placeholder='Indtast antal' style='text-align: center; width: 100px')
                     br
                     br
-                br
                 button.submitButton(type='submit' name='create' onclick='disableButtons()') Opret blueprint
-                br
                 br
