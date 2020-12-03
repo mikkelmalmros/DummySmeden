@@ -102,7 +102,7 @@ async function pickProduct() {
     product = await product.json()
     inputUpdateComponentName.value = product.name
     inputUpdateComponentAmount.value = product.amount
-    inputUpdateComponentNote.value = product.Note
+    inputUpdateComponentNote.value = product.note
 
     //Fetches the rigth data from API
     let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
