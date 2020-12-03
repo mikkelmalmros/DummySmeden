@@ -1,7 +1,5 @@
-// Begge disse skal implamenteres med !
 const validerString = /[a-zA-Z0-9]+/;
 const validerTal = /[0-9]+/;
-// på eget ansvar
 document.querySelectorAll('.collapsibleButton').forEach(button => {
     button.addEventListener('click', () => {
         const content = button.nextElementSibling
@@ -46,19 +44,19 @@ async function pickBlueprint() {
     let inputUpdateBlueprintAmount = document.querySelector('#updateamountBlueprint')
     let inputUpdateBlueprintNote = document.querySelector('#updateNoteBlueprint')
 
-    let blueprint = await fetch("http://localhost:8080/api/getBlueprint/" + selected.value)
+    let blueprint = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprint/" + selected.value)
     blueprint = await blueprint.json()
     inputUpdateBlueprintName.value = blueprint.name
     inputUpdateBlueprintAmount.value = blueprint.amount
     inputUpdateBlueprintNote.value = blueprint.note
 
     //Fetches the rigth data from API
-    let values = await fetch("http://localhost:8080/api/getComponentAmounts/" + selected.value)
+    let values = await fetch("http://dummysmeden.herokuapp.com/api/getComponentAmounts/" + selected.value)
     let jsonValues = await values.json()
     let components = []
     for (const jsonValue of jsonValues) {
-        let component = await fetch("http://localhost:8080/api/getComponentOnComponentAmount/" + jsonValue._id)
-        
+        let component = await fetch("http://dummysmeden.herokuapp.com/api/getComponentOnComponentAmount/" + jsonValue._id)
+
         let jsonComponent = await component.json()
         components.push(jsonComponent)
     }
@@ -86,19 +84,19 @@ async function pickProduct() {
     let inputUpdateComponentAmount = document.querySelector('#updateamountProduct')
     let inputUpdateComponentNote = document.querySelector('#updateNoteProduct')
 
-    let product = await fetch("http://localhost:8080/api/getProduct/" + selected.value)
+    let product = await fetch("http://dummysmeden.herokuapp.com/api/getProduct/" + selected.value)
     product = await product.json()
     inputUpdateComponentName.value = product.name
     inputUpdateComponentAmount.value = product.amount
     inputUpdateComponentNote.value = product.note
 
     //Fetches the rigth data from API
-    let values = await fetch("http://localhost:8080/api/getBlueprintAmounts/" + selected.value)
+    let values = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintAmounts/" + selected.value)
 
     let jsonValues = await values.json()
     let blueprints = []
     for (const jsonValue of jsonValues) {
-        let blueprint = await fetch("http://localhost:8080/api/getBlueprintOnBlueprintAmount/" + jsonValue._id)
+        let blueprint = await fetch("http://dummysmeden.herokuapp.com/api/getBlueprintOnBlueprintAmount/" + jsonValue._id)
         let jsonBlueprint = await blueprint.json()
         blueprints.push(jsonBlueprint)
     }
@@ -136,7 +134,7 @@ async function deleteBlueprint() {
     disableButtons()
     let div = document.getElementById('dropdownDeleteBlueprintID')
     let id = div.value
-    await fetch('http://localhost:8080/api/deleteBlueprint/' + id, {
+    await fetch('http://dummysmeden.herokuapp.com/api/deleteBlueprint/' + id, {
         method: 'delete'
     })
 }
@@ -169,7 +167,7 @@ async function updateBlueprint() {
         // Alt fetch
         let id = document.getElementById("blueprintSelector").value
 
-        await fetch("http://localhost:8080/api/updateBlueprint/" + id, {
+        await fetch("http://dummysmeden.herokuapp.com/api/updateBlueprint/" + id, {
             method: "put",
             headers: {
                 'Content-Type': 'application/json'
@@ -196,7 +194,7 @@ async function updateComponent() {
             ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
             ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
 
-        await fetch("http://localhost:8080/api/updateComponent/" + id, {
+        await fetch("http://dummysmeden.herokuapp.com/api/updateComponent/" + id, {
             method: "put",
             headers: {
                 'Content-Type': 'application/json'
@@ -223,7 +221,7 @@ async function createComponent() {
             ", " + '"amount": ' + amountInput +
             ", " + '"note": "' + noteInput + '"}'
 
-        await fetch("http://localhost:8080/api/createComponent/", {
+        await fetch("http://dummysmeden.herokuapp.com/api/createComponent/", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -237,7 +235,7 @@ async function deleteComponent() {
     disableButtons()
     let div = document.getElementById('dropDownDeleteID')
     let id = div.value
-    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
+    await fetch('http://dummysmeden.herokuapp.com/api/deleteComponent/' + id, {
         method: 'delete'
     })
 }
@@ -246,7 +244,7 @@ async function deleteProduct() {
     disableButtons()
     let div = document.getElementById('dropDownDeleteProductID')
     let id = div.value
-    await fetch('http://localhost:8080/api/deleteProduct/' + id, {
+    await fetch('http://dummysmeden.herokuapp.com/api/deleteProduct/' + id, {
         method: 'delete'
     })
 }
@@ -279,7 +277,7 @@ async function updateProduct() {
         // Alt fetch
         let id = document.getElementById("productSelector").value
 
-        await fetch("http://localhost:8080/api/updateProduct/" + id, {
+        await fetch("http://dummysmeden.herokuapp.com/api/updateProduct/" + id, {
             method: "put",
             headers: {
                 'Content-Type': 'application/json'
@@ -290,12 +288,12 @@ async function updateProduct() {
 }
 
 async function logout() {
-    await fetch("http://localhost:8080/logout", {
+    await fetch("http://dummysmeden.herokuapp.com/logout", {
         method: "get",
         redirect: "follow"
     }).then(res => {
-        if(res.redirected) {
+        if (res.redirected) {
             window.location.href = res.url
         }
     })
- }
+}
