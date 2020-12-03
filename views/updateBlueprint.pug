@@ -2,32 +2,32 @@ head
     style
         include ../styles/collapsible.css
 body
-    form(action='/' method='get')
-        h2 Opdater blueprint
-        label Vælg blueprint til at opdateres
-        select(name="dropdownBlueprints" id="blueprintSelector" onchange="pickBlueprint()" style="width: 100%")
-            option(value="" disabled selected) Vælg et blueprint
-            each blueprint in blueprints
-                option(value=blueprint.id) #{blueprint.name}
-        br
-        br
-        label Name
-        br
-        input( type='text' id = 'updatenameBlueprint' name='updatename' style="width:100%" placeholder='Nyt navn på blueprint')
-        br
-        br
-        label Antal
-        br
-        input(type='text' id = 'updateamountBlueprint' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
-        br
-        br
-        label Note
-        br
-        input(type='text' id = 'updateNoteBlueprint' name='updateNote' style="width:100%" placeholder='Ny note')
-        br
-        br
-        label Komponenter
-            div#divUpdateComponents
-        br
-        br
-        button.submitButton(type='submit' name='update' onclick= 'updateBlueprint()') Opdater blueprint
+    h2 Opdater blueprint
+    label Vælg blueprint til at opdateres
+    select(name="dropdownBlueprints" id="blueprintSelector" onchange="pickBlueprint()" style="width: 100%")
+        option(value="" disabled selected) Vælg et blueprint
+        each blueprint in blueprints
+            option(value=blueprint.id) #{blueprint.name}
+    br
+    br
+    label Name
+    br
+    input( type='text' id = 'updatenameBlueprint' name='updatename' style="width:100%" placeholder='Nyt navn på blueprint')
+    br
+    br
+    label Antal
+    br
+    input(type='text' id = 'updateamountBlueprint' name='updateamount' style="width:100%" placeholder='Nyt antal på lager')
+    br
+    br
+    label Note
+    br
+    input(type='text' id = 'updateNoteBlueprint' name='updateNote' style="width:100%" placeholder='Ny note')
+    br
+    br
+    label Komponenter
+        div#divUpdateComponents
+    br
+    br
+    button.submitButton(type='button' name='update' onclick= 'updateBlueprint()') Opdater blueprint
+    br
