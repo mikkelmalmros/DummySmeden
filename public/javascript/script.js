@@ -199,12 +199,33 @@ async function updateBlueprint() {
 async function updateComponent() {
     disableButtons()
 
-    let id = document.querySelector('#componentSelector')
+    let id = document.querySelector('#componentSelector').value
 
     let data = "{ ";
     data = data + '"name": "' + document.getElementById("updateComponentNameID").value + '"' +
         ", " + '"amount": ' + document.getElementById("updateComponentAmountID").value +
-        ", " + '"note": ' + document.getElementById("updateComponentNoteID").value + "}"
+        ", " + '"note": "' + document.getElementById("updateComponentNoteID").value + '"}'
+
+
+    await fetch("http://localhost:8080/api/updateComponent/" + id, {
+        method: "put",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: data
+    }).then(window.location.reload())
+}
+
+async function createComponent() {
+
+    let nameInput = document.querySelector('#createComponentNameID').value
+    let amountInput = document.querySelector('#createComponentAmountID').value
+    let noteInput = document.querySelector('#createComponentNoteID').value
+
+    let data = "{ ";
+    data = data + '"name": "' + nameInput + '"' +
+        ", " + '"amount": ' + amountInput +
+        ", " + '"note": "' + noteInput + '"}'
 
     await fetch("http://localhost:8080/api/updateComponent/" + id, {
         method: "put",
@@ -213,6 +234,7 @@ async function updateComponent() {
         },
         body: data
     })
+
 }
 
 async function deleteComponent() {
