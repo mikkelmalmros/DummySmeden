@@ -1,8 +1,11 @@
 h2 Slet et produkt
 label Vælg et produkt der skal slettes
+br
 select(name="dropdownDeleteProduct" id='dropDownDeleteProductID')
     each product in products
         option(value=product._id) #{product.name}
 br
 br
 button.submitButton(type='button' name='delete' onclick="deleteProduct().then(location.reload())") Slet valgte produkt
+br
+br

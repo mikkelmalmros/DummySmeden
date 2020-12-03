@@ -86,8 +86,7 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
   if (req.session.isLoggedIn) {
     req.session.isLoggedIn = false
-    console.log("Someone logged out");
-    res.redirect('')
+    res.redirect('/login')
   } else {
     res.redirect('/login')
   }

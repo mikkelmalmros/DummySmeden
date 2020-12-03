@@ -2,6 +2,7 @@
 -//
     h2 Slet et blueprint
     label Vælg et blueprint der skal slettes
+    br
     select(name="dropdownDeleteBlueprint" id='dropdownDeleteBlueprintID')
         each blueprint in blueprints
             option(value=blueprint._id) #{blueprint.name}
