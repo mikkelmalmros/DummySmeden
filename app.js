@@ -44,7 +44,7 @@ app.use('/api', apiRouter)
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
   //OBS have to be changed!
-  req.session.isLoggedIn = true
+  // req.session.isLoggedIn = true
 
   if (req.session.isLoggedIn) {
     const components = await componentController.getComponents();
