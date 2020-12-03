@@ -252,16 +252,6 @@ async function createComponent() {
         }).then(res => { window.location.href = res.url })
     }
 }
-async function deleteComponent() {
-    disableButtons()
-    let div = document.getElementById('dropDownDeleteID')
-    let id = div.value
-    await fetch('http://localhost:8080/api/deleteComponent/' + id, {
-        method: 'delete'
-    }).then(window.location.reload())
-}
-
-
 
 async function deleteComponent() {
     disableButtons()

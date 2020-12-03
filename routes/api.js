@@ -60,7 +60,7 @@ router.get('/getComponent/:id', async (req, res) => {
 
 router.delete('/deleteComponent/:id', async (req, res) => {
     if (req.session.isLoggedIn) {
-        return await componentController.deleteComponent(req.params.id)
+        await componentController.deleteComponent(req.params.id)
     } else {
         res.redirect('/login')
     }
