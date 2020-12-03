@@ -1,8 +1,8 @@
 table{
-    font-size:0.65em;
     font-family: sans-serif;
     border: 1px solid black;
     border-collapse: collapse;
+    font-size: 1.2em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -38,12 +38,10 @@ table{
     line-height: 34px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
-    /* margin-bottom: 100px; */
     width: 100%;
     background: #e6e6e6;
 }
 
-/* Start på lortet */
 .name {
     cursor: pointer;
     outline: none;
@@ -52,7 +50,6 @@ table{
     text-align: center;
     line-height: 34px;
     background: #e6e6e6;
-    /* border-bottom: none; */
 }
 
 /* Pil i højre side */
@@ -62,7 +59,6 @@ table{
     color: #000000;
     font-weight: bold;
     float: right;
-    /* transform: scale(1.5); */
 }
 
 /* Når collapsible er sat til active (se public/javascript/component.js) */
@@ -83,7 +79,33 @@ table{
     display: none;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
-    margin-right: -3.3em;
+    margin-right: -3.225em;
     margin-bottom: -1px;
     background-color: #E8E6D1;
+}
+
+input{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+button{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+select{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+label {
+    font-size:1em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+h1,h2{
+    /* font-size:1em; */
+    /* font-family: sans-serif; */
 }

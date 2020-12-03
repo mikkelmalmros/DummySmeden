@@ -25,16 +25,16 @@ html
                         include deleteProduct.pug
 
                     h2 Lagerbeholdning
-                        table
+                    table
+                        tr
+                            th.headerName Navn
+                            th.headerAmount Antal
+                        each product in products
                             tr
-                                th.headerName Navn
-                                th.headerAmount Antal
-                            each product in products
-                                tr
-                                    td.name #{product.name}
-                                    td.amount #{product.amount}
-                                tr
-                                    td.contentT Note: #{product.note}
+                                td.name #{product.name}
+                                td.amount #{product.amount}
+                            tr
+                                td.contentT Note: #{product.note}
             div.blueprintColumn
                 h1 Blueprints
                 div.collapsible
@@ -49,16 +49,16 @@ html
                         include deleteBlueprint.pug
 
                     h2 Lagerbeholdning
-                        table
+                    table
+                        tr
+                            th.headerName Navn
+                            th.headerAmount Antal
+                        each blueprint in blueprints
                             tr
-                                th.headerName Navn
-                                th.headerAmount Antal
-                            each blueprint in blueprints
-                                tr
-                                    td.name #{blueprint.name}
-                                    td.amount #{blueprint.amount}
-                                tr
-                                    td.contentT Note: #{blueprint.note}
+                                td.name #{blueprint.name}
+                                td.amount #{blueprint.amount}
+                            tr
+                                td.contentT(rowspan= "2") Note: #{blueprint.note} hehe
             div.componentColumn
                 h1 Komponenter
                 div.collapsible
@@ -73,13 +73,13 @@ html
                         include deleteComp.pug
 
                     h2 Lagerbeholdning
-                        table
+                    table
+                        tr
+                            th.headerName Navn
+                            th.headerAmount Antal
+                        each component in components
                             tr
-                                th.headerName Navn
-                                th.headerAmount Antal
-                            each component in components
-                                tr
-                                    td.name #{component.name}
-                                    td.amount #{component.amount}
-                                tr
-                                    td.contentT Note: #{component.note}
+                                td.name #{component.name}
+                                td.amount #{component.amount}
+                            tr
+                                td.contentT Note: #{component.note}

@@ -36,6 +36,28 @@ body{
     text-align: center;
 }
 
-.logIn{
-    font-size: 1em;
+input{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+button{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+select{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+label {
+    font-size:1em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+h1,h2{
+    font-size:1em;
+    font-family: sans-serif;
 }

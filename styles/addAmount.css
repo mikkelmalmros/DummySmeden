@@ -5,29 +5,14 @@ body{
 
 .div1 {
     display: grid;
-    width: 350px;
+    width: 400px;
     min-height: 1px;
-    text-align: center;
     grid-template-columns: 50% auto;
     grid-template-rows: 1;
     border: 2px solid black;
     background-color: #e6e6e6;
     padding-left: 5px;
     padding-right: 5px;
-    /* font-size: 1.25em; */
-    font-family: sans-serif;
-    border-radius: 25px;
-}
-
-.inputAmount{
-    /* font-size: 1em; */
-    font-family: sans-serif;
-    height: 1.25em;
-}
-
-.doneButton{
-    /* height: 3em; */
-    font-size: 1em;
     font-family: sans-serif;
 }
 
@@ -37,4 +22,30 @@ button[disabled] {
 	cursor: not-allowed;
 	opacity: 0.5;
 	pointer-events: none;
+}
+
+input{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+button{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+select{
+    font-size:1em;
+    font-family: sans-serif;
+}
+
+label {
+    font-size:1em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+h1,h2{
+    font-size:1em;
+    font-family: sans-serif;
 }
