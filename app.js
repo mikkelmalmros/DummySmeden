@@ -40,6 +40,7 @@ app.use('/product', productRouter)
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
+
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
@@ -74,7 +75,7 @@ app.post('/login', async (req, res) => {
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
       req.session.isLoggedIn = true
-      res.redirect('/')
+      res.status(200).redirect('/')
     } else {
       res.status(400).redirect('/login')
     }
