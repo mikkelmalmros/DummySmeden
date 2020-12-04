@@ -293,7 +293,8 @@ async function logout() {
         redirect: "follow"
     }).then(res => {
         if (res.redirected) {
-            window.location.href = res.url
+            //window.location.href = res.url
+            res.redirect(301, res.url)
         }
     })
 }
