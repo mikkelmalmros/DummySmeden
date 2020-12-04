@@ -1,9 +1,13 @@
 require("should")
+const { it } = require("mocha");
 const { server } = require("../app.js")
+const fetch = require('node-fetch')
 
 
 const blueprintController = require("../controllers/blueprint");
 const componentController = require("../controllers/component");
+const userController = require('../controllers/user')
+
 describe('Component', () => {
     describe('get component', () => {
 
@@ -39,6 +43,7 @@ describe('Component', () => {
     })
 
     describe('Update component', () => {
+
         it('update name', async () => {
             let component = await componentController.getComponent('5fc8cd56c9dd761e42114165')
             let name = 'newName'
@@ -74,11 +79,35 @@ describe('Component', () => {
     })
 })
 
-describe("Api Test", () => {
+describe("Users and login", () => {
+    describe("User", () => {
+        it("get User", async () => {
+            let users = await userController.getUsers()
+            users.length.should.be.equal(1)
+            users[0].username.should.be.equal('admin')
+        })
+        it("get user by name", async () => {
+            let user = await userController.getUsersByName('admin')
+            user.username.should.be.equal('admin')
+        })
+
+    })
 
 
+    describe("login", () => {
+        it("login", async () => {
+            let data = '{"username": "admin", "password": "adminadmin"}'
 
-
+            let res = await fetch('https://dummysmeden.herokuapp.com/login', {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+            res.status.should.be.equal(200)
+        })
+    })
 
 
 })
