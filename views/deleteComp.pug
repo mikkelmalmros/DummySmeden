@@ -6,6 +6,6 @@ select(name="dropdownDelete" id='dropDownDeleteID')
         option(value=component.id) #{component.name}
 br
 br
-button.submitButton(type='submit' name='delete' onclick='deleteComponent().then(location.reload())') Slet komponent
+button.submitButton(type='submit' name='delete' onclick='deleteComponent().then(getComponents())') Slet komponent
 br
 br
