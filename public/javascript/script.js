@@ -300,7 +300,7 @@ async function logout() {
     })
 }
 
-async function getComponents() {
-    let list = await componentController.getComponents()
-    console.log(list);
-}
+// async function getComponents() {
+//     let list = await componentController.getComponents()
+//     console.log(list);
+// }
