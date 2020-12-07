@@ -288,12 +288,14 @@ async function updateProduct() {
 }
 
 async function logout() {
-    await fetch("https://dummysmeden.herokuapp.com/logout", {
-        method: "get",
-        redirect: "follow"
-    }).then(res => {
-        if (res.redirected) {
-            window.location.replace(res.url)
-        }
-    })
+    // await fetch("https://dummysmeden.herokuapp.com/logout", {
+    //     method: "get",
+    //     redirect: "follow"
+    // }).then(res => {
+    //     if (res.redirected) {
+    //         window.location.replace(res.url)
+    //     }
+    // })
+
+    window.location = 'https://dummysmeden.herokuapp.com/logout'
 }
