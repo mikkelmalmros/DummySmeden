@@ -1,5 +1,3 @@
-const componentController = require("../../controllers/component");
-
 const validerString = /[a-zA-Z0-9]+/;
 const validerTal = /[0-9]+/;
 document.querySelectorAll('.collapsibleButton').forEach(button => {
