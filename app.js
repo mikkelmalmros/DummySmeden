@@ -44,9 +44,6 @@ app.use('/api', apiRouter)
 //End points
 //Finder blueprints og components fra DB og viser storage.pug
 app.get("/", async (req, res) => {
-  //OBS have to be changed!
-  // req.session.isLoggedIn = true
-
   if (req.session.isLoggedIn) {
     const components = await componentController.getComponents();
     const blueprints = await blueprintController.getBlueprints();
@@ -64,8 +61,6 @@ app.get('/login', (req, res) => {
     res.render('login')
   }
 })
-
-// userController.createUser("admin", "adminadmin")
 
 app.post('/login', async (req, res) => {
   const user = await userController.getUsersByName(req.body.username)
@@ -85,13 +80,6 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
-  // if (req.session.isLoggedIn) {
-  //   req.session.isLoggedIn = false
-  //   res.redirect('/login')
-  // } else {
-  //   res.redirect('/login')
-  // }
-
   req.session.isLoggedIn = false
   res.redirect('/login')
 })
